@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level : MonoBehaviour
+public class Map : MonoBehaviour
 {
+    private void Awake()
+    {
+        
+    }
     internal void Load()
     {
-        // Level data should be at Application.persistentDataPath
+        // Map data should be at Application.persistentDataPath
         throw new NotImplementedException();
     }
 

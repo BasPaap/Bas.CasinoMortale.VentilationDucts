@@ -7,12 +7,12 @@ public class Editor : MonoBehaviour
 {    
     private Camera editorCamera;
     private Camera mainCamera;
-    private Level level;
+    private Map map;
     private bool isOpen;
 
     private void Awake()
     {
-        level = GameObject.FindObjectOfType<Level>();
+        map = GameObject.FindObjectOfType<Map>();
         editorCamera = GetComponentInChildren<Camera>();
         mainCamera = Camera.main; // This needs to be stored because once disabled we can't access it via Camera.main.
         editorCamera.gameObject.SetActive(false);
@@ -45,8 +45,8 @@ public class Editor : MonoBehaviour
         isOpen = true;
         ToggleCameras();
 
-        // Create backup of current level
-        level.CreateBackup();
+        // Create backup of current map
+        map.CreateBackup();
     }
 
     private void ToggleCameras()

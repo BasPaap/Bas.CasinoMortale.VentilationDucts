@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-public class LevelData
+public class MapData
 {
     public int Width { get; set; }
     public int Height { get; set; }
