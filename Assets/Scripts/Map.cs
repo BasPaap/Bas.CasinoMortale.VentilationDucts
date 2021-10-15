@@ -63,4 +63,16 @@ public class Map : MonoBehaviour
             File.Copy(FullPath, Path.Combine(Application.persistentDataPath, $"{DateTime.Now:yyyyMMddhhmmss} {fileName}"));
         }
     }
+
+    internal Vector3 GetPosition(int gridX, int gridY)
+    {
+        var halfWidth = (Size.x - 1) / 2.0f;
+        var halfHeight = (Size.y - 1) / 2.0f;
+
+        var cellSize = Vector3.one;
+        var xPos = 0 - halfWidth + (cellSize.x * gridX);
+        var zPos = 0 - halfHeight + (cellSize.z * gridY);
+        
+        return new Vector3(xPos, 0, zPos);
+    }
 }

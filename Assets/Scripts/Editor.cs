@@ -63,25 +63,13 @@ public class Editor : MonoBehaviour
             return;
         }
 
-        var halfWidth = (map.Size.x - 1) / 2.0f;
-        var halfHeight = (map.Size.y - 1) / 2.0f;
-
-        int x = 0;
-        int y = 0;
-
-        for (float zPosition = 0 - halfHeight; zPosition <= halfHeight; zPosition += emptyCellPrefab.transform.localScale.z)
+        for (int y = 0; y < map.Size.y; y++)
         {
-            x = 0;
-
-            for (float xPosition = 0 - halfWidth; xPosition <= halfWidth; xPosition += emptyCellPrefab.transform.localScale.x)
+            for (int x = 0; x < map.Size.x; x++)
             {
-                var cell = Instantiate(emptyCellPrefab, new Vector3(xPosition, 0, zPosition), emptyCellPrefab.transform.rotation, gridTransform);
+                var cell = Instantiate(emptyCellPrefab, map.GetPosition(x,y), emptyCellPrefab.transform.rotation, gridTransform);
                 cell.name = $"Cell {x},{y}";
-
-                x++;
             }
-
-            y++;
         }
     }
 
