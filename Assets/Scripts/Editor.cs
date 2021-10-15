@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class Editor : MonoBehaviour
 {    
     private Camera editorCamera;
     private Camera mainCamera;
+    private bool isOpen;
 
     private void Awake()
     {
@@ -18,8 +20,35 @@ public class Editor : MonoBehaviour
     {
         if (Input.GetKeyUp(Hotkeys.EditorKey))
         {
-            editorCamera.gameObject.SetActive(!editorCamera.gameObject.activeSelf);
-            mainCamera.gameObject.SetActive(!mainCamera.gameObject.activeSelf);
+            if (isOpen)
+            {
+                Close();
+            }
+            else
+            {
+                Open();
+            }
         }
     }
+
+    private void Close()
+    {
+        isOpen = false;
+        ToggleCameras();
+        
+    }
+
+    private void Open()
+    {
+        isOpen = true;
+        ToggleCameras();
+
+        // Create backup of current level
+    }
+
+    private void ToggleCameras()
+    {
+        editorCamera.gameObject.SetActive(!editorCamera.gameObject.activeSelf);
+        mainCamera.gameObject.SetActive(!mainCamera.gameObject.activeSelf);
+    }    
 }
