@@ -53,6 +53,9 @@ public class Editor : MonoBehaviour
         CreateGrid();
     }
 
+    /// <summary>
+    /// Creates the grid of tiles that serve as helpers when editing the map.
+    /// </summary>
     private void CreateGrid()
     {
         ClearGrid();
