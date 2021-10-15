@@ -12,6 +12,8 @@ public class Map : MonoBehaviour
 
     private MapData mapData;
 
+    public Vector2 Size => mapData != null ? new Vector2(mapData.Width, mapData.Height) : Vector2.zero;
+
     private void Start()
     {
         Load();
