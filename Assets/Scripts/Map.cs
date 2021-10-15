@@ -64,6 +64,12 @@ public class Map : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns the position in world space for a cell in the grid.
+    /// </summary>
+    /// <param name="gridX">The X-coordinate of the cell.</param>
+    /// <param name="gridY">The Y-coordinate of the cell.</param>
+    /// <returns>The cell's position in world space.</returns>
     internal Vector3 GetPosition(int gridX, int gridY)
     {
         var halfWidth = (Size.x - 1) / 2.0f;
