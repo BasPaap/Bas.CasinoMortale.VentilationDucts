@@ -68,7 +68,7 @@ public class Map : MonoBehaviour
 
             if (prefab != null)
             {
-                Instantiate(prefab, GetPosition(tile.Column, tile.Row), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
+                Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
             }
         }
     }

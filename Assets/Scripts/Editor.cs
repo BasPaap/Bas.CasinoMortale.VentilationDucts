@@ -70,7 +70,7 @@ public class Editor : MonoBehaviour
         {
             for (int x = 0; x < map.Size.x; x++)
             {
-                var cell = Instantiate(emptyCellPrefab, map.GetPosition(x,y), emptyCellPrefab.transform.rotation, gridTransform);
+                var cell = Instantiate(emptyCellPrefab, emptyCellPrefab.transform.position + map.GetPosition(x,y), emptyCellPrefab.transform.rotation, gridTransform);
                 cell.name = $"Cell {x},{y}";
             }
         }
