@@ -126,7 +126,7 @@ public class Map : MonoBehaviour
         };
         defaultMapData.Tiles.Add(new DuctTile(DuctType.Straight, 5, 0, 0));
         defaultMapData.Tiles.Add(new DuctTile(DuctType.Straight, 5, 1, 0));
-        defaultMapData.Tiles.Add(new DuctTile(DuctType.Corner, 5, 2, 0));
+        defaultMapData.Tiles.Add(new DuctTile(DuctType.Corner, 5, 2, 270));
         defaultMapData.Tiles.Add(new DuctTile(DuctType.Straight, 6, 2, 90));
         defaultMapData.Tiles.Add(new DuctTile(DuctType.ThreeWayCrossing, 7, 2, 0));
         defaultMapData.Tiles.Add(new DuctTile(DuctType.FourWayCrossing, 7, 1, 0));
