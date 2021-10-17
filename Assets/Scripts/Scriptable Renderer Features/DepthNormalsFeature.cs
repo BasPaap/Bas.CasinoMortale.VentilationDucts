@@ -30,9 +30,9 @@ public class DepthNormalsFeature : ScriptableRendererFeature
     class RenderPass : ScriptableRenderPass
     {
 
-        private Material material;
+        private readonly Material material;
         private RenderTargetHandle destinationHandle;
-        private List<ShaderTagId> shaderTags;
+        private readonly List<ShaderTagId> shaderTags;
         private FilteringSettings filteringSettings;
 
         public RenderPass(Material material) : base()

@@ -1,4 +1,4 @@
 ﻿public class SoundTile : Tile
 {
-    public string fileName { get; set; }
+    public string FileName { get; set; }
 }

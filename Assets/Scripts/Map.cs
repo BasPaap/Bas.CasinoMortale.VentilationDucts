@@ -42,15 +42,15 @@ public class Map : MonoBehaviour
         //PopulateSoundTiles();
     }
 
-    private void PopulateSoundTiles()
-    {
-        throw new NotImplementedException();
-    }
+    //private void PopulateSoundTiles()
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    private void PopulateGrateTiles()
-    {
-        throw new NotImplementedException();
-    }
+    //private void PopulateGrateTiles()
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     private void PopulateDuctTiles()
     {
