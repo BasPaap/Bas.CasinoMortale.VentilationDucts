@@ -12,6 +12,7 @@ public class Editor : MonoBehaviour
 
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
+    [SerializeField] private Canvas toolbarCanvas;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class Editor : MonoBehaviour
         editorCamera = GetComponentInChildren<Camera>();
         mainCamera = Camera.main; // This needs to be stored because once disabled we can't access it via Camera.main.
         editorCamera.gameObject.SetActive(false);
+        toolbarCanvas.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -39,13 +41,20 @@ public class Editor : MonoBehaviour
     private void Close()
     {
         isOpen = false;
-        ToggleCameras();        
+        ToggleCameras();
+        ToggleToolbar();
+    }
+
+    private void ToggleToolbar()
+    {
+        toolbarCanvas.gameObject.SetActive(!toolbarCanvas.gameObject.activeSelf);
     }
 
     private void Open()
     {
         isOpen = true;
         ToggleCameras();
+        ToggleToolbar();
 
         // Create backup of current map
         map.CreateBackup();
@@ -89,4 +98,16 @@ public class Editor : MonoBehaviour
         editorCamera.gameObject.SetActive(!editorCamera.gameObject.activeSelf);
         mainCamera.gameObject.SetActive(!mainCamera.gameObject.activeSelf);
     }    
+
+    public void OnDuctButtonClicked(string ductTypeName)
+    {
+        if (Enum.TryParse<DuctType>(ductTypeName, out DuctType ductType))
+        {
+            
+        }
+        else
+        {
+            Debug.LogWarning($"OnDuctButtonClicked called with invalid DuctType name \"{ductTypeName}\".");
+        }
+    }
 }
