@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1696569425309498205}
   - component: {fileID: 75530906935353758}
   - component: {fileID: 7012470223780992359}
+  - component: {fileID: 5084267416216857910}
   m_Layer: 0
-  m_Name: Empty Cell
+  m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bb91066708daf0145bb9b4edcb37ec51, type: 2}
+  - {fileID: 2100000, guid: dcb5b2308cfbb8c4fa6323c66db90f69, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,3 +98,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &5084267416216857910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894475108927281474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b61cb9dcc11adc4d8b807fcb007464e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightedTexture: {fileID: 2800000, guid: bbadc7aebaaaca1419a252ae3545338d, type: 3}
