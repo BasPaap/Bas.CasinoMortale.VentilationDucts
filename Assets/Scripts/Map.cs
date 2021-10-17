@@ -148,17 +148,17 @@ public class Map : MonoBehaviour
     /// <summary>
     /// Returns the position in world space for a cell in the grid.
     /// </summary>
-    /// <param name="gridX">The X-coordinate of the cell.</param>
-    /// <param name="gridY">The Y-coordinate of the cell.</param>
+    /// <param name="column">The X-coordinate of the cell.</param>
+    /// <param name="row">The Y-coordinate of the cell.</param>
     /// <returns>The cell's position in world space.</returns>
-    internal Vector3 GetPosition(int gridX, int gridY)
+    internal Vector3 GetPosition(int column, int row)
     {
         var halfWidth = (Size.x - 1) / 2.0f;
         var halfHeight = (Size.y - 1) / 2.0f;
 
         var cellSize = Vector3.one;
-        var xPos = 0 - halfWidth + (cellSize.x * gridX);
-        var zPos = 0 - halfHeight + (cellSize.z * gridY);
+        var xPos = 0 - halfWidth + (cellSize.x * column);
+        var zPos = 0 - halfHeight + (cellSize.z * row);
         
         return new Vector3(xPos, 0, zPos);
     }

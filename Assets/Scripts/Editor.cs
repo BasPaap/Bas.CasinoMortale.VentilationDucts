@@ -66,12 +66,12 @@ public class Editor : MonoBehaviour
             return;
         }
 
-        for (int y = 0; y < map.Size.y; y++)
+        for (int row = 0; row < map.Size.y; row++)
         {
-            for (int x = 0; x < map.Size.x; x++)
+            for (int column = 0; column < map.Size.x; column++)
             {
-                var cell = Instantiate(emptyCellPrefab, emptyCellPrefab.transform.position + map.GetPosition(x,y), emptyCellPrefab.transform.rotation, gridTransform);
-                cell.name = $"Cell {x},{y}";
+                var cell = Instantiate(emptyCellPrefab, emptyCellPrefab.transform.position + map.GetPosition(column,row), emptyCellPrefab.transform.rotation, gridTransform);
+                cell.name = $"Cell {column},{row}";
             }
         }
     }
