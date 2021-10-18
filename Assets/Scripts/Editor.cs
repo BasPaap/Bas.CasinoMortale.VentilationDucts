@@ -108,9 +108,14 @@ public class Editor : MonoBehaviour
     {
         if (selectedTile != null)
         {
-            map.AddTile(selectedTile);
-            map.Load();
+            map.AddTile(selectedTile);            
         }
+        else if (sender is Cell cell)
+        {
+            map.RemoveTiles(cell.Column, cell.Row);
+        }
+
+        map.Load();
     }
 
     private void Cell_MouseExit(object sender, EventArgs e)
@@ -159,6 +164,17 @@ public class Editor : MonoBehaviour
         editorCamera.gameObject.SetActive(!editorCamera.gameObject.activeSelf);
         mainCamera.gameObject.SetActive(!mainCamera.gameObject.activeSelf);
     }    
+
+    public void OnClearButtonClicked()
+    {
+        toolYRotation = 0;
+        selectedTile = null;
+
+        if (tool != null)
+        {
+            Destroy(tool.gameObject);
+        }
+    }
 
     public void OnDuctButtonClicked(string ductTypeName)
     {

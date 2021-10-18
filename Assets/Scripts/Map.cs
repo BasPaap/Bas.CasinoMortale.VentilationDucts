@@ -107,6 +107,17 @@ public class Map : MonoBehaviour
         return defaultMapData;
     }
 
+    internal void RemoveTiles(int column, int row)
+    {
+        var tilesToRemove = mapData.Tiles.Where(t => t.Column == column && t.Row == row).ToList();
+        foreach (var tileToRemove in tilesToRemove)
+        {
+            mapData.Tiles.Remove(tileToRemove);
+        }
+
+        Save();
+    }
+
     internal void Load()
     {
         LoadMapData();
