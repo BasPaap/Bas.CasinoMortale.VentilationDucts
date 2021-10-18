@@ -9,9 +9,9 @@ public class Editor : MonoBehaviour
     private Camera mainCamera;
     private Map map;
     private bool isOpen;
-    private GameObject selectedTool;
-    private Quaternion originalSelectedToolRotation;
-    private float selectedToolYRotation;
+    private GameObject currentTool;
+    private Quaternion originalToolRotation;
+    private float currentToolYRotation;
 
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
@@ -42,8 +42,8 @@ public class Editor : MonoBehaviour
 
         if (Input.mouseScrollDelta.y != 0)
         {
-            selectedToolYRotation = (selectedToolYRotation + ((0 - Input.mouseScrollDelta.y) * 90.0f)) % 360.0f;
-            selectedTool.transform.rotation = Quaternion.AngleAxis(selectedToolYRotation, Vector3.up) * originalSelectedToolRotation;
+            currentToolYRotation = (currentToolYRotation + ((0 - Input.mouseScrollDelta.y) * 90.0f)) % 360.0f;
+            currentTool.transform.rotation = Quaternion.AngleAxis(currentToolYRotation, Vector3.up) * originalToolRotation;
         }
     }
 
@@ -98,18 +98,18 @@ public class Editor : MonoBehaviour
 
     private void Cell_MouseExit(object sender, EventArgs e)
     {
-        if (sender is Cell cell && selectedTool != null)
+        if (sender is Cell cell && currentTool != null)
         {
-            selectedTool.SetActive(false);
+            currentTool.SetActive(false);
         }
     }
 
     private void Cell_MouseEnter(object sender, EventArgs e)
     {
-        if (sender is Cell cell && selectedTool != null)
+        if (sender is Cell cell && currentTool != null)
         {
-            selectedTool.transform.position = new Vector3(cell.transform.position.x, 0, cell.transform.position.z);
-            selectedTool.SetActive(true);
+            currentTool.transform.position = new Vector3(cell.transform.position.x, 0, cell.transform.position.z);
+            currentTool.SetActive(true);
         }
     }
 
@@ -139,9 +139,9 @@ public class Editor : MonoBehaviour
     {
         if (Enum.TryParse<DuctType>(ductTypeName, out DuctType ductType))
         {
-            selectedToolYRotation = 0;
+            currentToolYRotation = 0;
             var selectedToolPrefab = TileFactory.Instance.GetTilePrefabByType(ductType);
-            originalSelectedToolRotation = selectedToolPrefab.transform.rotation;
+            originalToolRotation = selectedToolPrefab.transform.rotation;
             InstantiateTool(selectedToolPrefab);
         }
         else
@@ -152,9 +152,13 @@ public class Editor : MonoBehaviour
 
     private void InstantiateTool(GameObject selectedToolPrefab)
     {
-        selectedTool = Instantiate(selectedToolPrefab, selectedToolPrefab.transform.position, selectedToolPrefab.transform.rotation, transform);
-        selectedTool.SetActive(false);
-    }
+        if (currentTool != null)
+        {
+            Destroy(currentTool.gameObject);
+        }
 
-    
+        currentTool = Instantiate(selectedToolPrefab, selectedToolPrefab.transform.position, selectedToolPrefab.transform.rotation, transform);
+        currentTool.name = $"Tool ({selectedToolPrefab.name})";
+        currentTool.SetActive(false);
+    }    
 }
