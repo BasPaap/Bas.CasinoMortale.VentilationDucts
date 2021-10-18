@@ -10,6 +10,8 @@ public class Editor : MonoBehaviour
     private Map map;
     private bool isOpen;
     private GameObject selectedTool;
+    private Quaternion originalSelectedToolRotation;
+    private float selectedToolYRotation;
 
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
@@ -36,6 +38,12 @@ public class Editor : MonoBehaviour
             {
                 Open();
             }
+        }
+
+        if (Input.mouseScrollDelta.y != 0)
+        {
+            selectedToolYRotation = (selectedToolYRotation + ((0 - Input.mouseScrollDelta.y) * 90.0f)) % 360.0f;
+            selectedTool.transform.rotation = Quaternion.AngleAxis(selectedToolYRotation, Vector3.up) * originalSelectedToolRotation;
         }
     }
 
@@ -131,7 +139,9 @@ public class Editor : MonoBehaviour
     {
         if (Enum.TryParse<DuctType>(ductTypeName, out DuctType ductType))
         {
+            selectedToolYRotation = 0;
             var selectedToolPrefab = TileFactory.Instance.GetTilePrefabByType(ductType);
+            originalSelectedToolRotation = selectedToolPrefab.transform.rotation;
             InstantiateTool(selectedToolPrefab);
         }
         else
@@ -145,4 +155,6 @@ public class Editor : MonoBehaviour
         selectedTool = Instantiate(selectedToolPrefab, selectedToolPrefab.transform.position, selectedToolPrefab.transform.rotation, transform);
         selectedTool.SetActive(false);
     }
+
+    
 }
