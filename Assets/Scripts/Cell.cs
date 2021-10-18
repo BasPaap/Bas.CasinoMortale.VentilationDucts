@@ -12,6 +12,10 @@ public class Cell : MonoBehaviour
 
     public event EventHandler MouseEnter;
     public event EventHandler MouseExit;
+    public event EventHandler MouseUp;
+
+    public int Column { get; set; }
+    public int Row { get; set; }
 
     private void Awake()
     {
@@ -29,6 +33,14 @@ public class Cell : MonoBehaviour
         }
     }
 
+    private void OnMouseUp()
+    {
+        if (MouseUp != null)
+        {
+            MouseUp(this, EventArgs.Empty);
+        }
+    }
+
     private void OnMouseExit()
     {        
         meshRenderer.material.mainTexture = normalTexture;
@@ -37,5 +49,5 @@ public class Cell : MonoBehaviour
         {
             MouseExit(this, EventArgs.Empty);
         }
-    }
+    }    
 }

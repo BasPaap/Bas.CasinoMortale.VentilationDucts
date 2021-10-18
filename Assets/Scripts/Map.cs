@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
 
@@ -16,9 +17,8 @@ public class Map : MonoBehaviour
     private void Start()
     {
         Load();
-        PopulateMap();
     }
-
+    
     /// <summary>
     /// Populates the map objects with tiles as specified in the loaded map data.
     /// </summary>
@@ -57,16 +57,16 @@ public class Map : MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
         }
     }
-
+    
     /// <summary>
     /// Loads map data from a file.
     /// </summary>
-    internal void Load()
+    private void LoadMapData()
     {
         if (!File.Exists(FullPath))
         {
-            MapData defaultMap = CreateDefaultMap();
-            Save(defaultMap);
+            mapData = CreateDefaultMap();
+            Save();
         }
 
         var serializer = new XmlSerializer(typeof(MapData));
@@ -76,9 +76,8 @@ public class Map : MonoBehaviour
 
     /// <summary>
     /// Saves the map to a file.
-    /// </summary>
-    /// <param name="mapData">The map data to save.</param>
-    private void Save(MapData mapData)
+    /// </summary>    
+    private void Save()
     {
         var serializer = new XmlSerializer(typeof(MapData));
         using var streamWriter = new StreamWriter(FullPath);
@@ -106,6 +105,28 @@ public class Map : MonoBehaviour
         defaultMapData.Tiles.Add(new DuctTile(DuctType.FourWayCrossing, 7, 1, 0));
 
         return defaultMapData;
+    }
+
+    internal void Load()
+    {
+        LoadMapData();
+        PopulateMap();
+    }
+
+    internal void AddTile(Tile newTile)
+    {
+        if (newTile is DuctTile newDuctTile)
+        {
+            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTile.Column && t.Row == newTile.Row && t.GetType() == typeof(DuctTile)).ToList();
+            foreach (var tileToRemove in tilesToRemove)
+            {
+                mapData.Tiles.Remove(tileToRemove);
+            }
+
+            mapData.Tiles.Add(newDuctTile);
+        }
+
+        Save();
     }
 
     /// <summary>
