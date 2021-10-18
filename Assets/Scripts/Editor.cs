@@ -9,7 +9,7 @@ public class Editor : MonoBehaviour
     private Camera mainCamera;
     private Map map;
     private bool isOpen;
-    private Tile selectedTool;
+    private GameObject selectedTool;
 
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
@@ -80,9 +80,28 @@ public class Editor : MonoBehaviour
         {
             for (int column = 0; column < map.Size.x; column++)
             {
-                var cell = Instantiate(emptyCellPrefab, emptyCellPrefab.transform.position + map.GetPosition(column,row), emptyCellPrefab.transform.rotation, gridTransform);
+                var cell = Instantiate(emptyCellPrefab, emptyCellPrefab.transform.position + map.GetPosition(column,row), emptyCellPrefab.transform.rotation, gridTransform).GetComponent<Cell>();
                 cell.name = $"Cell {column},{row}";
+                cell.MouseEnter += Cell_MouseEnter;
+                cell.MouseExit += Cell_MouseExit;
             }
+        }
+    }
+
+    private void Cell_MouseExit(object sender, EventArgs e)
+    {
+        if (sender is Cell cell && selectedTool != null)
+        {
+            selectedTool.SetActive(false);
+        }
+    }
+
+    private void Cell_MouseEnter(object sender, EventArgs e)
+    {
+        if (sender is Cell cell && selectedTool != null)
+        {
+            selectedTool.transform.position = new Vector3(cell.transform.position.x, 0, cell.transform.position.z);
+            selectedTool.SetActive(true);
         }
     }
 
@@ -90,7 +109,15 @@ public class Editor : MonoBehaviour
     {
         for (int i = gridTransform.childCount - 1; i >= 0; i--)
         {
-            Destroy(gridTransform.GetChild(i).gameObject);
+            var child = gridTransform.GetChild(i);
+            var cell = child.GetComponent<Cell>();
+            if (cell != null)
+            {
+                cell.MouseEnter -= Cell_MouseEnter;
+                cell.MouseExit -= Cell_MouseExit;
+            }
+
+            Destroy(child.gameObject);
         }
     }
 
@@ -104,11 +131,18 @@ public class Editor : MonoBehaviour
     {
         if (Enum.TryParse<DuctType>(ductTypeName, out DuctType ductType))
         {
-            //selectedTool = 
+            var selectedToolPrefab = TileFactory.Instance.GetTilePrefabByType(ductType);
+            InstantiateTool(selectedToolPrefab);
         }
         else
         {
             Debug.LogWarning($"OnDuctButtonClicked called with invalid DuctType name \"{ductTypeName}\".");
         }
+    }
+
+    private void InstantiateTool(GameObject selectedToolPrefab)
+    {
+        selectedTool = Instantiate(selectedToolPrefab, selectedToolPrefab.transform.position, selectedToolPrefab.transform.rotation, transform);
+        selectedTool.SetActive(false);
     }
 }

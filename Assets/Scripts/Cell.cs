@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,19 +10,32 @@ public class Cell : MonoBehaviour
     private Texture normalTexture;
     private MeshRenderer meshRenderer;
 
+    public event EventHandler MouseEnter;
+    public event EventHandler MouseExit;
+
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         normalTexture = meshRenderer.material.mainTexture;
     }
 
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
         meshRenderer.material.mainTexture = highlightedTexture;
+
+        if (MouseEnter != null)
+        {
+            MouseEnter(this, EventArgs.Empty);
+        }
     }
 
     private void OnMouseExit()
     {        
         meshRenderer.material.mainTexture = normalTexture;
+
+        if (MouseExit != null)
+        {
+            MouseExit(this, EventArgs.Empty);
+        }
     }
 }

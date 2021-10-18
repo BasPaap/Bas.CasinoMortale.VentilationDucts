@@ -24,11 +24,11 @@ public class TileFactory : MonoBehaviour
         }
     }
 
-    public GameObject GetTilePrefab<T>(T tile) where T : Tile
+    public GameObject GetTilePrefabByType<T>(T tileType) where T : Enum
     {
-        if (tile is DuctTile ductTile)
+        if (tileType is DuctType ductType)
         {
-            switch (ductTile.Type)
+            switch (ductType)
             {
                 case DuctType.Straight:
                     return straightDuctPrefab;
@@ -41,6 +41,16 @@ public class TileFactory : MonoBehaviour
                 case DuctType.None:
                     return null;
             };
+        }
+
+        return null;
+    }
+
+    public GameObject GetTilePrefab<T>(T tile) where T : Tile
+    {
+        if (tile is DuctTile ductTile)
+        {
+            return GetTilePrefabByType(ductTile.Type);
         }
 
         return null;
