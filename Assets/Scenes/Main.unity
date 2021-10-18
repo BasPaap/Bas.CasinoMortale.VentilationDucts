@@ -990,6 +990,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxIntensity: 8
   speed: 4
+--- !u!1 &1266143163
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1266143165}
+  - component: {fileID: 1266143164}
+  m_Layer: 0
+  m_Name: TileFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1266143164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266143163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d726a838176c8a447a0cc3873876c7fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  straightDuctPrefab: {fileID: 3157868397155201309, guid: 1ca12698253dbfd4481d6bcd3e596cea, type: 3}
+  cornerDuctPrefab: {fileID: 8267212515531311322, guid: 461d00c95817666429fba797699480ed, type: 3}
+  threeWayDuctPrefab: {fileID: 3782348260103945143, guid: f67c327a59fa86d40bedd5488c671f58, type: 3}
+  fourWayDuctPrefab: {fileID: 683328362269437394, guid: 8d492c72c86cd7a4ab3a438a8bfa0176, type: 3}
+--- !u!4 &1266143165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266143163}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1431817877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,10 +1066,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af094dffc34d3e43a870965a62d5f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  straightDuctPrefab: {fileID: 3157868397155201309, guid: 1ca12698253dbfd4481d6bcd3e596cea, type: 3}
-  cornerDuctPrefab: {fileID: 8267212515531311322, guid: 461d00c95817666429fba797699480ed, type: 3}
-  threeWayDuctPrefab: {fileID: 3782348260103945143, guid: f67c327a59fa86d40bedd5488c671f58, type: 3}
-  fourWayDuctPrefab: {fileID: 683328362269437394, guid: 8d492c72c86cd7a4ab3a438a8bfa0176, type: 3}
 --- !u!4 &1431817879
 Transform:
   m_ObjectHideFlags: 0

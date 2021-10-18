@@ -11,12 +11,6 @@ public class Map : MonoBehaviour
     private MapData mapData;
 
     private string FullPath => Path.Combine(Application.persistentDataPath, fileName);
-
-    [SerializeField] private GameObject straightDuctPrefab;
-    [SerializeField] private GameObject cornerDuctPrefab;
-    [SerializeField] private GameObject threeWayDuctPrefab;
-    [SerializeField] private GameObject fourWayDuctPrefab;
-
     public Vector2 Size => mapData != null ? new Vector2(mapData.Width, mapData.Height) : Vector2.zero;
 
     private void Start()
@@ -37,34 +31,14 @@ public class Map : MonoBehaviour
         }
 
         ClearChildren();
-        PopulateDuctTiles();
-        //PopulateGrateTiles();
-        //PopulateSoundTiles();
+        PopulateTiles();
     }
-
-    //private void PopulateSoundTiles()
-    //{
-    //    throw new NotImplementedException();
-    //}
-
-    //private void PopulateGrateTiles()
-    //{
-    //    throw new NotImplementedException();
-    //}
-
-    private void PopulateDuctTiles()
+        
+    private void PopulateTiles()
     {
-        foreach (DuctTile tile in mapData.Tiles)
+        foreach (var tile in mapData.Tiles)
         {
-            var prefab = tile.Type switch
-            {
-                DuctType.Straight => straightDuctPrefab,
-                DuctType.Corner => cornerDuctPrefab,
-                DuctType.ThreeWayCrossing => threeWayDuctPrefab,
-                DuctType.FourWayCrossing => fourWayDuctPrefab,
-                DuctType.None => null,
-                _ => null
-            };
+            var prefab = TileFactory.Instance.GetTilePrefab(tile);
 
             if (prefab != null)
             {

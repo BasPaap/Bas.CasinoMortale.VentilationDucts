@@ -9,11 +9,12 @@ public class Editor : MonoBehaviour
     private Camera mainCamera;
     private Map map;
     private bool isOpen;
+    private Tile selectedTool;
 
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
     [SerializeField] private Canvas toolbarCanvas;
-
+    
     private void Awake()
     {
         map = GameObject.FindObjectOfType<Map>();
@@ -103,7 +104,7 @@ public class Editor : MonoBehaviour
     {
         if (Enum.TryParse<DuctType>(ductTypeName, out DuctType ductType))
         {
-            
+            //selectedTool = 
         }
         else
         {
