@@ -49,6 +49,11 @@ public class Editor : MonoBehaviour
             {
                 tool.transform.rotation = Quaternion.AngleAxis(toolYRotation, Vector3.up) * originalToolRotation;
             }
+
+            if (selectedTile != null)
+            {
+                selectedTile.Rotation = toolYRotation;
+            }
         }
     }
 
@@ -137,7 +142,6 @@ public class Editor : MonoBehaviour
             {
                 selectedTile.Column = cell.Column;
                 selectedTile.Row = cell.Row;
-                selectedTile.Rotation = toolYRotation;
             }
         }
     }
