@@ -3,9 +3,14 @@ guid: 3b2bfeafc0b2ee7409c4a708b83dfa5e
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Corner
+    second: {fileID: 2800000, guid: 58c544e4e7bac814bbc9b0bd7b533e1b, type: 3}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

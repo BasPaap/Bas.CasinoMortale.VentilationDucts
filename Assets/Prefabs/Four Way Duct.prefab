@@ -72,7 +72,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 32de2319f03c97f45a6d0df5393ac39b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: bb91066708daf0145bb9b4edcb37ec51, type: 2}
+      objectReference: {fileID: 2100000, guid: 3b3a1b494ad9bca4fa062426a9fe871c, type: 2}
     - target: {fileID: 919132149155446097, guid: 32de2319f03c97f45a6d0df5393ac39b, type: 3}
       propertyPath: m_Name
       value: Four Way Duct

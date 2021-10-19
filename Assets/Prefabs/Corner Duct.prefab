@@ -72,7 +72,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 3b2bfeafc0b2ee7409c4a708b83dfa5e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: bb91066708daf0145bb9b4edcb37ec51, type: 2}
+      objectReference: {fileID: 2100000, guid: dfbfaa6325aa5354e999c348fae36e65, type: 2}
     - target: {fileID: 919132149155446097, guid: 3b2bfeafc0b2ee7409c4a708b83dfa5e, type: 3}
       propertyPath: m_Name
       value: Corner Duct
