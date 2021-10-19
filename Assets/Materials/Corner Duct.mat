@@ -123,8 +123,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - Line_Color: {r: 0.10893285, g: 1, b: 0, a: 1}
-    - Wall_Color: {r: 0.046559807, g: 0.26415092, b: 0, a: 1}
+    - Line_Color: {r: 0.116464645, g: 1.0592737, b: 0, a: 1}
+    - Wall_Color: {r: 0, g: 0.4, b: 0, a: 1}
     - _BaseColor: {r: 0, g: 1, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
