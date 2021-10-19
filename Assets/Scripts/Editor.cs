@@ -60,8 +60,16 @@ public class Editor : MonoBehaviour
     private void Close()
     {
         isOpen = false;
+        toolYRotation = 0;
+        selectedTile = null;
+        if (tool != null)
+        {
+            Destroy(tool.gameObject);
+        }
+
         ToggleCameras();
         ToggleToolbar();
+        ClearGrid();
     }
 
     private void ToggleToolbar()
@@ -111,21 +119,24 @@ public class Editor : MonoBehaviour
 
     private void Cell_MouseUp(object sender, EventArgs e)
     {
-        if (selectedTile != null)
+        if (isOpen)
         {
-            map.AddTile(selectedTile);            
-        }
-        else if (sender is Cell cell)
-        {
-            map.RemoveTiles(cell.Column, cell.Row);
-        }
+            if (selectedTile != null)
+            {
+                map.AddTile(selectedTile);
+            }
+            else if (sender is Cell cell)
+            {
+                map.RemoveTiles(cell.Column, cell.Row);
+            }
 
-        map.Load();
+            map.Load();
+        }
     }
 
     private void Cell_MouseExit(object sender, EventArgs e)
     {
-        if (sender is Cell cell && tool != null)
+        if (isOpen && sender is Cell cell && tool != null)
         {
             tool.SetActive(false);
         }
@@ -133,7 +144,7 @@ public class Editor : MonoBehaviour
 
     private void Cell_MouseEnter(object sender, EventArgs e)
     {
-        if (sender is Cell cell && tool != null)
+        if (isOpen && sender is Cell cell && tool != null)
         {
             tool.transform.position = new Vector3(cell.transform.position.x, 0, cell.transform.position.z);
             tool.SetActive(true);
