@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Editor : MonoBehaviour
@@ -13,6 +14,7 @@ public class Editor : MonoBehaviour
     private Tile selectedTile;
     private Quaternion originalToolRotation;
     private float toolYRotation;
+    private readonly List<Cell> cells = new List<Cell>();
 
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
@@ -29,6 +31,30 @@ public class Editor : MonoBehaviour
 
     private void Update()
     {
+        if (isOpen)
+        {
+            RaycastHit[] hits = Physics.RaycastAll(editorCamera.ScreenPointToRay(Input.mousePosition));
+            foreach (var cell in cells)
+            {
+                cell.TestHits(hits.Select(h => h.collider.gameObject));
+            }
+
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                toolYRotation = (toolYRotation + ((0 - Input.mouseScrollDelta.y) * 90.0f)) % 360.0f;
+
+                if (tool != null)
+                {
+                    tool.transform.rotation = Quaternion.AngleAxis(toolYRotation, Vector3.up) * originalToolRotation;
+                }
+
+                if (selectedTile != null)
+                {
+                    selectedTile.Rotation = toolYRotation;
+                }
+            }
+        }
+        
         if (Input.GetKeyUp(Hotkeys.EditorKey))
         {
             if (isOpen)
@@ -39,22 +65,7 @@ public class Editor : MonoBehaviour
             {
                 Open();
             }
-        }
-
-        if (Input.mouseScrollDelta.y != 0)
-        {
-            toolYRotation = (toolYRotation + ((0 - Input.mouseScrollDelta.y) * 90.0f)) % 360.0f;
-
-            if (tool != null)
-            {
-                tool.transform.rotation = Quaternion.AngleAxis(toolYRotation, Vector3.up) * originalToolRotation;
-            }
-
-            if (selectedTile != null)
-            {
-                selectedTile.Rotation = toolYRotation;
-            }
-        }
+        }        
     }
 
     private void Close()
@@ -64,7 +75,7 @@ public class Editor : MonoBehaviour
         selectedTile = null;
         if (tool != null)
         {
-            Destroy(tool.gameObject);
+            Destroy(tool);
         }
 
         ToggleCameras();
@@ -109,15 +120,17 @@ public class Editor : MonoBehaviour
                 var cell = Instantiate(emptyCellPrefab, emptyCellPrefab.transform.position + map.GetPosition(column,row), emptyCellPrefab.transform.rotation, gridTransform).GetComponent<Cell>();
                 cell.name = $"Cell {column},{row}";
                 cell.MouseEnter += Cell_MouseEnter;
-                cell.MouseExit += Cell_MouseExit;
-                cell.MouseUp += Cell_MouseUp;
+                cell.MouseLeave += Cell_MouseLeave;
+                cell.Click += Cell_Click;
                 cell.Column = column;
                 cell.Row = row;
+                
+                cells.Add(cell);
             }
         }
     }
 
-    private void Cell_MouseUp(object sender, EventArgs e)
+    private void Cell_Click(object sender, EventArgs e)
     {
         if (isOpen)
         {
@@ -134,9 +147,12 @@ public class Editor : MonoBehaviour
         }
     }
 
-    private void Cell_MouseExit(object sender, EventArgs e)
+    private void Cell_MouseLeave(object sender, EventArgs e)
     {
-        if (isOpen && sender is Cell cell && tool != null)
+        var cell = sender as Cell;
+        Debug.Log($"Leaving {cell.Column}, {cell.Row}");
+
+        if (isOpen && sender is Cell && tool != null)
         {
             tool.SetActive(false);
         }
@@ -144,7 +160,10 @@ public class Editor : MonoBehaviour
 
     private void Cell_MouseEnter(object sender, EventArgs e)
     {
-        if (isOpen && sender is Cell cell && tool != null)
+        var cell = sender as Cell;
+        Debug.Log($"Entering {cell.Column}, {cell.Row}");
+
+        if (isOpen && sender is Cell && tool != null)
         {
             tool.transform.position = new Vector3(cell.transform.position.x, 0, cell.transform.position.z);
             tool.SetActive(true);
@@ -166,12 +185,14 @@ public class Editor : MonoBehaviour
             if (cell != null)
             {
                 cell.MouseEnter -= Cell_MouseEnter;
-                cell.MouseExit -= Cell_MouseExit;
-                cell.MouseUp -= Cell_MouseUp;
+                cell.MouseLeave -= Cell_MouseLeave;
+                cell.Click -= Cell_Click;
             }
 
             Destroy(child.gameObject);
         }
+
+        cells.Clear();
     }
 
     private void ToggleCameras()
@@ -187,7 +208,7 @@ public class Editor : MonoBehaviour
 
         if (tool != null)
         {
-            Destroy(tool.gameObject);
+            Destroy(tool);
         }
     }
 
@@ -211,7 +232,7 @@ public class Editor : MonoBehaviour
     {
         if (tool != null)
         {
-            Destroy(tool.gameObject);
+            Destroy(tool);
         }
 
         tool = Instantiate(selectedToolPrefab, selectedToolPrefab.transform.position, selectedToolPrefab.transform.rotation, transform);
