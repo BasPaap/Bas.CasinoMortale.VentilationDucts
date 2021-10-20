@@ -1,12 +1,44 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &-1148496778633560023
+--- !u!1 &3794813759681499909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2518696395589506984}
+  - component: {fileID: 1144208820344434078}
+  m_Layer: 0
+  m_Name: Three Way Duct
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2518696395589506984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3794813759681499909}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1196486322715156708}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1144208820344434078
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3782348260103945143}
+  m_GameObject: {fileID: 3794813759681499909}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -14,32 +46,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1504967853735218612, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
---- !u!1001 &4088406865581623014
+--- !u!1001 &1661965176841275151
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2518696395589506984}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_LocalPosition.y
@@ -51,7 +71,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_LocalRotation.x
@@ -59,48 +79,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70710677
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.70710677
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
-      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 6f9a07f56f1475f4882655b842645c7d, type: 2}
     - target: {fileID: 919132149155446097, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
       propertyPath: m_Name
-      value: Three Way Duct
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: duct-three-way-crossing
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
---- !u!1 &3782348260103945143 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
-  m_PrefabInstance: {fileID: 4088406865581623014}
+--- !u!4 &1196486322715156708 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
+  m_PrefabInstance: {fileID: 1661965176841275151}
   m_PrefabAsset: {fileID: 0}
