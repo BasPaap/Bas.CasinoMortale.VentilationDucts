@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: ThreeWay
-    second: {fileID: 2800000, guid: 211d614798d15e44194df047e12e2fe1, type: 3}
+    second: {fileID: 2800000, guid: 3052159b330e99c488d38a7db6043918, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
