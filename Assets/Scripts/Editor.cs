@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 public class Editor : MonoBehaviour
-{    
+{
     private Camera editorCamera;
     private Camera mainCamera;
     private Map map;
@@ -19,7 +19,7 @@ public class Editor : MonoBehaviour
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
     [SerializeField] private Canvas toolbarCanvas;
-    
+
     private void Awake()
     {
         map = GameObject.FindObjectOfType<Map>();
@@ -33,28 +33,14 @@ public class Editor : MonoBehaviour
     {
         if (isOpen)
         {
-            RaycastHit[] hits = Physics.RaycastAll(editorCamera.ScreenPointToRay(Input.mousePosition));
-            foreach (var cell in cells)
+            if (tool != null)
             {
-                cell.TestHits(hits.Select(h => h.collider.gameObject));
+                tool.SetActive(false);
             }
 
-            if (Input.mouseScrollDelta.y != 0)
-            {
-                toolYRotation = (toolYRotation + ((0 - Input.mouseScrollDelta.y) * 90.0f)) % 360.0f;
-
-                if (tool != null)
-                {
-                    tool.transform.rotation = Quaternion.AngleAxis(toolYRotation, Vector3.up) * originalToolRotation;
-                }
-
-                if (selectedTile != null)
-                {
-                    selectedTile.Rotation = toolYRotation;
-                }
-            }
+            HandleMouseInput();
         }
-        
+
         if (Input.GetKeyUp(Hotkeys.EditorKey))
         {
             if (isOpen)
@@ -65,7 +51,69 @@ public class Editor : MonoBehaviour
             {
                 Open();
             }
-        }        
+        }
+    }
+
+    private void HandleMouseInput()
+    {
+        RaycastHit[] hits = Physics.RaycastAll(editorCamera.ScreenPointToRay(Input.mousePosition));
+        var hitGameObjects = hits.Select(h => h.collider.gameObject);
+
+        foreach (var cell in cells)
+        {
+            var isCellHit = hitGameObjects.Contains(cell.gameObject);
+
+            cell.SetHighlight(isCellHit);
+
+            if (isCellHit)
+            {
+                MoveToolToCell(cell);
+
+                if (tool != null)
+                {
+                    tool.SetActive(true);
+                }
+
+                if (Input.GetMouseButtonUp(0))
+                {
+                    ApplyTool(cell);
+                }
+            }
+        }
+
+        SetToolRotation();
+    }
+
+    private void SetToolRotation()
+    {
+        if (Input.mouseScrollDelta.y != 0)
+        {
+            toolYRotation = (toolYRotation + ((0 - Input.mouseScrollDelta.y) * 90.0f)) % 360.0f;
+
+            if (tool != null)
+            {
+                tool.transform.rotation = Quaternion.AngleAxis(toolYRotation, Vector3.up) * originalToolRotation;
+            }
+
+            if (selectedTile != null)
+            {
+                selectedTile.Rotation = toolYRotation;
+            }
+        }
+    }
+
+    private void MoveToolToCell(Cell cell)
+    {
+        if (tool != null)
+        {
+            tool.transform.position = new Vector3(cell.transform.position.x, 0, cell.transform.position.z);
+        }
+
+        if (selectedTile != null)
+        {
+            selectedTile.Column = cell.Column;
+            selectedTile.Row = cell.Row;
+        }
     }
 
     private void Close()
@@ -117,63 +165,28 @@ public class Editor : MonoBehaviour
         {
             for (int column = 0; column < map.Size.x; column++)
             {
-                var cell = Instantiate(emptyCellPrefab, emptyCellPrefab.transform.position + map.GetPosition(column,row), emptyCellPrefab.transform.rotation, gridTransform).GetComponent<Cell>();
+                var cell = Instantiate(emptyCellPrefab, emptyCellPrefab.transform.position + map.GetPosition(column, row), emptyCellPrefab.transform.rotation, gridTransform).GetComponent<Cell>();
                 cell.name = $"Cell {column},{row}";
-                cell.MouseEnter += Cell_MouseEnter;
-                cell.MouseLeave += Cell_MouseLeave;
-                cell.Click += Cell_Click;
                 cell.Column = column;
                 cell.Row = row;
-                
+
                 cells.Add(cell);
             }
         }
     }
 
-    private void Cell_Click(object sender, EventArgs e)
+    private void ApplyTool(Cell cell)
     {
-        if (isOpen)
+        if (selectedTile != null)
         {
-            if (selectedTile != null)
-            {
-                map.AddTile(selectedTile);
-            }
-            else if (sender is Cell cell)
-            {
-                map.RemoveTiles(cell.Column, cell.Row);
-            }
-
-            map.Load();
+            map.AddTile(selectedTile);
         }
-    }
-
-    private void Cell_MouseLeave(object sender, EventArgs e)
-    {
-        var cell = sender as Cell;
-        Debug.Log($"Leaving {cell.Column}, {cell.Row}");
-
-        if (isOpen && sender is Cell && tool != null)
+        else
         {
-            tool.SetActive(false);
+            map.RemoveTiles(cell.Column, cell.Row);
         }
-    }
 
-    private void Cell_MouseEnter(object sender, EventArgs e)
-    {
-        var cell = sender as Cell;
-        Debug.Log($"Entering {cell.Column}, {cell.Row}");
-
-        if (isOpen && sender is Cell && tool != null)
-        {
-            tool.transform.position = new Vector3(cell.transform.position.x, 0, cell.transform.position.z);
-            tool.SetActive(true);
-
-            if (selectedTile != null)
-            {
-                selectedTile.Column = cell.Column;
-                selectedTile.Row = cell.Row;
-            }
-        }
+        map.Load();
     }
 
     private void ClearGrid()
@@ -181,14 +194,6 @@ public class Editor : MonoBehaviour
         for (int i = gridTransform.childCount - 1; i >= 0; i--)
         {
             var child = gridTransform.GetChild(i);
-            var cell = child.GetComponent<Cell>();
-            if (cell != null)
-            {
-                cell.MouseEnter -= Cell_MouseEnter;
-                cell.MouseLeave -= Cell_MouseLeave;
-                cell.Click -= Cell_Click;
-            }
-
             Destroy(child.gameObject);
         }
 
@@ -199,7 +204,7 @@ public class Editor : MonoBehaviour
     {
         editorCamera.gameObject.SetActive(!editorCamera.gameObject.activeSelf);
         mainCamera.gameObject.SetActive(!mainCamera.gameObject.activeSelf);
-    }    
+    }
 
     public void OnClearButtonClicked()
     {
@@ -238,5 +243,5 @@ public class Editor : MonoBehaviour
         tool = Instantiate(selectedToolPrefab, selectedToolPrefab.transform.position, selectedToolPrefab.transform.rotation, transform);
         tool.name = $"Tool ({selectedToolPrefab.name})";
         tool.SetActive(false);
-    }    
+    }
 }
