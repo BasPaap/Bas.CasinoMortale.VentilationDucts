@@ -1,4 +1,6 @@
-﻿public class SoundTile : Tile
+﻿using System.Collections.ObjectModel;
+
+public class SoundTile : Tile
 {
-    public string FileName { get; set; }
+    public Collection<string> FileNames { get; set; } = new Collection<string>();
 }

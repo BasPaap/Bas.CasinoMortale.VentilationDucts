@@ -9,6 +9,7 @@ public class TileFactory : MonoBehaviour
     [SerializeField] private GameObject cornerDuctPrefab;
     [SerializeField] private GameObject threeWayDuctPrefab;
     [SerializeField] private GameObject fourWayDuctPrefab;
+    [SerializeField] private GameObject soundPrefab;
 
     public static TileFactory Instance { get; private set; }
 
@@ -52,7 +53,16 @@ public class TileFactory : MonoBehaviour
         {
             return GetTilePrefabByType(ductTile.Type);
         }
+        else if (tile is SoundTile)
+        {
+            return soundPrefab;
+        }
 
         return null;
     }    
+
+    public GameObject GetSoundTilePrefab()
+    {
+        return soundPrefab;
+    }
 }

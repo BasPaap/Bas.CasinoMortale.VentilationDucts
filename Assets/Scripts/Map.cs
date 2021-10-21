@@ -136,6 +136,16 @@ public class Map : MonoBehaviour
 
             mapData.Tiles.Add(newDuctTile);
         }
+        else if (newTile is SoundTile soundTile)
+        {
+            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTile.Column && t.Row == newTile.Row && t.GetType() == typeof(SoundTile)).ToList();
+            foreach (var tileToRemove in tilesToRemove)
+            {
+                mapData.Tiles.Remove(tileToRemove);
+            }
+
+            mapData.Tiles.Add(soundTile);
+        }
 
         Save();
     }

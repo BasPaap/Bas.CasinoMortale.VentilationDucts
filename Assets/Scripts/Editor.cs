@@ -233,6 +233,15 @@ public class Editor : MonoBehaviour
         }
     }
 
+    public void OnSoundButtonClicked()
+    {
+        toolYRotation = 0;
+        var selectedToolPrefab = TileFactory.Instance.GetSoundTilePrefab();
+        originalToolRotation = selectedToolPrefab.transform.rotation;
+        InstantiateTool(selectedToolPrefab);
+        selectedTile = new SoundTile();
+    }
+
     private void InstantiateTool(GameObject selectedToolPrefab)
     {
         if (tool != null)
