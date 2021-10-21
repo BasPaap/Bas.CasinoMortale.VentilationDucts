@@ -27,14 +27,6 @@ public class Sound : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void Update()
-    {
-        if (audioSource.isPlaying)
-        {
-            Debug.Log(audioSource.volume);
-        }
-    }
-
     private async void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<CharacterController>() != null &&
