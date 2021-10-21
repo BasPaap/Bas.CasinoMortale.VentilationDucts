@@ -13,6 +13,8 @@ public class PlayerMovementController : MonoBehaviour
     [Range(0.01f, 10f)]
     [SerializeField] private float damping;
 
+    public float Speed => velocity.magnitude;
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -22,7 +24,6 @@ public class PlayerMovementController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         var input = context.ReadValue<Vector2>();
-
         movement.x = input.x;
         movement.z = input.y;
     }
@@ -30,6 +31,7 @@ public class PlayerMovementController : MonoBehaviour
     private void Update()
     {
         velocity = Vector3.Lerp(velocity, movement, damping * Time.deltaTime);
+        velocity = velocity.magnitude < 0.001f ? Vector3.zero : velocity;   // To prevent infinitely small lerping.
         characterController.Move(velocity * Time.deltaTime);
     }
 }
