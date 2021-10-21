@@ -7,7 +7,11 @@ using UnityEngine.InputSystem;
 public class PlayerMovementController : MonoBehaviour
 {
     private CharacterController characterController;
-    private Vector3 movement = new Vector3();
+    private Vector3 movement;
+    private Vector3 velocity;
+
+    [Range(0.01f, 10f)]
+    [SerializeField] private float damping;
 
     private void Awake()
     {
@@ -18,12 +22,14 @@ public class PlayerMovementController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         var input = context.ReadValue<Vector2>();
+
         movement.x = input.x;
         movement.z = input.y;
     }
 
     private void Update()
-    {        
-        characterController.Move(movement * Time.deltaTime);
+    {
+        velocity = Vector3.Lerp(velocity, movement, damping * Time.deltaTime);
+        characterController.Move(velocity * Time.deltaTime);
     }
 }
