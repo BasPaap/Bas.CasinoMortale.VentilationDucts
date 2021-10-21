@@ -1,7 +1,6 @@
 ﻿using System.Xml.Serialization;
 
 [XmlInclude(typeof(DuctTile))]
-[XmlInclude(typeof(GrateTile))]
 [XmlInclude(typeof(SoundTile))]
 public abstract class Tile
 {
