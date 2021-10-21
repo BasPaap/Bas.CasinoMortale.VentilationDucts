@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Duct Material.003
+    second: {fileID: 2100000, guid: 7791cc3104ac10741bc3bed16355cadc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material.004
     second: {fileID: 2100000, guid: ae0402283b60ef84a8457d42a9c30909, type: 2}
   - first:
