@@ -97,6 +97,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 32de2319f03c97f45a6d0df5393ac39b, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 32de2319f03c97f45a6d0df5393ac39b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 91b334fae7a5350499b44088ac2da8e2, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 32de2319f03c97f45a6d0df5393ac39b, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 87e7b84d906973843af4ff94ee1703a5, type: 2}
     - target: {fileID: 919132149155446097, guid: 32de2319f03c97f45a6d0df5393ac39b, type: 3}
       propertyPath: m_Name
       value: duct-four-way-crossing

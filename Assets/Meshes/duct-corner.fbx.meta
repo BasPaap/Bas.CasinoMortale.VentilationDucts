@@ -7,11 +7,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Corner Duct
-    second: {fileID: 2100000, guid: dfbfaa6325aa5354e999c348fae36e65, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: Duct Material.001
     second: {fileID: 2100000, guid: dfbfaa6325aa5354e999c348fae36e65, type: 2}
   - first:
@@ -20,7 +15,7 @@ ModelImporter:
       name: Corner
     second: {fileID: 2800000, guid: eaf672d62285af741aec843cd5ca1830, type: 3}
   materials:
-    materialImportMode: 2
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
