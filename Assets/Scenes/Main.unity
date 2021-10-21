@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 280197385}
   - component: {fileID: 280197387}
   - component: {fileID: 280197386}
+  - component: {fileID: 280197388}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -434,6 +435,14 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!81 &280197388
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280197383}
+  m_Enabled: 1
 --- !u!1 &288455011
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +469,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288455011}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &288455013
 Camera:
   m_ObjectHideFlags: 0
@@ -1627,7 +1636,7 @@ MonoBehaviour:
   cornerDuctPrefab: {fileID: 7089794102523129334, guid: 461d00c95817666429fba797699480ed, type: 3}
   threeWayDuctPrefab: {fileID: 3794813759681499909, guid: f67c327a59fa86d40bedd5488c671f58, type: 3}
   fourWayDuctPrefab: {fileID: 7861448240358273438, guid: 8d492c72c86cd7a4ab3a438a8bfa0176, type: 3}
-  soundPrefab: {fileID: 0}
+  soundPrefab: {fileID: 4716488817383428015, guid: 6436e8ed8a04e7f4292db8e456817901, type: 3}
 --- !u!4 &1266143165
 Transform:
   m_ObjectHideFlags: 0

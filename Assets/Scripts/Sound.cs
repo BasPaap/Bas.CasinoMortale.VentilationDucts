@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -10,28 +11,50 @@ using UnityEngine.Networking;
 public class Sound : MonoBehaviour
 {
     private AudioSource audioSource;
+    private readonly Queue<string> audioFileNameQueue = new Queue<string>();
+
+
+    public void SetAudioFileNames(IEnumerable<string> audioFileNames)
+    {
+        foreach (var audioFileName in audioFileNames)
+        {
+            audioFileNameQueue.Enqueue(audioFileName);
+        }
+    }
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
-    private async void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        await PlayClipAsync();
+        if (audioSource.isPlaying)
+        {
+            Debug.Log(audioSource.volume);
+        }
     }
 
-    private async Task PlayClipAsync()
+    private async void OnTriggerEnter(Collider other)
     {
-        // build your absolute path
-        var path = Path.Combine(Application.streamingAssetsPath, "do-you-expect-me-to-talk.mp3");
+        if (other.gameObject.GetComponent<CharacterController>() != null &&
+            audioFileNameQueue.Count > 0)
+        {
+            await PlayNextClipAsync();
+        }
+    }
 
-        // wait for the load and set your property
+    private async Task PlayNextClipAsync()
+    {
+        var fileName = audioFileNameQueue.Dequeue();
+        var path = Path.Combine(Application.streamingAssetsPath, fileName);
+                
         var audioClip = await LoadClipAsync(path);
         audioSource.clip = audioClip;
         audioSource.Play();
     }
 
-    async Task<AudioClip> LoadClipAsync(string path)
+    private async Task<AudioClip> LoadClipAsync(string path)
     {
         AudioClip clip = null;
 

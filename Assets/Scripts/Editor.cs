@@ -240,6 +240,8 @@ public class Editor : MonoBehaviour
         originalToolRotation = selectedToolPrefab.transform.rotation;
         InstantiateTool(selectedToolPrefab);
         selectedTile = new SoundTile();
+        (selectedTile as SoundTile).FileNames.Add("do-you-expect-me-to-talk.mp3");
+        (selectedTile as SoundTile).FileNames.Add("trololololo.mp3");
     }
 
     private void InstantiateTool(GameObject selectedToolPrefab)

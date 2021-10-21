@@ -42,7 +42,13 @@ public class Map : MonoBehaviour
 
             if (prefab != null)
             {
-                Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
+                var instantiatedTile = Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
+
+                if (tile is SoundTile soundTile)
+                {
+                    var sound = instantiatedTile.GetComponent<Sound>();
+                    sound.SetAudioFileNames(soundTile.FileNames);
+                }
             }
         }
     }
