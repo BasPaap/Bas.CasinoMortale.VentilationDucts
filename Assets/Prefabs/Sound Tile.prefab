@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7043015973407625495}
   - component: {fileID: 2869165625610858401}
   - component: {fileID: 8966424194372739132}
+  - component: {fileID: 8261271564783349933}
+  - component: {fileID: 8168941627200373946}
   m_Layer: 0
   m_Name: Sound Tile
   m_TagString: Untagged
@@ -155,6 +157,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!164 &8261271564783349933
+AudioReverbFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716488817383428015}
+  m_Enabled: 1
+  m_DryLevel: 0
+  m_Room: -1000
+  m_RoomHF: -1200
+  m_DecayTime: 1.49
+  m_DecayHFRatio: 0.54
+  m_ReflectionsLevel: -370
+  m_ReverbLevel: 1030
+  m_ReverbDelay: 0.011
+  m_Diffusion: 100
+  m_Density: 60
+  m_HFReference: 5000
+  m_RoomLF: 0
+  m_LFReference: 250
+  m_ReflectionsDelay: 0
+  m_ReverbPreset: 4
+--- !u!170 &8168941627200373946
+AudioDistortionFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716488817383428015}
+  m_Enabled: 1
+  m_DistortionLevel: 0.6
 --- !u!1 &4716488818922092192
 GameObject:
   m_ObjectHideFlags: 0
