@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2518696395589506984}
   - component: {fileID: 1144208820344434078}
+  - component: {fileID: 3365785875631885375}
   m_Layer: 0
   m_Name: Three Way Duct
   m_TagString: Untagged
@@ -46,6 +47,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1504967853735218612, guid: 19913f4eacba8294e8d91aab6c2f0702, type: 3}
+--- !u!114 &3365785875631885375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3794813759681499909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6838092b6b637ed448aba9d2ce54a652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  minDistanceToReveal: 1
 --- !u!1001 &1661965176841275151
 PrefabInstance:
   m_ObjectHideFlags: 0

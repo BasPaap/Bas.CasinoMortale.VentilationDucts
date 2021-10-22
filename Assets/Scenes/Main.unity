@@ -774,6 +774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materials:
   - {fileID: 2100000, guid: 91b334fae7a5350499b44088ac2da8e2, type: 2}
+  - {fileID: 2100000, guid: 87e7b84d906973843af4ff94ee1703a5, type: 2}
 --- !u!1 &288455011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3262,6 +3263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af094dffc34d3e43a870965a62d5f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 280197384}
 --- !u!4 &1431817879
 Transform:
   m_ObjectHideFlags: 0

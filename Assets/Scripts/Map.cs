@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
+    [SerializeField] private Transform playerTransform;
+
     private const string fileName = "map.xml";
     private MapData mapData;
 
@@ -43,6 +45,12 @@ public class Map : MonoBehaviour
             if (prefab != null)
             {
                 var instantiatedTile = Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
+
+                var duct = instantiatedTile.GetComponent<Duct>();
+                if (duct != null)
+                {
+                    duct.PlayerTransform = playerTransform;
+                }
 
                 if (tile is SoundTile soundTile)
                 {
