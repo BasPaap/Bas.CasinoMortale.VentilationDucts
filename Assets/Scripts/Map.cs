@@ -46,10 +46,10 @@ public class Map : MonoBehaviour
             {
                 var instantiatedTile = Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
 
-                var duct = instantiatedTile.GetComponent<Duct>();
-                if (duct != null)
+                var fogOfWar = instantiatedTile.GetComponent<FogOfWar>();
+                if (fogOfWar != null)
                 {
-                    duct.PlayerTransform = playerTransform;
+                    fogOfWar.PlayerTransform = playerTransform;
                 }
 
                 if (tile is SoundTile soundTile)
