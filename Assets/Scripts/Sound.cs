@@ -24,12 +24,13 @@ public class Sound : MonoBehaviour
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();        
     }
 
     private async void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<CharacterController>() != null &&
+        if (!audioSource.isPlaying &&
+            other.gameObject.GetComponent<CharacterController>() != null &&
             audioFileNameQueue.Count > 0)
         {
             await PlayNextClipAsync();
