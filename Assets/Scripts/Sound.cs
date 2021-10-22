@@ -13,9 +13,9 @@ public class Sound : MonoBehaviour
     private AudioSource audioSource;
     private readonly Queue<string> audioFileNameQueue = new Queue<string>();
 
-
     public void SetAudioFileNames(IEnumerable<string> audioFileNames)
     {
+        Debug.Log($"Setting the following fileNames for {name}: {string.Join(", ", audioFileNames)}");
         foreach (var audioFileName in audioFileNames)
         {
             audioFileNameQueue.Enqueue(audioFileName);
@@ -33,6 +33,7 @@ public class Sound : MonoBehaviour
             other.gameObject.GetComponent<CharacterController>() != null &&
             audioFileNameQueue.Count > 0)
         {
+            Debug.Log("Collider triggered, playing next audio clip.");
             await PlayNextClipAsync();
         }
     }
@@ -40,6 +41,7 @@ public class Sound : MonoBehaviour
     private async Task PlayNextClipAsync()
     {
         var fileName = audioFileNameQueue.Dequeue();
+        Debug.Log($"Playing {fileName}.");
         var path = Path.Combine(Application.streamingAssetsPath, fileName);
                 
         var audioClip = await LoadClipAsync(path);

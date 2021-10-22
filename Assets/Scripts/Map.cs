@@ -38,12 +38,14 @@ public class Map : MonoBehaviour
 
     private void PopulateTiles()
     {
+        Debug.Log($"Populating map with {mapData.Tiles.Count} tiles.");
         foreach (var tile in mapData.Tiles)
         {
             var prefab = TileFactory.Instance.GetTilePrefab(tile);
 
             if (prefab != null)
             {
+                Debug.Log($"Instantiating {prefab.name} at {tile.Column}, {tile.Row} at {tile.Rotation} degrees rotation.");
                 var instantiatedTile = Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
 
                 var fogOfWar = instantiatedTile.GetComponent<FogOfWar>();
@@ -66,6 +68,7 @@ public class Map : MonoBehaviour
     /// </summary>
     private void ClearChildren()
     {
+        Debug.Log($"Clearing {transform.childCount} map children.");
         for (int i = transform.childCount - 1; i >= 0; i--)
         {
             Destroy(transform.GetChild(i).gameObject);
@@ -83,6 +86,7 @@ public class Map : MonoBehaviour
             Save();
         }
 
+        Debug.Log("Loading map data.");
         var serializer = new XmlSerializer(typeof(MapData));
         using var streamReader = new StreamReader(FullPath);
         mapData = serializer.Deserialize(streamReader) as MapData;
@@ -90,6 +94,7 @@ public class Map : MonoBehaviour
 
     internal void ResetMap()
     {
+        Debug.Log($"Resetting the current map.");
         CreateBackup();
         File.Delete(FullPath);
         Load();
@@ -100,6 +105,7 @@ public class Map : MonoBehaviour
     /// </summary>    
     private void Save()
     {
+        Debug.Log("Saving map data.");
         var serializer = new XmlSerializer(typeof(MapData));
         using var streamWriter = new StreamWriter(FullPath);
         serializer.Serialize(streamWriter, mapData);
@@ -112,6 +118,8 @@ public class Map : MonoBehaviour
     /// <returns>A default 10x10 map.</returns>
     private MapData CreateDefaultMap()
     {
+        Debug.Log($"Creating a default map.");
+
         // Create an empty 10x10 map
         var defaultMapData = new MapData()
         {
@@ -154,6 +162,7 @@ public class Map : MonoBehaviour
 
     internal void RemoveTiles(int column, int row)
     {
+        Debug.Log($"Removing all tiles from cell {column}, {row}.");
         var tilesToRemove = mapData.Tiles.Where(t => t.Column == column && t.Row == row).ToList();
         foreach (var tileToRemove in tilesToRemove)
         {
@@ -171,28 +180,29 @@ public class Map : MonoBehaviour
 
     internal void AddTile(TileData newTileData)
     {
+        Debug.Log($"Adding new tile to map at {newTileData.Column}, {newTileData.Row}, rotation {newTileData.Rotation} degrees.");
         if (newTileData is DuctTileData newDuctTileData)
         {
-            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTileData.Column && t.Row == newTileData.Row && t.GetType() == typeof(DuctTileData)).ToList();
-            foreach (var tileToRemove in tilesToRemove)
-            {
-                mapData.Tiles.Remove(tileToRemove);
-            }
-
+            RemoveTilesOfType<DuctTileData>(newTileData.Column, newTileData.Row);
             mapData.Tiles.Add(newDuctTileData);
         }
         else if (newTileData is SoundTileData soundTileData)
         {
-            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTileData.Column && t.Row == newTileData.Row && t.GetType() == typeof(SoundTileData)).ToList();
-            foreach (var tileToRemove in tilesToRemove)
-            {
-                mapData.Tiles.Remove(tileToRemove);
-            }
-
+            RemoveTilesOfType<SoundTileData>(newTileData.Column, newTileData.Row);
             mapData.Tiles.Add(soundTileData);
         }
 
         Save();
+    }
+
+    private void RemoveTilesOfType<T>(int column, int row)
+    {
+        Debug.Log($"Removing all tiles of type {nameof(T)} from {column}, {row}.");
+        var tilesToRemove = mapData.Tiles.Where(t => t.Column == column && t.Row == row && t.GetType() == typeof(T)).ToList();
+        foreach (var tileToRemove in tilesToRemove)
+        {
+            mapData.Tiles.Remove(tileToRemove);
+        }
     }
 
     /// <summary>
@@ -200,6 +210,7 @@ public class Map : MonoBehaviour
     /// </summary>
     internal void CreateBackup()
     {
+        Debug.Log("Creating backup of map file.");
         if (File.Exists(FullPath))
         {
             File.Copy(FullPath, Path.Combine(Application.persistentDataPath, $"{DateTime.Now:yyyyMMddhhmmss} {fileName}"));
