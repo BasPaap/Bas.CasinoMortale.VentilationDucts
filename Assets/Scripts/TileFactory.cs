@@ -9,6 +9,7 @@ public class TileFactory : MonoBehaviour
     [SerializeField] private GameObject cornerDuctPrefab;
     [SerializeField] private GameObject threeWayDuctPrefab;
     [SerializeField] private GameObject fourWayDuctPrefab;
+    [SerializeField] private GameObject grillDuctPrefab;
     [SerializeField] private GameObject soundPrefab;
 
     public static TileFactory Instance { get; private set; }
@@ -39,6 +40,8 @@ public class TileFactory : MonoBehaviour
                     return threeWayDuctPrefab;
                 case DuctType.FourWayCrossing:
                     return fourWayDuctPrefab;
+                case DuctType.Grill:
+                    return grillDuctPrefab;
                 case DuctType.None:
                     return null;
             };

@@ -4,5 +4,6 @@
     Straight,
     Corner,
     ThreeWayCrossing,
-    FourWayCrossing
+    FourWayCrossing,
+    Grill
 }
