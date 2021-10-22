@@ -23,6 +23,6 @@ Press X to reset the map to the default version.
 - "[Every Single Scandinavian Crime Drama](https://www.youtube.com/watch?v=I-OOpZitfd0)" audio by the interdimensional [Alasdair Beckett-King](https://www.youtube.com/c/ABeckettKing). Subscribe to his YouTube channel, he's awesome.
 - [Casino audio](https://sound-effects.bbcrewind.co.uk/search?q=07021005) from [BBC Sound Effects](https://sound-effects.bbcrewind.co.uk/search?q=&source=bbc_archive) bbc.co.uk – © copyright [2021] BBC
 - [Domestic Sewing Machines audio](https://sound-effects.bbcrewind.co.uk/search?q=07039136) from [BBC Sound Effects](https://sound-effects.bbcrewind.co.uk/search?q=&source=bbc_archive) bbc.co.uk – © copyright [2021] BBC
-
+- [National Park Typeface](https://nationalparktypeface.com/License) Copyright (c) 2018, Jeremy Shellhorn | Design Outside Studio | with Reserved Font Name "National Park Typeface". Licensed under the [SIL Open Font License, version 1.1.](https://scripts.sil.org/OFL)
 ## License
 Licensed under the MIT license
