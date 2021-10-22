@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 2869165625610858401}
   - component: {fileID: 8966424194372739132}
   - component: {fileID: 8261271564783349933}
-  - component: {fileID: 8168941627200373946}
+  - component: {fileID: 1054693288511775501}
+  - component: {fileID: 4379468482039644377}
   m_Layer: 0
   m_Name: Sound Tile
   m_TagString: Untagged
@@ -180,15 +181,41 @@ AudioReverbFilter:
   m_LFReference: 250
   m_ReflectionsDelay: 0
   m_ReverbPreset: 4
---- !u!170 &8168941627200373946
-AudioDistortionFilter:
+--- !u!165 &1054693288511775501
+AudioHighPassFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4716488817383428015}
   m_Enabled: 1
-  m_DistortionLevel: 0.6
+  m_CutoffFrequency: 400
+  m_HighpassResonanceQ: 1
+--- !u!169 &4379468482039644377
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716488817383428015}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1814461
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4716488818922092192
 GameObject:
   m_ObjectHideFlags: 0

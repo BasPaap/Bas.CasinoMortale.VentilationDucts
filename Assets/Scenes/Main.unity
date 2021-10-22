@@ -460,7 +460,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5e1ae45187ab50d4092d198af716c0b5, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovementController: {fileID: 280197386}
   engineAudioSource: {fileID: 280197390}
-  maxVolume: 0.2
+  maxVolume: 0.05
   minPitch: 0
   maxPitch: 1
 --- !u!164 &280197392
