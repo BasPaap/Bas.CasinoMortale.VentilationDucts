@@ -20,9 +20,6 @@
         },
         {
             "m_Id": "8bd891c943994ca7ae9aec251990d2a4"
-        },
-        {
-            "m_Id": "a91c0e5d3b8d4c74a4a7502882110129"
         }
     ],
     "m_Keywords": [],
@@ -62,9 +59,6 @@
         },
         {
             "m_Id": "b3231e27ed60487487f47d874fc79cde"
-        },
-        {
-            "m_Id": "eee27a54f6e2460588b0f407d4be0b32"
         },
         {
             "m_Id": "7e2cbe55a44f4cb080fa1f4572ab3e87"
@@ -197,20 +191,6 @@
                     "m_Id": "62bdf98cf19d4d099c3827012d023877"
                 },
                 "m_SlotId": -793512893
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "eee27a54f6e2460588b0f407d4be0b32"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "7e2cbe55a44f4cb080fa1f4572ab3e87"
-                },
-                "m_SlotId": -1429578912
             }
         }
     ],
@@ -572,20 +552,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
-    "m_ObjectId": "5bb3fe6fb9134f8c966a185598f4ebb0",
-    "m_Id": -1429578912,
-    "m_DisplayName": "Is Revealed",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Is_Revealed",
-    "m_StageCapability": 3,
-    "m_Value": false,
-    "m_DefaultValue": false
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.TangentMaterialSlot",
     "m_ObjectId": "5ff32853cd9140908933efb0ead95aa6",
     "m_Id": 0,
@@ -651,12 +617,14 @@
     "m_PropertyGuids": [
         "435d0d77-9e56-49db-b576-d21dc0061e13",
         "64214bc1-29e7-4526-9646-9dbe03aabdb3",
-        "2cf2b216-7241-46c7-88c0-8e56a466e592"
+        "2cf2b216-7241-46c7-88c0-8e56a466e592",
+        "af5bca2d-fc3a-462a-89e1-d521de476516"
     ],
     "m_PropertyIds": [
         252396735,
         -792326572,
-        -793512893
+        -793512893,
+        -2040427503
     ]
 }
 
@@ -746,9 +714,6 @@
         },
         {
             "m_Id": "2be75a5f3bf24f7d81f154753d88025e"
-        },
-        {
-            "m_Id": "5bb3fe6fb9134f8c966a185598f4ebb0"
         },
         {
             "m_Id": "535846a4af724a02b47e48f988db267f"
@@ -1011,40 +976,6 @@
         "b": 0.5,
         "a": 1.0
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty",
-    "m_ObjectId": "a91c0e5d3b8d4c74a4a7502882110129",
-    "m_Guid": {
-        "m_GuidSerialized": "f9d5e6ea-e283-4da5-81f1-db5cca9b08a3"
-    },
-    "m_Name": "Is Revealed",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Is Revealed",
-    "m_DefaultReferenceName": "Is_Revealed",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": false,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": false
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
-    "m_ObjectId": "a94c24c102b74953a879b892d1c5adcb",
-    "m_Id": 0,
-    "m_DisplayName": "Is Revealed",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": false,
-    "m_DefaultValue": false
 }
 
 {
@@ -1409,41 +1340,6 @@
     },
     "m_Property": {
         "m_Id": "cf2fe19bd0554e928de7047e2001700d"
-    }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
-    "m_ObjectId": "eee27a54f6e2460588b0f407d4be0b32",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "Property",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -174.99998474121095,
-            "y": 741.0,
-            "width": 126.99999237060547,
-            "height": 34.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "a94c24c102b74953a879b892d1c5adcb"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_Property": {
-        "m_Id": "a91c0e5d3b8d4c74a4a7502882110129"
     }
 }
 

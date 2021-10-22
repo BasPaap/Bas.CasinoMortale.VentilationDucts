@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class Duct : MonoBehaviour
 {
-    //[Range(0, 1000)]
-    //[SerializeField] private float minDistanceToReveal;
-    //private readonly List<Material> ductMaterials = new List<Material>();
-    //private bool isRevealed;
+    [Range(0, 1000)]
+    [SerializeField] private float minDistanceToReveal;
+    
+    private MeshRenderer ductMeshRenderer;
+    private MaterialPropertyBlock materialPropertyBlock;
+    private bool isRevealed;
 
-    //public Transform PlayerTransform { get; set; }
+    public Transform PlayerTransform { get; set; }
 
-    //private void Awake()
-    //{
-    //    var meshRenderer = GetComponentInChildren<MeshRenderer>();
-    //    meshRenderer.GetMaterials(ductMaterials);
-    //}
+    private void Awake()
+    {
+        materialPropertyBlock = new MaterialPropertyBlock();
+        ductMeshRenderer = GetComponentInChildren<MeshRenderer>();        
+    }
 
-    //private void Update()
-    //{
-    //    if (!isRevealed && Vector3.Distance(transform.position, PlayerTransform.position) <= minDistanceToReveal)
-    //    {
-    //        foreach (var material in ductMaterials)
-    //        {
-    //            material.SetInt("Is_Revealed", 1);
-    //        }
+    private void Update()
+    {
+        if (!isRevealed && Vector3.Distance(transform.position, PlayerTransform.position) <= minDistanceToReveal)
+        {
+            ductMeshRenderer.GetPropertyBlock(materialPropertyBlock);
+            materialPropertyBlock.SetVector("Player_Position", transform.position);
+            ductMeshRenderer.SetPropertyBlock(materialPropertyBlock);
 
-    //        isRevealed = true;
-    //    }
-    //}
+            isRevealed = true;
+        }
+    }
 }

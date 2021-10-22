@@ -58,8 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6838092b6b637ed448aba9d2ce54a652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  minDistanceToReveal: 1
+  minDistanceToReveal: 0.5
 --- !u!1001 &7013394407568895130
 PrefabInstance:
   m_ObjectHideFlags: 0
