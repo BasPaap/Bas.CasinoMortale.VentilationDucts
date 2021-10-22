@@ -50,13 +50,13 @@ public class TileFactory : MonoBehaviour
         return null;
     }
 
-    public GameObject GetTilePrefab<T>(T tile) where T : TileData
+    public GameObject GetTilePrefab<T>(T tileData) where T : TileData
     {
-        if (tile is DuctTileData ductTile)
+        if (tileData is DuctTileData ductTileData)
         {
-            return GetTilePrefabByType(ductTile.Type);
+            return GetTilePrefabByType(ductTileData.Type);
         }
-        else if (tile is SoundTileData)
+        else if (tileData is SoundTileData)
         {
             return soundPrefab;
         }
