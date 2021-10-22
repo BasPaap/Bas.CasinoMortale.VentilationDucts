@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 280197390}
   - component: {fileID: 280197391}
   - component: {fileID: 280197392}
+  - component: {fileID: 280197393}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -759,6 +760,20 @@ AudioReverbFilter:
   m_LFReference: 250
   m_ReflectionsDelay: 0
   m_ReverbPreset: 22
+--- !u!114 &280197393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280197383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f036eeec9078d7440a7c1d3dcbaf9232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 91b334fae7a5350499b44088ac2da8e2, type: 2}
 --- !u!1 &288455011
 GameObject:
   m_ObjectHideFlags: 0
@@ -2100,6 +2115,7 @@ MonoBehaviour:
   gridTransform: {fileID: 2113160835}
   emptyCellPrefab: {fileID: 7894475108927281474, guid: dd772be2082234849a2f0c6802242394, type: 3}
   toolbarCanvas: {fileID: 1962188614}
+  fileBrowser: {fileID: 766111056}
 --- !u!1 &831134119
 GameObject:
   m_ObjectHideFlags: 0
