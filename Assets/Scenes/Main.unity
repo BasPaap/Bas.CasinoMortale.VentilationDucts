@@ -419,7 +419,6 @@ GameObject:
   - component: {fileID: 280197390}
   - component: {fileID: 280197391}
   - component: {fileID: 280197392}
-  - component: {fileID: 280197393}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -760,21 +759,6 @@ AudioReverbFilter:
   m_LFReference: 250
   m_ReflectionsDelay: 0
   m_ReverbPreset: 22
---- !u!114 &280197393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280197383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f036eeec9078d7440a7c1d3dcbaf9232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 2100000, guid: 91b334fae7a5350499b44088ac2da8e2, type: 2}
-  - {fileID: 2100000, guid: 87e7b84d906973843af4ff94ee1703a5, type: 2}
 --- !u!1 &288455011
 GameObject:
   m_ObjectHideFlags: 0
