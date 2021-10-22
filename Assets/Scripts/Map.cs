@@ -90,6 +90,7 @@ public class Map : MonoBehaviour
 
     internal void ResetMap()
     {
+        CreateBackup();
         File.Delete(FullPath);
         Load();
     }
