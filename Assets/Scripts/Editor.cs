@@ -11,7 +11,7 @@ public class Editor : MonoBehaviour
     private Map map;
     private bool isOpen;
     private GameObject tool;
-    private Tile selectedTile;
+    private TileData selectedTile;
     private Quaternion originalToolRotation;
     private float toolYRotation;
     private readonly List<Cell> cells = new List<Cell>();
@@ -230,7 +230,7 @@ public class Editor : MonoBehaviour
             var selectedToolPrefab = TileFactory.Instance.GetTilePrefabByType(ductType);
             originalToolRotation = selectedToolPrefab.transform.rotation;
             InstantiateTool(selectedToolPrefab);
-            selectedTile = new DuctTile { Type = ductType };
+            selectedTile = new DuctTileData { Type = ductType };
         }
         else
         {
@@ -254,11 +254,11 @@ public class Editor : MonoBehaviour
             var selectedToolPrefab = TileFactory.Instance.GetSoundTilePrefab();
             originalToolRotation = selectedToolPrefab.transform.rotation;
             InstantiateTool(selectedToolPrefab);
-            selectedTile = new SoundTile();
+            selectedTile = new SoundTileData();
 
             foreach (var fileName in e.SelectedFileNames)
             {
-                (selectedTile as SoundTile).FileNames.Add(fileName);                
+                (selectedTile as SoundTileData).FileNames.Add(fileName);                
             }
         }
     }

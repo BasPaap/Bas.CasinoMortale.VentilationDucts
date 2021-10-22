@@ -52,7 +52,7 @@ public class Map : MonoBehaviour
                     fogOfWar.PlayerTransform = playerTransform;
                 }
 
-                if (tile is SoundTile soundTile)
+                if (tile is SoundTileData soundTile)
                 {
                     var sound = instantiatedTile.GetComponent<Sound>();
                     sound.SetAudioFileNames(soundTile.FileNames);
@@ -111,12 +111,12 @@ public class Map : MonoBehaviour
             Height = 10,
             Width = 10
         };
-        defaultMapData.Tiles.Add(new DuctTile(DuctType.Straight, 5, 0, 0));
-        defaultMapData.Tiles.Add(new DuctTile(DuctType.Straight, 5, 1, 0));
-        defaultMapData.Tiles.Add(new DuctTile(DuctType.Corner, 5, 2, 270));
-        defaultMapData.Tiles.Add(new DuctTile(DuctType.Straight, 6, 2, 90));
-        defaultMapData.Tiles.Add(new DuctTile(DuctType.ThreeWayCrossing, 7, 2, 0));
-        defaultMapData.Tiles.Add(new DuctTile(DuctType.FourWayCrossing, 7, 1, 0));
+        defaultMapData.Tiles.Add(new DuctTileData(DuctType.Straight, 5, 0, 0));
+        defaultMapData.Tiles.Add(new DuctTileData(DuctType.Straight, 5, 1, 0));
+        defaultMapData.Tiles.Add(new DuctTileData(DuctType.Corner, 5, 2, 270));
+        defaultMapData.Tiles.Add(new DuctTileData(DuctType.Straight, 6, 2, 90));
+        defaultMapData.Tiles.Add(new DuctTileData(DuctType.ThreeWayCrossing, 7, 2, 0));
+        defaultMapData.Tiles.Add(new DuctTileData(DuctType.FourWayCrossing, 7, 1, 0));
 
         return defaultMapData;
     }
@@ -138,11 +138,11 @@ public class Map : MonoBehaviour
         PopulateMap();
     }
 
-    internal void AddTile(Tile newTile)
+    internal void AddTile(TileData newTile)
     {
-        if (newTile is DuctTile newDuctTile)
+        if (newTile is DuctTileData newDuctTile)
         {
-            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTile.Column && t.Row == newTile.Row && t.GetType() == typeof(DuctTile)).ToList();
+            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTile.Column && t.Row == newTile.Row && t.GetType() == typeof(DuctTileData)).ToList();
             foreach (var tileToRemove in tilesToRemove)
             {
                 mapData.Tiles.Remove(tileToRemove);
@@ -150,9 +150,9 @@ public class Map : MonoBehaviour
 
             mapData.Tiles.Add(newDuctTile);
         }
-        else if (newTile is SoundTile soundTile)
+        else if (newTile is SoundTileData soundTile)
         {
-            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTile.Column && t.Row == newTile.Row && t.GetType() == typeof(SoundTile)).ToList();
+            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTile.Column && t.Row == newTile.Row && t.GetType() == typeof(SoundTileData)).ToList();
             foreach (var tileToRemove in tilesToRemove)
             {
                 mapData.Tiles.Remove(tileToRemove);

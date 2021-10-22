@@ -4,5 +4,5 @@ public class MapData
 {
     public int Width { get; set; }
     public int Height { get; set; }
-    public Collection<Tile> Tiles { get; set; } = new Collection<Tile>();
+    public Collection<TileData> Tiles { get; set; } = new Collection<TileData>();
 }

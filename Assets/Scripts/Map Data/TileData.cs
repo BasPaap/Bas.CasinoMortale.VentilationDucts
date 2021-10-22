@@ -1,14 +1,14 @@
 ﻿using System.Xml.Serialization;
 
-[XmlInclude(typeof(DuctTile))]
-[XmlInclude(typeof(SoundTile))]
-public abstract class Tile
+[XmlInclude(typeof(DuctTileData))]
+[XmlInclude(typeof(SoundTileData))]
+public abstract class TileData
 {
-    public Tile()
+    public TileData()
     {
     }
 
-    public Tile(int column, int row, float rotation) 
+    public TileData(int column, int row, float rotation) 
     {
         Column = column;
         Row = row;

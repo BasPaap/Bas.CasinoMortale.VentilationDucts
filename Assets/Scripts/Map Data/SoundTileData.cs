@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-public class SoundTile : Tile
+public class SoundTileData : TileData
 {
     public Collection<string> FileNames { get; set; } = new Collection<string>();
 }
