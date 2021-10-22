@@ -11,7 +11,7 @@ public class Editor : MonoBehaviour
     private Map map;
     private bool isOpen;
     private GameObject tool;
-    private TileData selectedTile;
+    private TileData selectedTileData;
     private Quaternion originalToolRotation;
     private float toolYRotation;
     private readonly List<Cell> cells = new List<Cell>();
@@ -100,9 +100,9 @@ public class Editor : MonoBehaviour
                 tool.transform.rotation = Quaternion.AngleAxis(toolYRotation, Vector3.up) * originalToolRotation;
             }
 
-            if (selectedTile != null)
+            if (selectedTileData != null)
             {
-                selectedTile.Rotation = toolYRotation;
+                selectedTileData.Rotation = toolYRotation;
             }
         }
     }
@@ -114,10 +114,10 @@ public class Editor : MonoBehaviour
             tool.transform.position = new Vector3(cell.transform.position.x, 0, cell.transform.position.z);
         }
 
-        if (selectedTile != null)
+        if (selectedTileData != null)
         {
-            selectedTile.Column = cell.Column;
-            selectedTile.Row = cell.Row;
+            selectedTileData.Column = cell.Column;
+            selectedTileData.Row = cell.Row;
         }
     }
 
@@ -125,7 +125,7 @@ public class Editor : MonoBehaviour
     {
         isOpen = false;
         toolYRotation = 0;
-        selectedTile = null;
+        selectedTileData = null;
         if (tool != null)
         {
             Destroy(tool);
@@ -182,9 +182,9 @@ public class Editor : MonoBehaviour
 
     private void ApplyTool(Cell cell)
     {
-        if (selectedTile != null)
+        if (selectedTileData != null)
         {
-            map.AddTile(selectedTile);
+            map.AddTile(selectedTileData);
         }
         else
         {
@@ -214,7 +214,7 @@ public class Editor : MonoBehaviour
     public void OnClearButtonClicked()
     {
         toolYRotation = 0;
-        selectedTile = null;
+        selectedTileData = null;
 
         if (tool != null)
         {
@@ -230,7 +230,7 @@ public class Editor : MonoBehaviour
             var selectedToolPrefab = TileFactory.Instance.GetTilePrefabByType(ductType);
             originalToolRotation = selectedToolPrefab.transform.rotation;
             InstantiateTool(selectedToolPrefab);
-            selectedTile = new DuctTileData { Type = ductType };
+            selectedTileData = new DuctTileData { Type = ductType };
         }
         else
         {
@@ -254,11 +254,11 @@ public class Editor : MonoBehaviour
             var selectedToolPrefab = TileFactory.Instance.GetSoundTilePrefab();
             originalToolRotation = selectedToolPrefab.transform.rotation;
             InstantiateTool(selectedToolPrefab);
-            selectedTile = new SoundTileData();
+            selectedTileData = new SoundTileData();
 
             foreach (var fileName in e.SelectedFileNames)
             {
-                (selectedTile as SoundTileData).FileNames.Add(fileName);                
+                (selectedTileData as SoundTileData).FileNames.Add(fileName);                
             }
         }
     }

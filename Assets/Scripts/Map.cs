@@ -138,27 +138,27 @@ public class Map : MonoBehaviour
         PopulateMap();
     }
 
-    internal void AddTile(TileData newTile)
+    internal void AddTile(TileData newTileData)
     {
-        if (newTile is DuctTileData newDuctTile)
+        if (newTileData is DuctTileData newDuctTileData)
         {
-            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTile.Column && t.Row == newTile.Row && t.GetType() == typeof(DuctTileData)).ToList();
+            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTileData.Column && t.Row == newTileData.Row && t.GetType() == typeof(DuctTileData)).ToList();
             foreach (var tileToRemove in tilesToRemove)
             {
                 mapData.Tiles.Remove(tileToRemove);
             }
 
-            mapData.Tiles.Add(newDuctTile);
+            mapData.Tiles.Add(newDuctTileData);
         }
-        else if (newTile is SoundTileData soundTile)
+        else if (newTileData is SoundTileData soundTileData)
         {
-            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTile.Column && t.Row == newTile.Row && t.GetType() == typeof(SoundTileData)).ToList();
+            var tilesToRemove = mapData.Tiles.Where(t => t.Column == newTileData.Column && t.Row == newTileData.Row && t.GetType() == typeof(SoundTileData)).ToList();
             foreach (var tileToRemove in tilesToRemove)
             {
                 mapData.Tiles.Remove(tileToRemove);
             }
 
-            mapData.Tiles.Add(soundTile);
+            mapData.Tiles.Add(soundTileData);
         }
 
         Save();
