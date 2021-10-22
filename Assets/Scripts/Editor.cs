@@ -19,6 +19,7 @@ public class Editor : MonoBehaviour
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
     [SerializeField] private Canvas toolbarCanvas;
+    [SerializeField] private FileBrowser fileBrowser;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class Editor : MonoBehaviour
         mainCamera = Camera.main; // This needs to be stored because once disabled we can't access it via Camera.main.
         editorCamera.gameObject.SetActive(false);
         toolbarCanvas.gameObject.SetActive(false);
+        fileBrowser.gameObject.SetActive(false);        
     }
 
     private void Update()
@@ -56,32 +58,35 @@ public class Editor : MonoBehaviour
 
     private void HandleMouseInput()
     {
-        RaycastHit[] hits = Physics.RaycastAll(editorCamera.ScreenPointToRay(Input.mousePosition));
-        var hitGameObjects = hits.Select(h => h.collider.gameObject);
-
-        foreach (var cell in cells)
+        if (!fileBrowser.IsOpen)
         {
-            var isCellHit = hitGameObjects.Contains(cell.gameObject);
+            RaycastHit[] hits = Physics.RaycastAll(editorCamera.ScreenPointToRay(Input.mousePosition));
+            var hitGameObjects = hits.Select(h => h.collider.gameObject);
 
-            cell.SetHighlight(isCellHit);
-
-            if (isCellHit)
+            foreach (var cell in cells)
             {
-                MoveToolToCell(cell);
+                var isCellHit = hitGameObjects.Contains(cell.gameObject);
 
-                if (tool != null)
-                {
-                    tool.SetActive(true);
-                }
+                cell.SetHighlight(isCellHit);
 
-                if (Input.GetMouseButtonUp(0))
+                if (isCellHit)
                 {
-                    ApplyTool(cell);
+                    MoveToolToCell(cell);
+
+                    if (tool != null)
+                    {
+                        tool.SetActive(true);
+                    }
+
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        ApplyTool(cell);
+                    }
                 }
             }
-        }
 
-        SetToolRotation();
+            SetToolRotation();
+        }
     }
 
     private void SetToolRotation()
@@ -235,13 +240,27 @@ public class Editor : MonoBehaviour
 
     public void OnSoundButtonClicked()
     {
-        toolYRotation = 0;
-        var selectedToolPrefab = TileFactory.Instance.GetSoundTilePrefab();
-        originalToolRotation = selectedToolPrefab.transform.rotation;
-        InstantiateTool(selectedToolPrefab);
-        selectedTile = new SoundTile();
-        (selectedTile as SoundTile).FileNames.Add("do-you-expect-me-to-talk.mp3");
-        (selectedTile as SoundTile).FileNames.Add("trololololo.mp3");
+        fileBrowser.Closed += FileBrowser_ClosedForSoundTile;
+        fileBrowser.Show("*.mp3");        
+    }
+
+    private void FileBrowser_ClosedForSoundTile(object sender, FileBrowserClosedEventArgs e)
+    {
+        fileBrowser.Closed -= FileBrowser_ClosedForSoundTile;
+
+        if (!e.IsCanceled)
+        {
+            toolYRotation = 0;
+            var selectedToolPrefab = TileFactory.Instance.GetSoundTilePrefab();
+            originalToolRotation = selectedToolPrefab.transform.rotation;
+            InstantiateTool(selectedToolPrefab);
+            selectedTile = new SoundTile();
+
+            foreach (var fileName in e.SelectedFileNames)
+            {
+                (selectedTile as SoundTile).FileNames.Add(fileName);                
+            }
+        }
     }
 
     private void InstantiateTool(GameObject selectedToolPrefab)
