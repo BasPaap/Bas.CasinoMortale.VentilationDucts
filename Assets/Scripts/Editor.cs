@@ -54,6 +54,10 @@ public class Editor : MonoBehaviour
                 Open();
             }
         }
+        else if (Input.GetKeyUp(Hotkeys.ResetMapKey))
+        {
+            map.ResetMap();
+        }
     }
 
     private void HandleMouseInput()

@@ -4,7 +4,7 @@
     {
     }
 
-    public DuctTileData(DuctType type, int column, int row, float rotation)
+    public DuctTileData(int column, int row, float rotation, DuctType type)
         : base(column, row, rotation)
     {
         Type = type;
