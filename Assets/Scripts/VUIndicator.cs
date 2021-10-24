@@ -14,6 +14,12 @@ public class VUIndicator : MonoBehaviour
     private float perlinYAxis;
     private const float fluctuationSpeed = 2.0f;
 
+    public float Level
+    {
+        get => level;
+        set { level = value; }
+    }
+
     private void Awake()
     {
         perlinYAxis = (float)transform.GetSiblingIndex();

@@ -34,6 +34,9 @@ public class Sound : MonoBehaviour
             audioFileNameQueue.Count > 0)
         {
             Debug.Log("Collider triggered, playing next audio clip.");
+            var vuMeter = other.gameObject.GetComponent<VUMeter>();
+            vuMeter.audioSource = audioSource;
+
             await PlayNextClipAsync();
         }
     }
