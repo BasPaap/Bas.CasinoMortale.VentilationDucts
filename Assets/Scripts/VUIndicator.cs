@@ -17,7 +17,7 @@ public class VUIndicator : MonoBehaviour
     public float Level
     {
         get => level;
-        set { level = value; }
+        set { level = Mathf.Clamp01(value); }
     }
 
     private void Awake()

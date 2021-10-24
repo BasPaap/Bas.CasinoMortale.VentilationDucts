@@ -7,6 +7,7 @@ public class VUMeter : MonoBehaviour
     public AudioSource audioSource;
     public float updateStep = 0.1f;
     public int sampleDataLength = 1024;
+    public float currentMaxLoudness;
     private float currentUpdateTime = 0f;
     private float clipLoudness;
     private float[] clipSampleData;
@@ -37,8 +38,8 @@ public class VUMeter : MonoBehaviour
             }
             clipLoudness /= sampleDataLength; //clipLoudness is what you are looking for
 
-            const float maxLoudness = 0.02f;
-            var loudness = Map(clipLoudness, 0, maxLoudness, 0, 1, true, true, true, true);
+            
+            var loudness = Map(clipLoudness, 0, currentMaxLoudness, 0, 1, true, true, true, true);
 
             foreach (var vuIndicator in vuIndicators)
             {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -34,22 +35,41 @@ public class Sound : MonoBehaviour
             audioFileNameQueue.Count > 0)
         {
             Debug.Log("Collider triggered, playing next audio clip.");
-            var vuMeter = other.gameObject.GetComponent<VUMeter>();
-            vuMeter.audioSource = audioSource;
+                        
+            var maxLoudness = await PlayNextClipAsync();
 
-            await PlayNextClipAsync();
+            var vuMeter = other.gameObject.GetComponent<VUMeter>();
+            if (vuMeter != null)
+            {
+                vuMeter.audioSource = audioSource;
+                vuMeter.currentMaxLoudness = maxLoudness;
+            }
         }
     }
 
-    private async Task PlayNextClipAsync()
+    private async Task<float> PlayNextClipAsync()
     {
         var fileName = audioFileNameQueue.Dequeue();
         Debug.Log($"Playing {fileName}.");
         var path = Path.Combine(Application.streamingAssetsPath, fileName);
                 
         var audioClip = await LoadClipAsync(path);
+        float[] samples = new float[audioClip.samples];
+        audioClip.GetData(samples, 0);
+
+        List<float> averages = new List<float>();
+        for (int i = 0; i < audioClip.samples / 1024; i++)
+        {
+            averages.Add(samples.Skip(i * 1024).Take(1024).Average());
+        } 
+
+        var maxLoudness = averages.Max();
+        Debug.Log($"Max loudnes of clip {fileName} = {maxLoudness}");
+
         audioSource.clip = audioClip;
         audioSource.Play();
+
+        return maxLoudness;
     }
 
     private async Task<AudioClip> LoadClipAsync(string path)
