@@ -230,9 +230,7 @@ public class Editor : MonoBehaviour
     {
         if (Enum.TryParse<DuctType>(ductTypeName, out DuctType ductType))
         {
-            toolYRotation = 0;
             var selectedToolPrefab = TileFactory.Instance.GetTilePrefabByType(ductType);
-            originalToolRotation = selectedToolPrefab.transform.rotation;
             InstantiateTool(selectedToolPrefab);
             selectedTileData = new DuctTileData { Type = ductType };
         }
@@ -248,15 +246,20 @@ public class Editor : MonoBehaviour
         fileBrowser.Show("*.mp3");        
     }
 
+    public void OnStartPositionButtonClicked()
+    {
+        var selectedToolPrefab = TileFactory.Instance.GetStartPositionPrefab();
+        InstantiateTool(selectedToolPrefab);
+        selectedTileData = new StartPositionTileData();
+    }
+
     private void FileBrowser_ClosedForSoundTile(object sender, FileBrowserClosedEventArgs e)
     {
         fileBrowser.Closed -= FileBrowser_ClosedForSoundTile;
 
         if (!e.IsCanceled)
         {
-            toolYRotation = 0;
             var selectedToolPrefab = TileFactory.Instance.GetSoundTilePrefab();
-            originalToolRotation = selectedToolPrefab.transform.rotation;
             InstantiateTool(selectedToolPrefab);
             selectedTileData = new SoundTileData();
 
@@ -274,6 +277,8 @@ public class Editor : MonoBehaviour
             Destroy(tool);
         }
 
+        toolYRotation = 0;
+        originalToolRotation = selectedToolPrefab.transform.rotation;
         tool = Instantiate(selectedToolPrefab, selectedToolPrefab.transform.position, selectedToolPrefab.transform.rotation, transform);
         tool.name = $"Tool ({selectedToolPrefab.name})";
         tool.SetActive(false);

@@ -11,6 +11,7 @@ public class TileFactory : MonoBehaviour
     [SerializeField] private GameObject fourWayDuctPrefab;
     [SerializeField] private GameObject grillDuctPrefab;
     [SerializeField] private GameObject soundPrefab;
+    [SerializeField] private GameObject startPositionPrefab;
 
     public static TileFactory Instance { get; private set; }
 
@@ -67,5 +68,10 @@ public class TileFactory : MonoBehaviour
     public GameObject GetSoundTilePrefab()
     {
         return soundPrefab;
+    }
+
+    public GameObject GetStartPositionPrefab()
+    {
+        return startPositionPrefab;
     }
 }

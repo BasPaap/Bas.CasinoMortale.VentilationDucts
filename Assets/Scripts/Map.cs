@@ -186,19 +186,41 @@ public class Map : MonoBehaviour
             RemoveTilesOfType<DuctTileData>(newTileData.Column, newTileData.Row);
             mapData.Tiles.Add(newDuctTileData);
         }
-        else if (newTileData is SoundTileData soundTileData)
+        else if (newTileData is SoundTileData newSoundTileData)
         {
             RemoveTilesOfType<SoundTileData>(newTileData.Column, newTileData.Row);
-            mapData.Tiles.Add(soundTileData);
+            mapData.Tiles.Add(newSoundTileData);
         }
-
+        else if (newTileData is StartPositionTileData newStartPositionTileData)
+        {
+            RemoveTilesOfType<StartPositionTileData>(); // Remove all start position tiles from the map. There can be only one.
+            mapData.Tiles.Add(newStartPositionTileData);
+        }
         Save();
     }
 
-    private void RemoveTilesOfType<T>(int column, int row)
+    private void RemoveTilesOfType<T>(int? column = null, int? row = null)
     {
-        Debug.Log($"Removing all tiles of type {nameof(T)} from {column}, {row}.");
-        var tilesToRemove = mapData.Tiles.Where(t => t.Column == column && t.Row == row && t.GetType() == typeof(T)).ToList();
+        if ((column.HasValue && !row.HasValue) ||
+            (row.HasValue && !column.HasValue))
+        {
+            Debug.LogError($"The parameters column and row should either both be null or both have a value. column has value: {column.HasValue}. row has value: {row.HasValue}");
+            return;
+        }
+
+        List<TileData> tilesToRemove;
+
+        if (column.HasValue && row.HasValue)
+        {
+            Debug.Log($"Removing all tiles of type {nameof(T)} from {column.Value}, {row.Value}.");
+            tilesToRemove = mapData.Tiles.Where(t => t.Column == column && t.Row == row && t.GetType() == typeof(T)).ToList();
+        }
+        else
+        {
+            Debug.Log($"Removing all tiles of type {nameof(T)} from the entire map.");
+            tilesToRemove = mapData.Tiles.Where(t => t.GetType() == typeof(T)).ToList();
+        }
+        
         foreach (var tileToRemove in tilesToRemove)
         {
             mapData.Tiles.Remove(tileToRemove);
