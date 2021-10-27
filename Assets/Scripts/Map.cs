@@ -156,6 +156,7 @@ public class Map : MonoBehaviour
         defaultMapData.Tiles.Add(new DuctTileData(8, 8, 90, DuctType.Straight));
         defaultMapData.Tiles.Add(new SoundTileData(9, 8, 0, "trololololo.mp3"));
         defaultMapData.Tiles.Add(new DuctTileData(9, 8, -90, DuctType.Grill));
+        defaultMapData.Tiles.Add(new StartPositionTileData(5, 0, 0));
 
         return defaultMapData;
     }
@@ -176,6 +177,21 @@ public class Map : MonoBehaviour
     {
         LoadMapData();
         PopulateMap();
+        PlacePlayerAtStartPosition();
+    }
+
+    private void PlacePlayerAtStartPosition()
+    {
+        var startPositionTileData = mapData.Tiles.FirstOrDefault(t => t.GetType() == typeof(StartPositionTileData));
+
+        if (startPositionTileData == null)
+        {
+            playerTransform.position = GetPosition(0, 0);
+        }
+        else
+        {
+            playerTransform.position = GetPosition(startPositionTileData.Column, startPositionTileData.Row);
+        }
     }
 
     internal void AddTile(TileData newTileData)

@@ -2,6 +2,7 @@
 
 [XmlInclude(typeof(DuctTileData))]
 [XmlInclude(typeof(SoundTileData))]
+[XmlInclude(typeof(StartPositionTileData))]
 public abstract class TileData
 {
     public TileData()

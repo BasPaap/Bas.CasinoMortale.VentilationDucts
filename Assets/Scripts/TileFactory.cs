@@ -61,6 +61,10 @@ public class TileFactory : MonoBehaviour
         {
             return soundPrefab;
         }
+        else if (tileData is StartPositionTileData)
+        {
+            return startPositionPrefab;
+        }
 
         return null;
     }    

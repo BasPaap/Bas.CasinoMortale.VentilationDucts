@@ -3952,6 +3952,7 @@ MonoBehaviour:
   fourWayDuctPrefab: {fileID: 7861448240358273438, guid: 8d492c72c86cd7a4ab3a438a8bfa0176, type: 3}
   grillDuctPrefab: {fileID: 3794813759681499909, guid: faeffb9af7c0d0943b70ed21e6b96aa6, type: 3}
   soundPrefab: {fileID: 4716488817383428015, guid: 6436e8ed8a04e7f4292db8e456817901, type: 3}
+  startPositionPrefab: {fileID: 4716488817383428015, guid: a015ef05cdc7d804282e2dc78b3aa762, type: 3}
 --- !u!4 &1266143165
 Transform:
   m_ObjectHideFlags: 0
