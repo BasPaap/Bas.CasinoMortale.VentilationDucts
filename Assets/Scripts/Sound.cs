@@ -41,8 +41,8 @@ public class Sound : MonoBehaviour
             var vuMeter = other.gameObject.GetComponent<VUMeter>();
             if (vuMeter != null)
             {
-                vuMeter.audioSource = audioSource;
-                vuMeter.currentMaxLoudness = maxLoudness;
+                vuMeter.AudioSource = audioSource;
+                vuMeter.CurrentMaxLoudness = maxLoudness;
             }
         }
     }

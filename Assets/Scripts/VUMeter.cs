@@ -4,24 +4,20 @@ using UnityEngine;
 
 public class VUMeter : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public float updateStep = 0.1f;
-    public int sampleDataLength = 1024;
-    public float currentMaxLoudness;
-    private float currentUpdateTime = 0f;
-    private float clipLoudness;
-    private float[] clipSampleData;
+    private const int sampleDataLength = 1024; // 1024 samples is about 80 ms on a 44khz stereo clip.
+    private const float updateStep = 0.1f;
 
+    private float currentUpdateTime = 0f;
+    private float[] clipSampleData = new float[sampleDataLength];
+    
     [SerializeField] private VUIndicator[] vuIndicators;
 
-    void Awake()
-    {
-        clipSampleData = new float[sampleDataLength];
-    }
+    public AudioSource AudioSource { get; set; }
+    public float CurrentMaxLoudness { get; set; }
 
     void Update()
     {
-        if (!audioSource)
+        if (!AudioSource)
         {
             return;
         }
@@ -29,23 +25,30 @@ public class VUMeter : MonoBehaviour
         currentUpdateTime += Time.deltaTime;
         if (currentUpdateTime >= updateStep)
         {
-            currentUpdateTime = 0f;
-            audioSource.GetOutputData(clipSampleData, 0); //audioSource.clip.GetData(clipSampleData, audioSource.timeSamples); //I read 1024 samples, which is about 80 ms on a 44khz stereo clip, beginning at the current sample position of the clip.
-            clipLoudness = 0f;
-            foreach (var sample in clipSampleData)
-            {
-                clipLoudness += Mathf.Abs(sample);
-            }
-            clipLoudness /= sampleDataLength; //clipLoudness is what you are looking for
-
-            
-            var loudness = Map(clipLoudness, 0, currentMaxLoudness, 0, 1, true, true, true, true);
+            var clipLoudness = CalculateClipLoudness();
+            var normalizedLoudness = Map(clipLoudness, 0, CurrentMaxLoudness, 0, 1, true, true, true, true);
 
             foreach (var vuIndicator in vuIndicators)
             {
-                vuIndicator.Level = loudness;
+                vuIndicator.Level = normalizedLoudness;
             }
         }
+    }
+
+    private float CalculateClipLoudness()
+    {
+        currentUpdateTime = 0f;
+        AudioSource.GetOutputData(clipSampleData, 0);
+
+        float clipLoudness = 0f;
+        foreach (var sample in clipSampleData)
+        {
+            clipLoudness += Mathf.Abs(sample);
+        }
+
+        clipLoudness /= sampleDataLength;
+
+        return clipLoudness;
     }
 
     private static float Map(float val, float in1, float in2, float out1, float out2,
