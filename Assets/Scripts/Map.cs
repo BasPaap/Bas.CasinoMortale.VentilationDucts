@@ -263,12 +263,9 @@ public class Map : MonoBehaviour
     /// <returns>The cell's position in world space.</returns>
     internal Vector3 GetPosition(int column, int row)
     {
-        var halfWidth = (Size.x - 1) / 2.0f;
-        var halfHeight = (Size.y - 1) / 2.0f;
-
         var cellSize = Vector3.one;
-        var xPos = 0 - halfWidth + (cellSize.x * column);
-        var zPos = 0 - halfHeight + (cellSize.z * row);
+        var xPos = cellSize.x * column;
+        var zPos = cellSize.z * row;
 
         return new Vector3(xPos, 0, zPos);
     } 
