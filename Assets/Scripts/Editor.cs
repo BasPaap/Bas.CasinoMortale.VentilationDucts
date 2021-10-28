@@ -280,13 +280,10 @@ public class Editor : MonoBehaviour
     #region Button Handlers
     public void OnClearButtonClicked()
     {
-        toolYRotation = 0;
+        var selectedToolPrefab = TileFactory.Instance.GetClearPrefab();
+        InstantiateTool(selectedToolPrefab);        
         selectedTileData = null;
 
-        if (tool != null)
-        {
-            Destroy(tool);
-        }
     }
 
     public void OnDuctButtonClicked(string ductTypeName)
