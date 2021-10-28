@@ -14,7 +14,7 @@ public class Editor : MonoBehaviour
     private TileData selectedTileData;
     private Quaternion originalToolRotation;
     private float toolYRotation;
-    private readonly List<Cell> cells = new List<Cell>();
+    private readonly List<Cell> cells = new();
 
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
@@ -58,6 +58,34 @@ public class Editor : MonoBehaviour
         {
             map.ResetMap();
         }
+    }
+
+    #region UI
+    private void Open()
+    {
+        isOpen = true;
+        ToggleCameras();
+        ToggleToolbar();
+
+        // Create backup of current map
+        map.CreateBackup();
+
+        CreateGrid();
+    }
+
+    private void Close()
+    {
+        isOpen = false;
+        toolYRotation = 0;
+        selectedTileData = null;
+        if (tool != null)
+        {
+            Destroy(tool);
+        }
+
+        ToggleCameras();
+        ToggleToolbar();
+        ClearGrid();
     }
 
     private void HandleMouseInput()
@@ -125,38 +153,25 @@ public class Editor : MonoBehaviour
         }
     }
 
-    private void Close()
+    private void InstantiateTool(GameObject selectedToolPrefab)
     {
-        isOpen = false;
-        toolYRotation = 0;
-        selectedTileData = null;
         if (tool != null)
         {
             Destroy(tool);
         }
 
-        ToggleCameras();
-        ToggleToolbar();
-        ClearGrid();
+        toolYRotation = 0;
+        originalToolRotation = selectedToolPrefab.transform.rotation;
+        tool = Instantiate(selectedToolPrefab, selectedToolPrefab.transform.position, selectedToolPrefab.transform.rotation, transform);
+        tool.name = $"Tool ({selectedToolPrefab.name})";
+        tool.SetActive(false);
     }
 
     private void ToggleToolbar()
     {
         toolbarCanvas.gameObject.SetActive(!toolbarCanvas.gameObject.activeSelf);
     }
-
-    private void Open()
-    {
-        isOpen = true;
-        ToggleCameras();
-        ToggleToolbar();
-
-        // Create backup of current map
-        map.CreateBackup();
-
-        CreateGrid();
-    }
-
+        
     /// <summary>
     /// Creates the grid of tiles that serve as helpers when editing the map.
     /// </summary>
@@ -183,21 +198,7 @@ public class Editor : MonoBehaviour
             }
         }
     }
-
-    private void ApplyTool(Cell cell)
-    {
-        if (selectedTileData != null)
-        {
-            map.AddTile(selectedTileData);
-        }
-        else
-        {
-            map.ClearCell(cell.Column, cell.Row);
-        }
-
-        map.Load();
-    }
-
+        
     private void ClearGrid()
     {
         for (int i = gridTransform.childCount - 1; i >= 0; i--)
@@ -214,7 +215,40 @@ public class Editor : MonoBehaviour
         editorCamera.gameObject.SetActive(!editorCamera.gameObject.activeSelf);
         mainCamera.gameObject.SetActive(!mainCamera.gameObject.activeSelf);
     }
+    #endregion
 
+    private void FileBrowser_ClosedForSoundTile(object sender, FileBrowserClosedEventArgs e)
+    {
+        fileBrowser.Closed -= FileBrowser_ClosedForSoundTile;
+
+        if (!e.IsCanceled)
+        {
+            var selectedToolPrefab = TileFactory.Instance.GetSoundTilePrefab();
+            InstantiateTool(selectedToolPrefab);
+            selectedTileData = new SoundTileData();
+
+            foreach (var fileName in e.SelectedFileNames)
+            {
+                (selectedTileData as SoundTileData).FileNames.Add(fileName);                
+            }
+        }
+    }
+
+    private void ApplyTool(Cell cell)
+    {
+        if (selectedTileData != null)
+        {
+            map.AddTile(selectedTileData);
+        }
+        else
+        {
+            map.ClearCell(cell.Column, cell.Row);
+        }
+
+        map.Load();
+    }
+    
+    #region Button Handlers
     public void OnClearButtonClicked()
     {
         toolYRotation = 0;
@@ -243,7 +277,7 @@ public class Editor : MonoBehaviour
     public void OnSoundButtonClicked()
     {
         fileBrowser.Closed += FileBrowser_ClosedForSoundTile;
-        fileBrowser.Show("*.mp3");        
+        fileBrowser.Show("*.mp3");
     }
 
     public void OnStartPositionButtonClicked()
@@ -263,6 +297,8 @@ public class Editor : MonoBehaviour
         {
             Debug.LogWarning($"{nameof(OnAddColumnButtonClicked)} called with invalid {nameof(ColumnSide)} name \"{sideName}\".");
         }
+
+        map.Load();
     }
 
     private void OnDeleteColumnButtonClicked(string sideName)
@@ -275,6 +311,8 @@ public class Editor : MonoBehaviour
         {
             Debug.LogWarning($"{nameof(OnDeleteColumnButtonClicked)} called with invalid {nameof(ColumnSide)} name \"{sideName}\".");
         }
+
+        map.Load();
     }
 
     private void OnAddRowButtonClicked(string sideName)
@@ -287,6 +325,8 @@ public class Editor : MonoBehaviour
         {
             Debug.LogWarning($"{nameof(OnAddRowButtonClicked)} called with invalid {nameof(RowSide)} name \"{sideName}\".");
         }
+
+        map.Load();
     }
 
     private void OnDeleteRowButtonClicked(string sideName)
@@ -299,36 +339,8 @@ public class Editor : MonoBehaviour
         {
             Debug.LogWarning($"{nameof(OnDeleteRowButtonClicked)} called with invalid {nameof(RowSide)} name \"{sideName}\".");
         }
+
+        map.Load();
     }
-
-    private void FileBrowser_ClosedForSoundTile(object sender, FileBrowserClosedEventArgs e)
-    {
-        fileBrowser.Closed -= FileBrowser_ClosedForSoundTile;
-
-        if (!e.IsCanceled)
-        {
-            var selectedToolPrefab = TileFactory.Instance.GetSoundTilePrefab();
-            InstantiateTool(selectedToolPrefab);
-            selectedTileData = new SoundTileData();
-
-            foreach (var fileName in e.SelectedFileNames)
-            {
-                (selectedTileData as SoundTileData).FileNames.Add(fileName);                
-            }
-        }
-    }
-
-    private void InstantiateTool(GameObject selectedToolPrefab)
-    {
-        if (tool != null)
-        {
-            Destroy(tool);
-        }
-
-        toolYRotation = 0;
-        originalToolRotation = selectedToolPrefab.transform.rotation;
-        tool = Instantiate(selectedToolPrefab, selectedToolPrefab.transform.position, selectedToolPrefab.transform.rotation, transform);
-        tool.name = $"Tool ({selectedToolPrefab.name})";
-        tool.SetActive(false);
-    }
+    #endregion
 }

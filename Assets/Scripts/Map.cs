@@ -21,6 +21,69 @@ public class Map : MonoBehaviour
         Load();
     }
 
+    internal void Load()
+    {
+        LoadMapData();
+        PopulateMap();
+        PlacePlayerAtStartPosition();
+    }
+
+    #region Map Editing
+    public void AddColumn(ColumnSide side)
+    {
+        mapData.AddColumn(side);
+        Save();
+    }
+
+    public void DeleteColumn(ColumnSide side)
+    {
+        mapData.DeleteColumn(side);
+        Save();
+    }
+
+    public void AddRow(RowSide side)
+    {
+        mapData.AddRow(side);
+        Save();
+    }
+
+    public void DeleteRow(RowSide side)
+    {
+        mapData.DeleteRow(side);
+        Save();
+    }
+
+    internal void ClearCell(int column, int row)
+    {
+        Debug.Log($"Removing all tiles from cell {column}, {row}.");
+        mapData.RemoveTiles(t => t.Column == column && t.Row == row);
+        Save();
+    }
+
+    internal void AddTile(TileData newTileData)
+    {
+        Debug.Log($"Adding new tile to map at {newTileData.Column}, {newTileData.Row}, rotation {newTileData.Rotation} degrees.");
+        if (newTileData is DuctTileData newDuctTileData)
+        {
+            mapData.RemoveTilesOfType<DuctTileData>(newTileData.Column, newTileData.Row);
+            mapData.Tiles.Add(newDuctTileData);
+        }
+        else if (newTileData is SoundTileData newSoundTileData)
+        {
+            mapData.RemoveTilesOfType<SoundTileData>(newTileData.Column, newTileData.Row);
+            mapData.Tiles.Add(newSoundTileData);
+        }
+        else if (newTileData is StartPositionTileData newStartPositionTileData)
+        {
+            mapData.RemoveTilesOfType<StartPositionTileData>(); // Remove all start position tiles from the map. There can be only one.
+            mapData.Tiles.Add(newStartPositionTileData);
+        }
+
+        Save();
+    } 
+    #endregion
+    
+    #region Visuals
     /// <summary>
     /// Populates the map objects with tiles as specified in the loaded map data.
     /// </summary>
@@ -75,6 +138,23 @@ public class Map : MonoBehaviour
         }
     }
 
+    private void PlacePlayerAtStartPosition()
+    {
+        var startPositionTileData = mapData.Tiles.FirstOrDefault(t => t.GetType() == typeof(StartPositionTileData));
+
+        if (startPositionTileData == null)
+        {
+            playerTransform.position = GetPosition(0, 0);
+        }
+        else
+        {
+            playerTransform.position = GetPosition(startPositionTileData.Column, startPositionTileData.Row);
+        }
+    }
+
+    #endregion
+
+    #region File I/O
     /// <summary>
     /// Loads map data from a file.
     /// </summary>
@@ -113,6 +193,20 @@ public class Map : MonoBehaviour
     }
 
     /// <summary>
+    /// Creates a backup of the current map file.
+    /// </summary>
+    internal void CreateBackup()
+    {
+        Debug.Log("Creating backup of map file.");
+        if (File.Exists(FullPath))
+        {
+            File.Copy(FullPath, Path.Combine(Application.persistentDataPath, $"{DateTime.Now:yyyyMMddhhmmss} {fileName}"));
+        }
+    }
+    #endregion
+
+    #region Utilities
+    /// <summary>
     /// Returns a default 10x10 map.
     /// </summary>
     /// <returns>A default 10x10 map.</returns>
@@ -126,7 +220,7 @@ public class Map : MonoBehaviour
             Height = 10,
             Width = 10
         };
-                
+
         defaultMapData.Tiles.Add(new DuctTileData(0, 3, -270, DuctType.Corner));
         defaultMapData.Tiles.Add(new DuctTileData(0, 4, 0, DuctType.Straight));
         defaultMapData.Tiles.Add(new DuctTileData(0, 5, 180, DuctType.Grill));
@@ -142,7 +236,7 @@ public class Map : MonoBehaviour
         defaultMapData.Tiles.Add(new DuctTileData(3, 6, 180, DuctType.Corner));
         defaultMapData.Tiles.Add(new DuctTileData(4, 2, -90, DuctType.Straight));
         defaultMapData.Tiles.Add(new DuctTileData(4, 6, -90, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(4, 8, -270, DuctType.Grill));        
+        defaultMapData.Tiles.Add(new DuctTileData(4, 8, -270, DuctType.Grill));
         defaultMapData.Tiles.Add(new SoundTileData(4, 8, 0, "gunnar-gunnarson.mp3"));
         defaultMapData.Tiles.Add(new DuctTileData(5, 0, 0, DuctType.Straight));
         defaultMapData.Tiles.Add(new DuctTileData(5, 1, 0, DuctType.Straight));
@@ -161,173 +255,6 @@ public class Map : MonoBehaviour
         return defaultMapData;
     }
 
-    internal void ClearCell(int column, int row)
-    {
-        Debug.Log($"Removing all tiles from cell {column}, {row}.");
-        RemoveTiles(t => t.Column == column && t.Row == row);
-        Save();
-    }
-
-    private void RemoveTiles(Func<TileData, bool> predicate)
-    {
-        var tilesToRemove = mapData.Tiles.Where(predicate).ToList();
-        foreach (var tileToRemove in tilesToRemove)
-        {
-            mapData.Tiles.Remove(tileToRemove);
-        }
-    }
-
-    private void RemoveTilesOfType<T>(int? column = null, int? row = null)
-    {
-        if ((column.HasValue && !row.HasValue) ||
-            (row.HasValue && !column.HasValue))
-        {
-            Debug.LogError($"The parameters column and row should either both be null or both have a value. column has value: {column.HasValue}. row has value: {row.HasValue}");
-            return;
-        }
-
-        if (column.HasValue && row.HasValue)
-        {
-            Debug.Log($"Removing all tiles of type {nameof(T)} from {column.Value}, {row.Value}.");
-            RemoveTiles(t => t.Column == column && t.Row == row && t.GetType() == typeof(T));
-        }
-        else
-        {
-            Debug.Log($"Removing all tiles of type {nameof(T)} from the entire map.");
-            RemoveTiles(t => t.GetType() == typeof(T));
-        }
-    }
-
-    internal void AddColumn(ColumnSide side)
-    {
-        Debug.Log($"Adding column to: {side}");
-
-        mapData.Width++;
-
-        if (side == ColumnSide.Left)
-        {
-            foreach (var tile in mapData.Tiles)
-            {
-                tile.Column++;
-            }
-        }
-    }
-
-    internal void DeleteColumn(ColumnSide side)
-    {
-        Debug.Log($"Deleting column from: {side}");
-
-        if (mapData.Width <= 1)
-        {
-            Debug.LogWarning("Cannot delete column because the map is already at its minimum width.");
-            return;
-        }
-
-        mapData.Width--;
-
-        if (side == ColumnSide.Left)
-        {
-            RemoveTiles(t => t.Column == 0);
-        }
-        else
-        {
-            RemoveTiles(t => t.Column == mapData.Width);
-        }
-    }
-
-    internal void AddRow(RowSide side)
-    {
-        Debug.Log($"Adding row to: {side}");
-
-        mapData.Height++;
-
-        if (side == RowSide.Bottom)
-        {
-            foreach (var tile in mapData.Tiles)
-            {
-                tile.Row++;
-            }
-        }
-    }
-
-
-    internal void DeleteRow(RowSide side)
-    {
-        Debug.Log($"Deleting row from: {side}");
-
-        if (mapData.Height <= 1)
-        {
-            Debug.LogWarning("Cannot delete row because the map is already at its minimum height.");
-            return;
-        }
-        
-        mapData.Height--;
-
-        if (side == RowSide.Bottom)
-        {
-            RemoveTiles(t => t.Row == 0);
-        }
-        else
-        {
-            RemoveTiles(t => t.Row == mapData.Height);
-        }
-    }
-
-
-    internal void Load()
-    {
-        LoadMapData();
-        PopulateMap();
-        PlacePlayerAtStartPosition();
-    }
-
-    private void PlacePlayerAtStartPosition()
-    {
-        var startPositionTileData = mapData.Tiles.FirstOrDefault(t => t.GetType() == typeof(StartPositionTileData));
-
-        if (startPositionTileData == null)
-        {
-            playerTransform.position = GetPosition(0, 0);
-        }
-        else
-        {
-            playerTransform.position = GetPosition(startPositionTileData.Column, startPositionTileData.Row);
-        }
-    }
-
-    internal void AddTile(TileData newTileData)
-    {
-        Debug.Log($"Adding new tile to map at {newTileData.Column}, {newTileData.Row}, rotation {newTileData.Rotation} degrees.");
-        if (newTileData is DuctTileData newDuctTileData)
-        {
-            RemoveTilesOfType<DuctTileData>(newTileData.Column, newTileData.Row);
-            mapData.Tiles.Add(newDuctTileData);
-        }
-        else if (newTileData is SoundTileData newSoundTileData)
-        {
-            RemoveTilesOfType<SoundTileData>(newTileData.Column, newTileData.Row);
-            mapData.Tiles.Add(newSoundTileData);
-        }
-        else if (newTileData is StartPositionTileData newStartPositionTileData)
-        {
-            RemoveTilesOfType<StartPositionTileData>(); // Remove all start position tiles from the map. There can be only one.
-            mapData.Tiles.Add(newStartPositionTileData);
-        }
-        Save();
-    }
-
-    /// <summary>
-    /// Creates a backup of the current map file.
-    /// </summary>
-    internal void CreateBackup()
-    {
-        Debug.Log("Creating backup of map file.");
-        if (File.Exists(FullPath))
-        {
-            File.Copy(FullPath, Path.Combine(Application.persistentDataPath, $"{DateTime.Now:yyyyMMddhhmmss} {fileName}"));
-        }
-    }
-
     /// <summary>
     /// Returns the position in world space for a cell in the grid.
     /// </summary>
@@ -344,5 +271,6 @@ public class Map : MonoBehaviour
         var zPos = 0 - halfHeight + (cellSize.z * row);
 
         return new Vector3(xPos, 0, zPos);
-    }
+    } 
+    #endregion
 }
