@@ -192,7 +192,7 @@ public class Editor : MonoBehaviour
         }
         else
         {
-            map.RemoveTiles(cell.Column, cell.Row);
+            map.ClearCell(cell.Column, cell.Row);
         }
 
         map.Load();
@@ -236,7 +236,7 @@ public class Editor : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"OnDuctButtonClicked called with invalid DuctType name \"{ductTypeName}\".");
+            Debug.LogWarning($"{nameof(OnDuctButtonClicked)} called with invalid {nameof(DuctType)} name \"{ductTypeName}\".");
         }
     }
 
@@ -251,6 +251,54 @@ public class Editor : MonoBehaviour
         var selectedToolPrefab = TileFactory.Instance.GetStartPositionPrefab();
         InstantiateTool(selectedToolPrefab);
         selectedTileData = new StartPositionTileData();
+    }
+
+    private void OnAddColumnButtonClicked(string sideName)
+    {
+        if (Enum.TryParse<ColumnSide>(sideName, out ColumnSide side))
+        {
+            map.AddColumn(side);
+        }
+        else
+        {
+            Debug.LogWarning($"{nameof(OnAddColumnButtonClicked)} called with invalid {nameof(ColumnSide)} name \"{sideName}\".");
+        }
+    }
+
+    private void OnDeleteColumnButtonClicked(string sideName)
+    {
+        if (Enum.TryParse<ColumnSide>(sideName, out ColumnSide side))
+        {
+            map.DeleteColumn(side);
+        }
+        else
+        {
+            Debug.LogWarning($"{nameof(OnDeleteColumnButtonClicked)} called with invalid {nameof(ColumnSide)} name \"{sideName}\".");
+        }
+    }
+
+    private void OnAddRowButtonClicked(string sideName)
+    {
+        if (Enum.TryParse<RowSide>(sideName, out RowSide side))
+        {
+            map.AddRow(side);
+        }
+        else
+        {
+            Debug.LogWarning($"{nameof(OnAddRowButtonClicked)} called with invalid {nameof(RowSide)} name \"{sideName}\".");
+        }
+    }
+
+    private void OnDeleteRowButtonClicked(string sideName)
+    {
+        if (Enum.TryParse<RowSide>(sideName, out RowSide side))
+        {
+            map.DeleteRow(side);
+        }
+        else
+        {
+            Debug.LogWarning($"{nameof(OnDeleteRowButtonClicked)} called with invalid {nameof(RowSide)} name \"{sideName}\".");
+        }
     }
 
     private void FileBrowser_ClosedForSoundTile(object sender, FileBrowserClosedEventArgs e)

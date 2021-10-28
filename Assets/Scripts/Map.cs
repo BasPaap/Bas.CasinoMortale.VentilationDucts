@@ -161,17 +161,118 @@ public class Map : MonoBehaviour
         return defaultMapData;
     }
 
-    internal void RemoveTiles(int column, int row)
+    internal void ClearCell(int column, int row)
     {
         Debug.Log($"Removing all tiles from cell {column}, {row}.");
-        var tilesToRemove = mapData.Tiles.Where(t => t.Column == column && t.Row == row).ToList();
+        RemoveTiles(t => t.Column == column && t.Row == row);
+        Save();
+    }
+
+    private void RemoveTiles(Func<TileData, bool> predicate)
+    {
+        var tilesToRemove = mapData.Tiles.Where(predicate).ToList();
         foreach (var tileToRemove in tilesToRemove)
         {
             mapData.Tiles.Remove(tileToRemove);
         }
-
-        Save();
     }
+
+    private void RemoveTilesOfType<T>(int? column = null, int? row = null)
+    {
+        if ((column.HasValue && !row.HasValue) ||
+            (row.HasValue && !column.HasValue))
+        {
+            Debug.LogError($"The parameters column and row should either both be null or both have a value. column has value: {column.HasValue}. row has value: {row.HasValue}");
+            return;
+        }
+
+        if (column.HasValue && row.HasValue)
+        {
+            Debug.Log($"Removing all tiles of type {nameof(T)} from {column.Value}, {row.Value}.");
+            RemoveTiles(t => t.Column == column && t.Row == row && t.GetType() == typeof(T));
+        }
+        else
+        {
+            Debug.Log($"Removing all tiles of type {nameof(T)} from the entire map.");
+            RemoveTiles(t => t.GetType() == typeof(T));
+        }
+    }
+
+    internal void AddColumn(ColumnSide side)
+    {
+        Debug.Log($"Adding column to: {side}");
+
+        mapData.Width++;
+
+        if (side == ColumnSide.Left)
+        {
+            foreach (var tile in mapData.Tiles)
+            {
+                tile.Column++;
+            }
+        }
+    }
+
+    internal void DeleteColumn(ColumnSide side)
+    {
+        Debug.Log($"Deleting column from: {side}");
+
+        if (mapData.Width <= 1)
+        {
+            Debug.LogWarning("Cannot delete column because the map is already at its minimum width.");
+            return;
+        }
+
+        mapData.Width--;
+
+        if (side == ColumnSide.Left)
+        {
+            RemoveTiles(t => t.Column == 0);
+        }
+        else
+        {
+            RemoveTiles(t => t.Column == mapData.Width);
+        }
+    }
+
+    internal void AddRow(RowSide side)
+    {
+        Debug.Log($"Adding row to: {side}");
+
+        mapData.Height++;
+
+        if (side == RowSide.Bottom)
+        {
+            foreach (var tile in mapData.Tiles)
+            {
+                tile.Row++;
+            }
+        }
+    }
+
+
+    internal void DeleteRow(RowSide side)
+    {
+        Debug.Log($"Deleting row from: {side}");
+
+        if (mapData.Height <= 1)
+        {
+            Debug.LogWarning("Cannot delete row because the map is already at its minimum height.");
+            return;
+        }
+        
+        mapData.Height--;
+
+        if (side == RowSide.Bottom)
+        {
+            RemoveTiles(t => t.Row == 0);
+        }
+        else
+        {
+            RemoveTiles(t => t.Row == mapData.Height);
+        }
+    }
+
 
     internal void Load()
     {
@@ -213,34 +314,6 @@ public class Map : MonoBehaviour
             mapData.Tiles.Add(newStartPositionTileData);
         }
         Save();
-    }
-
-    private void RemoveTilesOfType<T>(int? column = null, int? row = null)
-    {
-        if ((column.HasValue && !row.HasValue) ||
-            (row.HasValue && !column.HasValue))
-        {
-            Debug.LogError($"The parameters column and row should either both be null or both have a value. column has value: {column.HasValue}. row has value: {row.HasValue}");
-            return;
-        }
-
-        List<TileData> tilesToRemove;
-
-        if (column.HasValue && row.HasValue)
-        {
-            Debug.Log($"Removing all tiles of type {nameof(T)} from {column.Value}, {row.Value}.");
-            tilesToRemove = mapData.Tiles.Where(t => t.Column == column && t.Row == row && t.GetType() == typeof(T)).ToList();
-        }
-        else
-        {
-            Debug.Log($"Removing all tiles of type {nameof(T)} from the entire map.");
-            tilesToRemove = mapData.Tiles.Where(t => t.GetType() == typeof(T)).ToList();
-        }
-        
-        foreach (var tileToRemove in tilesToRemove)
-        {
-            mapData.Tiles.Remove(tileToRemove);
-        }
     }
 
     /// <summary>
