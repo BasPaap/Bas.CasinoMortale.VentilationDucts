@@ -9,10 +9,12 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(AudioSource))]
-public class Sound : MonoBehaviour
+public class SoundTile : MonoBehaviour
 {
     private AudioSource audioSource;
     private readonly Queue<string> audioFileNameQueue = new Queue<string>();
+
+    public float CurrentMaxLoudness { get; private set; }
 
     public void SetAudioFileNames(IEnumerable<string> audioFileNames)
     {
@@ -36,18 +38,11 @@ public class Sound : MonoBehaviour
         {
             Debug.Log("Collider triggered, playing next audio clip.");
                         
-            var maxLoudness = await PlayNextClipAsync();
-
-            var vuMeter = other.gameObject.GetComponent<VUMeter>();
-            if (vuMeter != null)
-            {
-                vuMeter.AudioSource = audioSource;
-                vuMeter.CurrentMaxLoudness = maxLoudness;
-            }
+            await PlayNextClipAsync();
         }
     }
 
-    private async Task<float> PlayNextClipAsync()
+    private async Task PlayNextClipAsync()
     {
         var fileName = audioFileNameQueue.Dequeue();
         Debug.Log($"Playing {fileName}.");
@@ -64,12 +59,11 @@ public class Sound : MonoBehaviour
         } 
 
         var maxLoudness = averages.Max();
-        Debug.Log($"Max loudnes of clip {fileName} = {maxLoudness}");
-
+        
         audioSource.clip = audioClip;
         audioSource.Play();
 
-        return maxLoudness;
+        CurrentMaxLoudness = maxLoudness;
     }
 
     private async Task<AudioClip> LoadClipAsync(string path)

@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class VUMeter : MonoBehaviour
 {
     private const int sampleDataLength = 1024; // 1024 samples is about 80 ms on a 44khz stereo clip.
     private const float updateStep = 0.1f;
-
+    
     private float currentUpdateTime = 0f;
     private float[] clipSampleData = new float[sampleDataLength];
-    
-    [SerializeField] private VUIndicator[] vuIndicators;
+    private AudioSource nearestSoundTileAudioSource;
+    private float distanceToNearestSound = float.MaxValue;
+    private float nearestSoundMaxLoudness;
 
-    public AudioSource AudioSource { get; set; }
-    public float CurrentMaxLoudness { get; set; }
+    [SerializeField] private VUIndicator[] vuIndicators;
+        
+    
 
     void Update()
     {
-        if (!AudioSource)
+        if (nearestSoundTileAudioSource == null)
         {
             return;
         }
@@ -26,7 +29,7 @@ public class VUMeter : MonoBehaviour
         if (currentUpdateTime >= updateStep)
         {
             var clipLoudness = CalculateClipLoudness();
-            var normalizedLoudness = Map(clipLoudness, 0, CurrentMaxLoudness, 0, 1, true, true, true, true);
+            var normalizedLoudness = Map(clipLoudness, 0, nearestSoundMaxLoudness, 0, 1, true, true, true, true);
 
             foreach (var vuIndicator in vuIndicators)
             {
@@ -35,10 +38,40 @@ public class VUMeter : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        var sound = other.gameObject.GetComponent<SoundTile>();
+        var audioSource = other.gameObject.GetComponent<AudioSource>();
+
+        if (sound != null && audioSource != null)
+        {
+            var distanceToSound = Vector3.Distance(transform.position, sound.transform.position);
+
+            if (audioSource == nearestSoundTileAudioSource)
+            {
+                distanceToNearestSound = distanceToSound;
+                nearestSoundMaxLoudness = sound.CurrentMaxLoudness;
+            }
+            else if(distanceToSound < distanceToNearestSound)
+            {     
+                nearestSoundTileAudioSource = audioSource;
+                distanceToNearestSound = distanceToSound;
+                nearestSoundMaxLoudness = sound.CurrentMaxLoudness;
+            }
+        }        
+    }
+
+
     private float CalculateClipLoudness()
     {
+        if (nearestSoundTileAudioSource == null)
+        {
+            return 0;
+        }
+
         currentUpdateTime = 0f;
-        AudioSource.GetOutputData(clipSampleData, 0);
+        
+        nearestSoundTileAudioSource.GetOutputData(clipSampleData, 0);
 
         float clipLoudness = 0f;
         foreach (var sample in clipSampleData)

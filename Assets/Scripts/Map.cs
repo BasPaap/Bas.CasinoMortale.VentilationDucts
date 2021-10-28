@@ -121,7 +121,7 @@ public class Map : MonoBehaviour
 
                 if (tile is SoundTileData soundTile)
                 {
-                    var sound = instantiatedTile.GetComponent<Sound>();
+                    var sound = instantiatedTile.GetComponent<SoundTile>();
                     sound.SetAudioFileNames(soundTile.FileNames);
                 }
             }
