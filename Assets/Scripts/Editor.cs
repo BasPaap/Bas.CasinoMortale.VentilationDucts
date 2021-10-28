@@ -15,6 +15,7 @@ public class Editor : MonoBehaviour
     private Quaternion originalToolRotation;
     private float toolYRotation;
     private readonly List<Cell> cells = new List<Cell>();
+    private Vector3 previousMouseDragPosition;
 
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
@@ -90,11 +91,13 @@ public class Editor : MonoBehaviour
         ToggleToolbar();
         ClearGrid();
     }
-
+    
     private void HandleMouseInput()
     {
         if (!fileBrowser.IsOpen)
         {
+            HandleMapDragging();
+
             RaycastHit[] hits = Physics.RaycastAll(editorCamera.ScreenPointToRay(Input.mousePosition));
             var hitGameObjects = hits.Select(h => h.collider.gameObject);
 
@@ -121,6 +124,22 @@ public class Editor : MonoBehaviour
             }
 
             SetToolRotation();
+        }
+    }
+
+    private void HandleMapDragging()
+    {
+        const int dragMouseButtonIndex = 2;
+        if (Input.GetMouseButtonDown(dragMouseButtonIndex))
+        {
+            previousMouseDragPosition = editorCamera.ScreenToWorldPoint(Input.mousePosition);
+        }
+
+        if (Input.GetMouseButton(dragMouseButtonIndex))
+        {
+            var mousePositionDelta = (editorCamera.ScreenToWorldPoint(Input.mousePosition) - previousMouseDragPosition);
+            Debug.Log(mousePositionDelta);
+            editorCamera.transform.position -= new Vector3(mousePositionDelta.x, 0, mousePositionDelta.z);
         }
     }
 
