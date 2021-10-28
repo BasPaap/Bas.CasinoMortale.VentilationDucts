@@ -14,7 +14,7 @@ public class Editor : MonoBehaviour
     private TileData selectedTileData;
     private Quaternion originalToolRotation;
     private float toolYRotation;
-    private readonly List<Cell> cells = new();
+    private readonly List<Cell> cells = new List<Cell>();
 
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
