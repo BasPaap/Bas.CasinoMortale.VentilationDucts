@@ -35,9 +35,9 @@ public class Map : MonoBehaviour
         Save();
     }
 
-    public void DeleteColumn(ColumnSide side)
+    public void RemoveColumn(ColumnSide side)
     {
-        mapData.DeleteColumn(side);
+        mapData.RemoveColumn(side);
         Save();
     }
 
@@ -47,9 +47,9 @@ public class Map : MonoBehaviour
         Save();
     }
 
-    public void DeleteRow(RowSide side)
+    public void RemoveRow(RowSide side)
     {
-        mapData.DeleteRow(side);
+        mapData.RemoveRow(side);
         Save();
     }
 

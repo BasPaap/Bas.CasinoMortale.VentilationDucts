@@ -57,6 +57,7 @@ public class Editor : MonoBehaviour
         else if (Input.GetKeyUp(Hotkeys.ResetMapKey))
         {
             map.ResetMap();
+            CreateGrid();
         }
     }
 
@@ -287,7 +288,7 @@ public class Editor : MonoBehaviour
         selectedTileData = new StartPositionTileData();
     }
 
-    private void OnAddColumnButtonClicked(string sideName)
+    public void OnAddColumnButtonClicked(string sideName)
     {
         if (Enum.TryParse<ColumnSide>(sideName, out ColumnSide side))
         {
@@ -299,23 +300,25 @@ public class Editor : MonoBehaviour
         }
 
         map.Load();
+        CreateGrid();
     }
 
-    private void OnDeleteColumnButtonClicked(string sideName)
+    public void OnRemoveColumnButtonClicked(string sideName)
     {
         if (Enum.TryParse<ColumnSide>(sideName, out ColumnSide side))
         {
-            map.DeleteColumn(side);
+            map.RemoveColumn(side);
         }
         else
         {
-            Debug.LogWarning($"{nameof(OnDeleteColumnButtonClicked)} called with invalid {nameof(ColumnSide)} name \"{sideName}\".");
+            Debug.LogWarning($"{nameof(OnRemoveColumnButtonClicked)} called with invalid {nameof(ColumnSide)} name \"{sideName}\".");
         }
 
         map.Load();
+        CreateGrid();
     }
 
-    private void OnAddRowButtonClicked(string sideName)
+    public void OnAddRowButtonClicked(string sideName)
     {
         if (Enum.TryParse<RowSide>(sideName, out RowSide side))
         {
@@ -327,20 +330,22 @@ public class Editor : MonoBehaviour
         }
 
         map.Load();
+        CreateGrid();
     }
 
-    private void OnDeleteRowButtonClicked(string sideName)
+    public void OnRemoveRowButtonClicked(string sideName)
     {
         if (Enum.TryParse<RowSide>(sideName, out RowSide side))
         {
-            map.DeleteRow(side);
+            map.RemoveRow(side);
         }
         else
         {
-            Debug.LogWarning($"{nameof(OnDeleteRowButtonClicked)} called with invalid {nameof(RowSide)} name \"{sideName}\".");
+            Debug.LogWarning($"{nameof(OnRemoveRowButtonClicked)} called with invalid {nameof(RowSide)} name \"{sideName}\".");
         }
 
         map.Load();
+        CreateGrid();
     }
     #endregion
 }

@@ -54,13 +54,13 @@ public class MapData
         }
     }
 
-    internal void DeleteColumn(ColumnSide side)
+    internal void RemoveColumn(ColumnSide side)
     {
-        Debug.Log($"Deleting column from: {side}");
+        Debug.Log($"Removing column from: {side}");
 
         if (Width <= 1)
         {
-            Debug.LogWarning("Cannot delete column because the map is already at its minimum width.");
+            Debug.LogWarning("Cannot remove column because the map is already at its minimum width.");
             return;
         }
 
@@ -69,6 +69,11 @@ public class MapData
         if (side == ColumnSide.Left)
         {
             RemoveTiles(t => t.Column == 0);
+
+            foreach (var tile in Tiles)
+            {
+                tile.Column--;
+            }
         }
         else
         {
@@ -91,13 +96,13 @@ public class MapData
         }
     }
 
-    internal void DeleteRow(RowSide side)
+    internal void RemoveRow(RowSide side)
     {
-        Debug.Log($"Deleting row from: {side}");
+        Debug.Log($"Removing row from: {side}");
 
         if (Height <= 1)
         {
-            Debug.LogWarning("Cannot delete row because the map is already at its minimum height.");
+            Debug.LogWarning("Cannot remove row because the map is already at its minimum height.");
             return;
         }
 
@@ -106,6 +111,11 @@ public class MapData
         if (side == RowSide.Bottom)
         {
             RemoveTiles(t => t.Row == 0);
+
+            foreach (var tile in Tiles)
+            {
+                tile.Row--;
+            }
         }
         else
         {
