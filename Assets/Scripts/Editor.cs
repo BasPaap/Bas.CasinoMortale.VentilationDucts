@@ -58,6 +58,7 @@ public class Editor : MonoBehaviour
         {
             map.ResetMap();
             CreateGrid();
+            MoveCameraToCenter();
         }
     }
 
@@ -72,6 +73,7 @@ public class Editor : MonoBehaviour
         map.CreateBackup();
 
         CreateGrid();
+        MoveCameraToCenter();
     }
 
     private void Close()
@@ -215,6 +217,13 @@ public class Editor : MonoBehaviour
     {
         editorCamera.gameObject.SetActive(!editorCamera.gameObject.activeSelf);
         mainCamera.gameObject.SetActive(!mainCamera.gameObject.activeSelf);
+    }
+
+    private void MoveCameraToCenter()
+    {
+        editorCamera.transform.position = new Vector3(map.Size.x * map.CellSize.x / 2.0f,
+                                                      editorCamera.transform.position.y,
+                                                      map.Size.y * map.CellSize.z / 2.0f);
     }
     #endregion
 

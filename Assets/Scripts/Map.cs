@@ -16,6 +16,8 @@ public class Map : MonoBehaviour
     private string FullPath => Path.Combine(Application.persistentDataPath, fileName);
     public Vector2 Size => mapData != null ? new Vector2(mapData.Width, mapData.Height) : Vector2.zero;
 
+    public Vector3 CellSize => Vector3.one;
+
     private void Start()
     {
         Load();
@@ -263,9 +265,8 @@ public class Map : MonoBehaviour
     /// <returns>The cell's position in world space.</returns>
     internal Vector3 GetPosition(int column, int row)
     {
-        var cellSize = Vector3.one;
-        var xPos = cellSize.x * column;
-        var zPos = cellSize.z * row;
+        var xPos = CellSize.x * column;
+        var zPos = CellSize.z * row;
 
         return new Vector3(xPos, 0, zPos);
     } 
