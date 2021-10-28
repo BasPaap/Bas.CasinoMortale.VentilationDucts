@@ -204,6 +204,27 @@ public class Map : MonoBehaviour
         {
             File.Copy(FullPath, Path.Combine(Application.persistentDataPath, $"{DateTime.Now:yyyyMMddhhmmss} {fileName}"));
         }
+
+        // Remove old backups.
+        RemoveOldBackups();
+    }
+
+    private static void RemoveOldBackups()
+    {
+        string searchPattern = $"* {fileName}";
+        var backupFilePaths = Directory.GetFiles(Application.persistentDataPath, searchPattern).OrderByDescending(f => File.GetLastWriteTime(f));
+        var filePathsToExclude = backupFilePaths.Take(10).ToList();
+        var filePathFromPreviousDate = backupFilePaths.Where(f => File.GetLastWriteTime(f) < DateTime.Today).FirstOrDefault();
+        if (filePathFromPreviousDate != null && !filePathsToExclude.Contains(filePathFromPreviousDate))
+        {
+            filePathsToExclude.Add(filePathFromPreviousDate);
+        }
+
+        foreach (var filePath in backupFilePaths.Except(filePathsToExclude))
+        {
+            Debug.Log($"Deleting backup file {Path.GetFileName(filePath)}");
+            File.Delete(filePath);
+        }
     }
     #endregion
 
