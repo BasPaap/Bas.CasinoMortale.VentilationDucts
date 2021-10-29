@@ -97,7 +97,7 @@ Material:
     - Max_Fog_Distance: 2
     - Min_Fog_Distance: 1
     - Scan_Falloff: 0.4
-    - Scan_Radius: 1.04
+    - Scan_Radius: 0.73479885
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -127,7 +127,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Line_Color: {r: 0, g: 1, b: 0, a: 1}
-    - Player_Position: {r: 2.9941945, g: 0.14410505, b: 2.319373, a: 0}
+    - Player_Position: {r: 5.2412696, g: 0.14410499, b: 5.994002, a: 0}
+    - Scan_Ring_Color: {r: 0.3224012, g: 0.6509434, b: 0.3224012, a: 0.0627451}
     - Wall_Color: {r: 0, g: 0.2745098, b: 0, a: 1}
     - _BaseColor: {r: 0.120666504, g: 1, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

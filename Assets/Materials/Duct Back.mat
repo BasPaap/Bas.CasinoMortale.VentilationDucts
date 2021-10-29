@@ -98,7 +98,7 @@ Material:
     - Max_Fog_Distance: 2
     - Min_Fog_Distance: 1
     - Scan_Falloff: 0.4
-    - Scan_Radius: 0.74
+    - Scan_Radius: 0.73479885
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -128,6 +128,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - Line_Color: {r: 0, g: 1, b: 0, a: 1}
+    - Scan_Ring_Color: {r: 0.32156864, g: 0.6509804, b: 0.32156864, a: 0.6117647}
     - Wall_Color: {r: 0, g: 0.02745098, b: 0, a: 0.27450982}
     - _BaseColor: {r: 1, g: 0, b: 0.06326771, a: 0.57254905}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
