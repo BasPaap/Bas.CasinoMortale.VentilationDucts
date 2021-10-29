@@ -26,7 +26,9 @@ public class MicrophoneAudioPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (!audioSource.isPlaying && Microphone.GetPosition(null) > sampleRate * playbackDelay)
+        if (!audioSource.isPlaying && 
+            Microphone.IsRecording(null) && 
+            Microphone.GetPosition(null) > sampleRate * playbackDelay)
         {
             Debug.Log("Starting start position playback");
             audioSource.Play();            
@@ -35,7 +37,10 @@ public class MicrophoneAudioPlayer : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Debug.Log("Stopping recording on default microphone.");
-        Microphone.End(null);
+        if (Microphone.IsRecording(null))
+        {
+            Debug.Log("Stopping recording on default microphone.");
+            Microphone.End(null);
+        }
     }
 }
