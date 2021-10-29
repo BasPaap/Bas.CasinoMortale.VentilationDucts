@@ -31,9 +31,9 @@ public class SoundTile : MonoBehaviour
     }
 
     private async void OnTriggerEnter(Collider other)
-    {
+    {        
         if (!audioSource.isPlaying &&
-            other.gameObject.GetComponent<CharacterController>() != null &&
+            other.gameObject.GetComponent<Player>() != null &&
             audioFileNameQueue.Count > 0)
         {
             Debug.Log("Collider triggered, playing next audio clip.");
