@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8688708963932443381}
   - component: {fileID: 6180371652799542102}
   - component: {fileID: 7925493326010740827}
+  - component: {fileID: -880375651455145996}
   m_Layer: 0
   m_Name: Corner Duct
   m_TagString: Untagged
@@ -59,7 +60,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6838092b6b637ed448aba9d2ce54a652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistanceToReveal: 0.5
+--- !u!114 &-880375651455145996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7089794102523129334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5f9649b45e6de44a039920285e6f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1739621987537363657
 PrefabInstance:
   m_ObjectHideFlags: 0

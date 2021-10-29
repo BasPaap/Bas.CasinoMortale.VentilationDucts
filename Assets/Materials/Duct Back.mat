@@ -95,6 +95,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Max_Fog_Distance: 2
+    - Min_Fog_Distance: 1
+    - Scan_Falloff: 0.4
+    - Scan_Radius: 0.74
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

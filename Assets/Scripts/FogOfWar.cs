@@ -25,7 +25,7 @@ public class FogOfWar : MonoBehaviour
         }
 
         ductMeshRenderer.GetPropertyBlock(materialPropertyBlock);
-        materialPropertyBlock.SetVector("Player_Position", closestPosition);
+        materialPropertyBlock.SetVector("Closest_Player_Position", closestPosition);
         ductMeshRenderer.SetPropertyBlock(materialPropertyBlock);
     }
 }
