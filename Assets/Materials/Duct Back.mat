@@ -96,9 +96,10 @@ Material:
     m_Ints: []
     m_Floats:
     - Max_Fog_Distance: 2
+    - Max_Scan_Distance: 4
     - Min_Fog_Distance: 1
     - Scan_Falloff: 0.4
-    - Scan_Radius: 0.73479885
+    - Scan_Radius: 0.4126259
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2518696395589506984}
   - component: {fileID: 4977860182382629649}
   - component: {fileID: 3587336795330229710}
-  - component: {fileID: -7485452494313827860}
   m_Layer: 0
   m_Name: Grill Duct
   m_TagString: Untagged
@@ -57,18 +56,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6838092b6b637ed448aba9d2ce54a652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-7485452494313827860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3794813759681499909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5f9649b45e6de44a039920285e6f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7013394407568895130
