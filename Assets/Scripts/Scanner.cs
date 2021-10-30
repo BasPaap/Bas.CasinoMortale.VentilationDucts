@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public class Scanner : MonoBehaviour
@@ -10,6 +12,19 @@ public class Scanner : MonoBehaviour
 
     private float currentRadius;
     private float timeSinceLastScan;
+    private readonly List<Material> materialInstances = new List<Material>();
+
+    private void Start()
+    {        
+        // Make sure we get the instanced versions of all scannable materials and apply our changes to them instead of the originals.
+        foreach (var scannableMaterial in scannableMaterials)
+        {
+            if (MaterialInstanceFactory.Instance.TryGetMaterialInstance(scannableMaterial, out Material scannableMaterialInstance))
+            {
+                materialInstances.Add(scannableMaterialInstance);
+            }
+        }
+    }
 
     private void Update()
     {
@@ -20,9 +35,9 @@ public class Scanner : MonoBehaviour
             currentRadius = 0;
             timeSinceLastScan = 0;
 
-            foreach (var scannableMaterial in scannableMaterials)
+            foreach (var materialInstance in materialInstances)
             {
-                scannableMaterial.SetVector("Scan_Position", transform.position);
+                materialInstance.SetVector("Scan_Position", transform.position);
             }
         }
         else
@@ -30,10 +45,10 @@ public class Scanner : MonoBehaviour
             currentRadius += speed * Time.deltaTime;
         }
 
-        foreach (var scannableMaterial in scannableMaterials)
+        foreach (var materialInstance in materialInstances)
         {
-            scannableMaterial.SetFloat("Max_Scan_Distance", speed * interval);
-            scannableMaterial.SetFloat("Scan_Radius", currentRadius);
+            materialInstance.SetFloat("Max_Scan_Distance", speed * interval);
+            materialInstance.SetFloat("Scan_Radius", currentRadius);
         }
-    }
+    }    
 }
