@@ -1,7 +1,7 @@
 # Casino Mortale Ventilation Ducts
 A minigame in which players control a robot that crawls through ventilation ducts, listening in on the various rooms it passes. This game was developed for Casino Mortale, a LARP event by [RSV Arcana](https://www.arcana.nl).
 
-![main](https://user-images.githubusercontent.com/18243979/138502344-d8d57bc2-bc08-411c-933f-880f572d47ef.png)
+![main](https://user-images.githubusercontent.com/18243979/139534386-71396837-a6b1-4b70-8e2f-34eae307c7e8.png)
 
 ## How to use
 Control the robot with the arrow keys.
