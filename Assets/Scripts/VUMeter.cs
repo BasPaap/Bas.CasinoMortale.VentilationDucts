@@ -7,7 +7,8 @@ public class VUMeter : MonoBehaviour
 {
     private const int sampleDataLength = 1024; // 1024 samples is about 80 ms on a 44khz stereo clip.
     private const float updateStep = 0.1f;
-    
+    private const float startPositionMaxLoudness = 0.02f;
+
     private float currentUpdateTime = 0f;
     private float[] clipSampleData = new float[sampleDataLength];
     private AudioSource nearestSoundTileAudioSource;
@@ -15,9 +16,7 @@ public class VUMeter : MonoBehaviour
     private float nearestSoundMaxLoudness;
 
     [SerializeField] private VUIndicator[] vuIndicators;
-        
     
-
     void Update()
     {
         if (nearestSoundTileAudioSource == null)
@@ -43,20 +42,20 @@ public class VUMeter : MonoBehaviour
         var sound = other.gameObject.GetComponent<SoundTile>();
         var audioSource = other.gameObject.GetComponent<AudioSource>();
 
-        if (sound != null && audioSource != null)
+        if (audioSource != null)
         {
-            var distanceToSound = Vector3.Distance(transform.position, sound.transform.position);
-
+            var distanceToSound = Vector3.Distance(transform.position, audioSource.transform.position);
+                        
             if (audioSource == nearestSoundTileAudioSource)
             {
                 distanceToNearestSound = distanceToSound;
-                nearestSoundMaxLoudness = sound.CurrentMaxLoudness;
+                nearestSoundMaxLoudness = sound != null ? sound.CurrentMaxLoudness : startPositionMaxLoudness;
             }
             else if(distanceToSound < distanceToNearestSound)
             {     
                 nearestSoundTileAudioSource = audioSource;
                 distanceToNearestSound = distanceToSound;
-                nearestSoundMaxLoudness = sound.CurrentMaxLoudness;
+                nearestSoundMaxLoudness = sound != null ? sound.CurrentMaxLoudness : startPositionMaxLoudness;
             }
         }        
     }
