@@ -90,10 +90,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Distortion_Band_Width: 80
+    - Distortion_Strength: 0.05
     - Image_Brightness: 2
     - RGB_Stripe_Resolution: 384
     - Scanline_Height: 10
     - Scanline_Strength: 0.16
+    - Scroll_Speed: 0.3
+    - Static_Strength: 0.15
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
