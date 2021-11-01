@@ -6,8 +6,7 @@ using UnityEngine;
 public class VUMeter : MonoBehaviour
 {
     private const int sampleDataLength = 1024; // 1024 samples is about 80 ms on a 44khz stereo clip.
-    private const float updateStep = 0.1f;
-    private const float startPositionMaxLoudness = 0.02f;
+    private const float updateStep = 0.1f;    
 
     private float currentUpdateTime = 0f;
     private float[] clipSampleData = new float[sampleDataLength];
@@ -49,13 +48,13 @@ public class VUMeter : MonoBehaviour
             if (audioSource == nearestSoundTileAudioSource)
             {
                 distanceToNearestSound = distanceToSound;
-                nearestSoundMaxLoudness = sound != null ? sound.CurrentMaxLoudness : startPositionMaxLoudness;
+                nearestSoundMaxLoudness = sound != null ? sound.CurrentMaxLoudness : Settings.Instance.StartPositionMicrophoneMaxLoudness;
             }
             else if(distanceToSound < distanceToNearestSound)
             {     
                 nearestSoundTileAudioSource = audioSource;
                 distanceToNearestSound = distanceToSound;
-                nearestSoundMaxLoudness = sound != null ? sound.CurrentMaxLoudness : startPositionMaxLoudness;
+                nearestSoundMaxLoudness = sound != null ? sound.CurrentMaxLoudness : Settings.Instance.StartPositionMicrophoneMaxLoudness;
             }
         }        
     }

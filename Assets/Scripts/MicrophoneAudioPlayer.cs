@@ -10,6 +10,12 @@ public class MicrophoneAudioPlayer : MonoBehaviour
 
     [SerializeField] private float playbackDelay = 0.5f;
 
+    private void Awake()
+    {
+        enabled = Settings.Instance.IsMicrophoneActiveOnStartPosition;
+        playbackDelay = Settings.Instance.StartPositionMicrophonePlaybackDelay;
+    }
+
     private void Start()
     {
         if (Microphone.devices.Length == 0)
