@@ -6,7 +6,7 @@ namespace UnityEngine.Rendering.Universal
     internal class DrawFullscreenPass : ScriptableRenderPass
     {
         public FilterMode filterMode { get; set; }
-        public DrawFullscreenFeature.Settings settings;
+        public DrawFullscreenFeature.RenderFeatureSettings settings;
 
         RenderTargetIdentifier source;
         RenderTargetIdentifier destination;

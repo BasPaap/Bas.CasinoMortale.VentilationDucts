@@ -9,7 +9,7 @@ namespace UnityEngine.Rendering.Universal
     public class DrawFullscreenFeature : ScriptableRendererFeature
     {
         [System.Serializable]
-        public class Settings
+        public class RenderFeatureSettings
         {
             public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
 
@@ -21,7 +21,7 @@ namespace UnityEngine.Rendering.Universal
             public string destinationTextureId = "_DestinationTexture";
         }
 
-        public Settings settings = new Settings();
+        public RenderFeatureSettings renderFeatureSettings = new RenderFeatureSettings();
         DrawFullscreenPass blitPass;
 
         public override void Create()
@@ -31,14 +31,18 @@ namespace UnityEngine.Rendering.Universal
 
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
-            if (settings.blitMaterial == null)
+            if (renderFeatureSettings.blitMaterial == null)
             {
                 Debug.LogWarningFormat("Missing Blit Material. {0} blit pass will not execute. Check for missing reference in the assigned renderer.", GetType().Name);
                 return;
             }
+            else if (!Settings.Instance.IsRetroEffectEnabled && renderFeatureSettings.blitMaterial.name == "Retro Screen")
+            {
+                return;
+            }
 
-            blitPass.renderPassEvent = settings.renderPassEvent;
-            blitPass.settings = settings;
+            blitPass.renderPassEvent = renderFeatureSettings.renderPassEvent;
+            blitPass.settings = renderFeatureSettings;
             renderer.EnqueuePass(blitPass);
         }
     }
