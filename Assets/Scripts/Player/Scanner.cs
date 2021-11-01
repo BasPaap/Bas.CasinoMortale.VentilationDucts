@@ -17,6 +17,8 @@ public class Scanner : MonoBehaviour
     private void Awake()
     {
         enabled = Settings.Instance.IsScannerPulseVisible;
+        speed = Settings.Instance.ScannerSpeed;
+        interval = Settings.Instance.ScannerInterval;
     }
 
     private void Start()

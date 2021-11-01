@@ -34,6 +34,8 @@ public class Settings
     public bool IsSignalIndicatorVisible { get; set; }
     public bool IsBatteryIndicatorVisible { get; set; }
     public bool IsScannerPulseVisible { get; set; }
+    public float ScannerSpeed { get; set; }
+    public float ScannerInterval { get; set; }
     public bool IsFogOfWarEnabled { get; set; }
 
     private static void Load()
@@ -45,15 +47,18 @@ public class Settings
         {
             Debug.Log("Settings file not found, creating default settings file.");
 
-            Instance.StartPositionMicrophoneMaxLoudness = 0.02f;
-            Instance.StartPositionMicrophonePlaybackDelay = 0.5f;
-            Instance.IsRetroEffectEnabled = true;
-            Instance.IsMicrophoneActiveOnStartPosition = true;
-            Instance.IsVUIndicatorVisible = true;
-            Instance.IsSignalIndicatorVisible = true;
-            Instance.IsBatteryIndicatorVisible = true;
-            Instance.IsScannerPulseVisible = true;
-            Instance.IsFogOfWarEnabled = true;
+            instance = new Settings();
+            instance.StartPositionMicrophoneMaxLoudness = 0.02f;
+            instance.StartPositionMicrophonePlaybackDelay = 0.5f;
+            instance.IsRetroEffectEnabled = true;
+            instance.IsMicrophoneActiveOnStartPosition = true;
+            instance.IsVUIndicatorVisible = true;
+            instance.IsSignalIndicatorVisible = true;
+            instance.IsBatteryIndicatorVisible = true;
+            instance.IsScannerPulseVisible = true;
+            instance.ScannerSpeed = 1.0f;
+            instance.ScannerInterval = 1.0f;
+            instance.IsFogOfWarEnabled = true;
 
             Save();
         }
