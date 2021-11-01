@@ -33,6 +33,7 @@ public class Settings
     public bool IsVUIndicatorVisible { get; set; }
     public bool IsSignalIndicatorVisible { get; set; }
     public bool IsBatteryIndicatorVisible { get; set; }
+    public bool IsIndicatorBackgroundVisible { get; set; }
     public bool IsScannerPulseVisible { get; set; }
     public float ScannerSpeed { get; set; }
     public float ScannerInterval { get; set; }
@@ -55,6 +56,7 @@ public class Settings
             instance.IsVUIndicatorVisible = true;
             instance.IsSignalIndicatorVisible = true;
             instance.IsBatteryIndicatorVisible = true;
+            instance.IsIndicatorBackgroundVisible = true;
             instance.IsScannerPulseVisible = true;
             instance.ScannerSpeed = 1.0f;
             instance.ScannerInterval = 1.0f;
