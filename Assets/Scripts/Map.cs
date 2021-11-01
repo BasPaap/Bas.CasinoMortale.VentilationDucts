@@ -111,7 +111,7 @@ public class Map : MonoBehaviour
             if (prefab != null)
             {
                 Debug.Log($"Instantiating {prefab.name} at {tile.Column}, {tile.Row} at {tile.Rotation} degrees rotation.");
-                var instantiatedTile = Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
+                var instantiatedTile = Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row, tile.Level), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
 
                 var fogOfWar = instantiatedTile.GetComponent<FogOfWar>();
                 if (fogOfWar != null)
@@ -146,11 +146,11 @@ public class Map : MonoBehaviour
 
         if (startPositionTileData == null)
         {
-            playerTransform.position = GetPosition(0, 0);
+            playerTransform.position = GetPosition(0, 0, 0);
         }
         else
         {
-            playerTransform.position = GetPosition(startPositionTileData.Column, startPositionTileData.Row);
+            playerTransform.position = GetPosition(startPositionTileData.Column, startPositionTileData.Row, startPositionTileData.Level);
         }
     }
 
@@ -284,12 +284,13 @@ public class Map : MonoBehaviour
     /// <param name="column">The X-coordinate of the cell.</param>
     /// <param name="row">The Y-coordinate of the cell.</param>
     /// <returns>The cell's position in world space.</returns>
-    internal Vector3 GetPosition(int column, int row)
+    internal Vector3 GetPosition(int column, int row, int level)
     {
         var xPos = CellSize.x * column;
+        var yPos = CellSize.y * level;
         var zPos = CellSize.z * row;
 
-        return new Vector3(xPos, 0, zPos);
+        return new Vector3(xPos, yPos, zPos);
     } 
     #endregion
 }

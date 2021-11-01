@@ -211,7 +211,7 @@ public class Editor : MonoBehaviour
         {
             for (int column = 0; column < map.Size.x; column++)
             {
-                var cell = Instantiate(emptyCellPrefab, emptyCellPrefab.transform.position + map.GetPosition(column, row), emptyCellPrefab.transform.rotation, gridTransform).GetComponent<Cell>();
+                var cell = Instantiate(emptyCellPrefab, emptyCellPrefab.transform.position + map.GetPosition(column, row, 0), emptyCellPrefab.transform.rotation, gridTransform).GetComponent<Cell>();
                 cell.name = $"Cell {column},{row}";
                 cell.Column = column;
                 cell.Row = row;
