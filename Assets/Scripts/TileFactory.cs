@@ -44,7 +44,9 @@ public class TileFactory : MonoBehaviour
                     return fourWayDuctPrefab;
                 case DuctType.Grill:
                     return grillDuctPrefab;
+                case DuctType.Ramp:
                 case DuctType.None:
+                default:
                     return null;
             };
         }
