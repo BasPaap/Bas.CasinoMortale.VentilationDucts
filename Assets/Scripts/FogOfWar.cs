@@ -10,9 +10,18 @@ public class FogOfWar : MonoBehaviour
     public Transform PlayerTransform { get; set; }
 
     private void Awake()
-    {
+    {        
         materialPropertyBlock = new MaterialPropertyBlock();
         ductMeshRenderer = GetComponentInChildren<MeshRenderer>();
+
+        if (!Settings.Instance.IsFogOfWarEnabled)
+        {
+            ductMeshRenderer.GetPropertyBlock(materialPropertyBlock);
+            materialPropertyBlock.SetVector("Closest_Player_Position", transform.position);
+            ductMeshRenderer.SetPropertyBlock(materialPropertyBlock);
+
+            enabled = false;
+        }
     }
 
     private void Update()
