@@ -28,7 +28,6 @@ public class MaterialInstanceFactory : MonoBehaviour
         foreach (var material in materialsToInstantiate)
         {
             var materialInstance = new Material(material);
-            materialInstance.name = $"{materialInstance.name} valhalleluja!";
             materialInstances.Add(material, materialInstance);
         }
     }
