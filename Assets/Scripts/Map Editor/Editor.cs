@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Editor : MonoBehaviour
 {
+    private float editorCameraYOffsetFromGrid;
     private Camera editorCamera;
     private Camera mainCamera;
     private Map map;
@@ -16,6 +17,7 @@ public class Editor : MonoBehaviour
     private float toolYRotation;
     private readonly List<Cell> cells = new List<Cell>();
     private Vector3 previousMouseDragPosition;
+    private int currentLevel;
 
     [SerializeField] private Transform gridTransform;
     [SerializeField] private GameObject emptyCellPrefab;
@@ -29,7 +31,8 @@ public class Editor : MonoBehaviour
         mainCamera = Camera.main; // This needs to be stored because once disabled we can't access it via Camera.main.
         editorCamera.gameObject.SetActive(false);
         toolbarCanvas.gameObject.SetActive(false);
-        fileBrowser.gameObject.SetActive(false);        
+        fileBrowser.gameObject.SetActive(false);
+        editorCameraYOffsetFromGrid = editorCamera.transform.position.y;
     }
 
     private void Update()
@@ -73,6 +76,7 @@ public class Editor : MonoBehaviour
         // Create backup of current map
         map.CreateBackup();
 
+        SetLevel(0);
         CreateGrid();
         MoveCameraToCenter();
     }
@@ -172,6 +176,7 @@ public class Editor : MonoBehaviour
         {
             selectedTileData.Column = cell.Column;
             selectedTileData.Row = cell.Row;
+            selectedTileData.Level = currentLevel;
         }
     }
 
@@ -215,7 +220,7 @@ public class Editor : MonoBehaviour
                 cell.name = $"Cell {column},{row}";
                 cell.Column = column;
                 cell.Row = row;
-
+                
                 cells.Add(cell);
             }
         }
@@ -271,13 +276,31 @@ public class Editor : MonoBehaviour
         }
         else
         {
-            map.ClearCell(cell.Column, cell.Row);
+            map.ClearCell(cell.Column, cell.Row, currentLevel);
         }
 
         map.Load();
     }
+
+    private void SetLevel(int level)
+    {
+        currentLevel = level;
+        gridTransform.position = new Vector3(gridTransform.position.x, currentLevel, gridTransform.position.z);
+        editorCamera.transform.position = new Vector3(editorCamera.transform.position.x, currentLevel + editorCameraYOffsetFromGrid, editorCamera.transform.position.z);
+    }
     
     #region Button Handlers
+
+    public void OnLevelUpButtonClicked()
+    {
+        SetLevel(currentLevel + 1);
+    }
+
+    public void OnLevelDownButtonClicked()
+    {
+        SetLevel(currentLevel - 1);
+    }
+
     public void OnClearButtonClicked()
     {
         var selectedToolPrefab = TileFactory.Instance.GetClearPrefab();
