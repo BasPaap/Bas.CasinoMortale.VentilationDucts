@@ -55,10 +55,10 @@ public class Map : MonoBehaviour
         Save();
     }
 
-    internal void ClearCell(int column, int row)
+    internal void ClearCell(int column, int row, int level)
     {
-        Debug.Log($"Removing all tiles from cell {column}, {row}.");
-        mapData.RemoveTiles(t => t.Column == column && t.Row == row);
+        Debug.Log($"Removing all tiles from cell {column}, {row} at level {level}.");
+        mapData.RemoveTiles(t => t.Column == column && t.Row == row && t.Level == level);
         Save();
     }
 
@@ -110,7 +110,7 @@ public class Map : MonoBehaviour
 
             if (prefab != null)
             {
-                Debug.Log($"Instantiating {prefab.name} at {tile.Column}, {tile.Row} at {tile.Rotation} degrees rotation.");
+                Debug.Log($"Instantiating {prefab.name} at {tile.Column}, {tile.Row} at level {tile.Level} at {tile.Rotation} degrees rotation.");
                 var instantiatedTile = Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row, tile.Level), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
 
                 var fogOfWar = instantiatedTile.GetComponent<FogOfWar>();
