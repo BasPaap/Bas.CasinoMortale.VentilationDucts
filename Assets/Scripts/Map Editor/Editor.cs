@@ -169,7 +169,7 @@ public class Editor : MonoBehaviour
     {
         if (tool != null)
         {
-            tool.transform.position = new Vector3(cell.transform.position.x, 0, cell.transform.position.z);
+            tool.transform.position = new Vector3(cell.transform.position.x, cell.transform.position.y + 1, cell.transform.position.z);
         }
 
         if (selectedTileData != null)
