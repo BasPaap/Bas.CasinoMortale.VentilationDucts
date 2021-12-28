@@ -55,8 +55,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   renderFeatureSettings:
-    renderPassEvent: 300
-    blitMaterial: {fileID: 0}
+    renderPassEvent: 500
+    blitMaterial: {fileID: 2100000, guid: 9a4c2e19dbaffcd47825256923eff896, type: 2}
     blitMaterialPassIndex: -1
     sourceType: 0
     destinationType: 0
