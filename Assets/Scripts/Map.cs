@@ -18,6 +18,8 @@ public class Map : MonoBehaviour
 
     public Vector3 CellSize => Vector3.one;
 
+    public event EventHandler Loaded;
+
     private void Start()
     {
         Load();
@@ -28,6 +30,11 @@ public class Map : MonoBehaviour
         LoadMapData();
         PopulateMap();
         PlacePlayerAtStartPosition();
+
+        if (Loaded != null)
+        {
+            Loaded(this, EventArgs.Empty);
+        }
     }
 
     #region Map Editing

@@ -33,6 +33,7 @@ public class MicrophoneAudioPlayer : MonoBehaviour
     private void Update()
     {
         if (audioSource != null &&
+            audioSource.isActiveAndEnabled && 
             !audioSource.isPlaying && 
             Microphone.IsRecording(null) && 
             Microphone.GetPosition(null) > sampleRate * playbackDelay)
