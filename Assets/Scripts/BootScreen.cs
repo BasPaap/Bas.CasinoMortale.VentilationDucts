@@ -11,18 +11,14 @@ public class BootScreen : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private Terminal terminal;
 
-    private PlayerInput playerInput;
-    private AudioListener playerAudioListener;
+    private PlayerMovementController playerMovementController;
     private readonly List<VUIndicator> vuIndicators = new List<VUIndicator>();
-
+    
     private void Awake()
     {
-        playerInput = player.GetComponent<PlayerInput>();
-        playerInput.enabled = false;
-
-        playerAudioListener = player.GetComponent<AudioListener>();
-        playerAudioListener.enabled = false;
-
+        playerMovementController = player.GetComponent<PlayerMovementController>();
+        playerMovementController.enabled = false;
+        
         vuIndicators.AddRange(player.GetComponentsInChildren<VUIndicator>());
         foreach (var vuIndicator in vuIndicators)
         {
@@ -31,6 +27,14 @@ public class BootScreen : MonoBehaviour
 
         signalAnimator.enabled = false;
         batteryAnimator.enabled = false;
+    }
+
+    public void Connect_started(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("Connecting!");
+        }
     }
 
     private void Start()

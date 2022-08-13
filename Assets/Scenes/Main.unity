@@ -600,6 +600,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de84335a0ba9c41419c8f4ef1dab99cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 50
+  cursorBlinkSpeed: 5
 --- !u!1 &123592922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,6 +1141,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e02ff5dc-b9d5-4982-abd8-3d4fd1e78bfe
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 25eccbb5-3f52-4acc-bae8-245b40c68b79
+    m_ActionName: Player/Connect[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 508ab539-6076-4508-a36f-4ad2e4d6e482
+    m_ActionName: Player/Power[/Keyboard/v]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1543,6 +1553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 300888300}
   - component: {fileID: 300888301}
+  - component: {fileID: 300888302}
   m_Layer: 0
   m_Name: Boot Screen
   m_TagString: Untagged
@@ -1577,10 +1588,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dea6e2735175d945b642ec456c9af51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signalAnimator: {fileID: 1508433694}
-  batteryAnimator: {fileID: 895990654}
+  signalAnimator: {fileID: 1192372608}
+  batteryAnimator: {fileID: 39104607}
   player: {fileID: 280197383}
   terminal: {fileID: 121222215}
+--- !u!114 &300888302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300888299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 393225afdefd3ab44a28bb485f08eeba, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e02ff5dc-b9d5-4982-abd8-3d4fd1e78bfe
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 300888301}
+        m_TargetAssemblyTypeName: BootScreen, Assembly-CSharp
+        m_MethodName: Connect_started
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 25eccbb5-3f52-4acc-bae8-245b40c68b79
+    m_ActionName: Player/Connect[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 508ab539-6076-4508-a36f-4ad2e4d6e482
+    m_ActionName: Player/Power[/Keyboard/v]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &339679343
 GameObject:
   m_ObjectHideFlags: 0
