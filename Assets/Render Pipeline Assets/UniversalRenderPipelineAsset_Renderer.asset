@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482f58e17a0193d42a0f422bef916b21, type: 3}
   m_Name: Distortion
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   renderFeatureSettings:
     renderPassEvent: 500
     blitMaterial: {fileID: 2100000, guid: 9a4c2e19dbaffcd47825256923eff896, type: 2}
