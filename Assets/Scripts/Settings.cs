@@ -38,6 +38,7 @@ public class Settings
     public float ScannerSpeed { get; set; }
     public float ScannerInterval { get; set; }
     public bool IsFogOfWarEnabled { get; set; }
+    public bool IsPowerButtonRequired { get; set; }
 
     private static void Load()
     {
@@ -61,6 +62,7 @@ public class Settings
             instance.ScannerSpeed = 1.0f;
             instance.ScannerInterval = 1.0f;
             instance.IsFogOfWarEnabled = true;
+            instance.IsPowerButtonRequired = false;
 
             Save();
         }

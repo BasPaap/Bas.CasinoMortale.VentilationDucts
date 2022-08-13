@@ -25,6 +25,8 @@ public class Terminal : MonoBehaviour
 
     public void Clear()
     {
+        callbacks.Clear();
+        textBuffer.Clear();
         enteredText = string.Empty;
         lastEnteredCharacterTime = Time.time;
         lastCursorVisibilityChangeTime = Time.time;
@@ -34,12 +36,15 @@ public class Terminal : MonoBehaviour
     public void AppendLine(string textToAppend, Action callback = null) => Append(System.Environment.NewLine + textToAppend, callback);
     public void Append(string textToAppend, Action callback = null)
     {
-        if (callback != null)
+        if (isActiveAndEnabled)
         {
-            callbacks.Add(textToAppend, callback);
-        }
+            if (callback != null)
+            {
+                callbacks.Add(textToAppend, callback);
+            }
 
-        textBuffer.Append(textToAppend + pauseCharacter);
+            textBuffer.Append(textToAppend + pauseCharacter);
+        }
     }
 
     private void Update()

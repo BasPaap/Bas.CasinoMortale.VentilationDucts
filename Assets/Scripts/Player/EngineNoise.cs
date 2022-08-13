@@ -23,5 +23,10 @@ public class EngineNoise : MonoBehaviour
             engineAudioSource.volume = Mathf.Clamp(playerMovementController.Speed, 0, maxVolume);
             engineAudioSource.pitch = Mathf.Clamp(playerMovementController.Speed, minPitch, maxPitch);
         }
+        else
+        {
+            engineAudioSource.volume = 0;
+            engineAudioSource.pitch = minPitch;
+        }
     }
 }
