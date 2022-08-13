@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class BootScreen : MonoBehaviour
 {
-    [SerializeField] private GameObject signalAnimator;
-    [SerializeField] private GameObject batteryAnimator;
+    [SerializeField] private Animator signalAnimator;
+    [SerializeField] private Animator batteryAnimator;
     [SerializeField] private GameObject player;
+    [SerializeField] private Terminal terminal;
 
     private PlayerInput playerInput;
     private AudioListener playerAudioListener;
@@ -27,7 +29,18 @@ public class BootScreen : MonoBehaviour
             vuIndicator.enabled = false;
         }
 
-        signalAnimator.SetActive(false);
-        batteryAnimator.SetActive(false);
+        signalAnimator.enabled = false;
+        batteryAnimator.enabled = false;
+    }
+
+    private void Start()
+    {
+        terminal.Clear();
+        this.Wait(1, () => terminal.Append("> Checking battery status... "));
+        this.Wait(2, () =>
+        {
+            batteryAnimator.enabled = true;
+            terminal.Append("OK.");
+        });
     }
 }
