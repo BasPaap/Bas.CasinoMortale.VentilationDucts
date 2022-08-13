@@ -20,7 +20,7 @@ public class PlayerMovementController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context) // Called by PlayerInput component on Player
     {
         var input = context.ReadValue<Vector2>();
         movement.x = input.x;

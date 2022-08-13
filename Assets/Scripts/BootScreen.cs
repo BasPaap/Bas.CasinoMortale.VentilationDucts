@@ -54,7 +54,7 @@ public class BootScreen : MonoBehaviour
         }
     }
 
-    public void Connect_started(InputAction.CallbackContext context)
+    public void OnConnect(InputAction.CallbackContext context) // Called by PlayerInput component on Player
     {
         if (context.started)
         {
