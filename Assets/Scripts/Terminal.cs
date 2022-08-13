@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -12,10 +13,10 @@ public class Terminal : MonoBehaviour
     private StringBuilder textBuffer = new StringBuilder();
     private string enteredText;
     private float lastEnteredCharacterTime;
-
     private const char pauseCharacter = (char)3;
     private bool isCursorVisible = false;
     private float lastCursorVisibilityChangeTime;
+    private readonly Dictionary<string, Action> callbacks = new Dictionary<string, Action>();
 
     private void Awake()
     {
@@ -30,15 +31,29 @@ public class Terminal : MonoBehaviour
     }
 
     public void AppendLine() => AppendLine(string.Empty);
-    public void AppendLine(string textToAppend) => Append(System.Environment.NewLine + textToAppend);
-    public void Append(string textToAppend)
+    public void AppendLine(string textToAppend, Action callback = null) => Append(System.Environment.NewLine + textToAppend, callback);
+    public void Append(string textToAppend, Action callback = null)
     {
+        if (callback != null)
+        {
+            callbacks.Add(textToAppend, callback);
+        }
+
         textBuffer.Append(textToAppend + pauseCharacter);
     }
 
     private void Update()
     {
         UpdateText();
+        UpdateCursor();
+    }
+
+    private void UpdateCursor()
+    {
+        if (isCursorVisible)
+        {
+            text.text += "_";
+        }
 
         if (Time.time - lastCursorVisibilityChangeTime > 1 / cursorBlinkSpeed)
         {
@@ -63,13 +78,32 @@ public class Terminal : MonoBehaviour
                 enteredText += newCharacter;
                 lastEnteredCharacterTime = Time.time;
             }
+
+            HandleCallbacks();
         }
 
         text.text = enteredText;
+    }
 
-        if (isCursorVisible)
+    private void HandleCallbacks()
+    {
+        if (textBuffer.Length == 0)
         {
-            text.text += "_";
+            string callbackText = null;
+            foreach (var key in callbacks.Keys)
+            {
+                if (enteredText.EndsWith(key))
+                {
+                    callbackText = key;
+                    callbacks[key]();
+                }
+                break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(callbackText))
+            {
+                callbacks.Remove(callbackText);
+            }
         }
     }
 }

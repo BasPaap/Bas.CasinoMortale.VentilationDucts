@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +17,11 @@ public class BootScreen : MonoBehaviour
     private readonly List<VUIndicator> vuIndicators = new List<VUIndicator>();
     private readonly List<AudioSource> audioSources = new List<AudioSource>();
     private readonly List<MicrophoneAudioPlayer> microphoneAudioPlayers = new List<MicrophoneAudioPlayer>();
+    private bool isReadyForConnection = false;
 
     private void Awake()
     {
+        Debug.Log("Starting boot sequence.");
         map.Loaded += Map_Loaded;
         playerMovementController = player.GetComponent<PlayerMovementController>();
         playerMovementController.enabled = false;
@@ -35,8 +38,10 @@ public class BootScreen : MonoBehaviour
             vuIndicator.enabled = false;
         }
 
-        signalAnimator.enabled = false;
-        batteryAnimator.enabled = false;
+        //signalAnimator.enabled = false;
+        signalAnimator.gameObject.SetActive(false);
+        //batteryAnimator.enabled = false;
+        batteryAnimator.gameObject.SetActive(false);
     }
 
     private void Map_Loaded(object sender, System.EventArgs e)
@@ -56,23 +61,54 @@ public class BootScreen : MonoBehaviour
 
     public void OnConnect(InputAction.CallbackContext context) // Called by PlayerInput component on Player
     {
-        if (context.started)
+        if (isReadyForConnection && context.started)
         {
-            Debug.Log("Connecting!");
-            foreach (var audioSource in audioSources)
+            isReadyForConnection = false;
+            terminal.Append(" OK");
+            terminal.AppendLine("> Connecting...", () =>
             {
-                if (audioSource != null)
+                terminal.Append(" OK");
+                this.Wait(1, () => signalAnimator.gameObject.SetActive(true));
+                this.Wait(1, () => terminal.AppendLine("> Testing battery status..."));
+                this.Wait(3, () => terminal.Append(" OK", () => batteryAnimator.gameObject.SetActive(true)));
+                this.Wait(5, () => terminal.AppendLine("> Receiving audio..."));
+                this.Wait(7, () => terminal.Append(" OK", () =>
                 {
-                    audioSource.enabled = true;
-                }
-            }
+                    foreach (var vuIndicator in vuIndicators)
+                    {
+                        vuIndicator.enabled = true;
+                    }
 
-            foreach (var microphoneAudioPlayer in microphoneAudioPlayers)
+                    EnableAllAudio();
+                }));
+                this.Wait(9, () => terminal.AppendLine("> Switching to environmental imaging mode...", () => this.Wait(3, EndBootSequence)));
+            });
+        }
+    }
+
+    private void EndBootSequence()
+    {
+        Debug.Log("Ending boot sequence.");
+        terminal.Clear();
+        playerMovementController.enabled = true;
+        gameObject.SetActive(false);
+    }
+
+    private void EnableAllAudio()
+    {
+        foreach (var audioSource in audioSources)
+        {
+            if (audioSource != null)
             {
-                if (microphoneAudioPlayer != null)
-                {
-                    microphoneAudioPlayer.enabled = true;
-                }
+                audioSource.enabled = true;
+            }
+        }
+
+        foreach (var microphoneAudioPlayer in microphoneAudioPlayers)
+        {
+            if (microphoneAudioPlayer != null)
+            {
+                microphoneAudioPlayer.enabled = true;
             }
         }
     }
@@ -90,6 +126,6 @@ public class BootScreen : MonoBehaviour
         
         terminal.Append(" <ERROR>");
         terminal.AppendLine();
-        terminal.AppendLine("> Waiting for connection...");
+        terminal.AppendLine("> Waiting for connection...", () => isReadyForConnection = true);
     }
 }

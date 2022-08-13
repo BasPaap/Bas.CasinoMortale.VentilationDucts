@@ -1142,7 +1142,19 @@ MonoBehaviour:
     m_ActionId: e02ff5dc-b9d5-4982-abd8-3d4fd1e78bfe
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 300888301}
+        m_TargetAssemblyTypeName: BootScreen, Assembly-CSharp
+        m_MethodName: OnConnect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 25eccbb5-3f52-4acc-bae8-245b40c68b79
     m_ActionName: Player/Connect[/Keyboard/c]
   - m_PersistentCalls:
