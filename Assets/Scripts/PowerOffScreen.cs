@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -43,16 +44,21 @@ public class PowerOffScreen : MonoBehaviour
 
     private void PowerOff()
     {
-        backgroundImage.color = Color.black;
-        bootScreen.Shutdown();
-        terminal.gameObject.SetActive(false);
-        isPoweredOn = false;
+        backgroundImage.DOFade(1, 0.25f).OnComplete(() =>
+        {
+            bootScreen.Shutdown();
+            terminal.gameObject.SetActive(false);
+            isPoweredOn = false;
+        });        
     }
 
     private void PowerOn()
     {
-        backgroundImage.color = Color.clear;
-        bootScreen.StartBootSequence();
-        isPoweredOn = true;
+        backgroundImage.DOFade(0, 1).OnComplete(() =>
+        {
+            bootScreen.StartBootSequence();
+            isPoweredOn = true;
+        });
+        
     }
 }
