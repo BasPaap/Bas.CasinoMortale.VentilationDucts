@@ -56,8 +56,11 @@ public class PowerOffScreen : MonoBehaviour
     {
         backgroundImage.DOFade(0, 1).OnComplete(() =>
         {
-            bootScreen.StartBootSequence();
-            isPoweredOn = true;
+            this.Wait(1, () =>
+            {
+                bootScreen.StartBootSequence();
+                isPoweredOn = true;
+            });
         });
         
     }

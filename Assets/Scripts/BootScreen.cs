@@ -17,6 +17,9 @@ public class BootScreen : MonoBehaviour
     private readonly List<VUIndicator> vuIndicators = new List<VUIndicator>();
     private readonly List<AudioSource> audioSources = new List<AudioSource>();
     private readonly List<MicrophoneAudioPlayer> microphoneAudioPlayers = new List<MicrophoneAudioPlayer>();
+
+    private readonly Queue<float> bootScreenTimes = new Queue<float>();
+    private readonly Queue<Action> bootScreenActions = new Queue<Action>();
     private bool isReadyForConnection = false;
     private bool isShutDown;
 
@@ -27,6 +30,9 @@ public class BootScreen : MonoBehaviour
 
     private void DisableGame()
     {
+        bootScreenTimes.Clear();    
+        bootScreenActions.Clear();  
+
         isReadyForConnection = false;
         playerMovementController.enabled = false;
 
@@ -37,6 +43,7 @@ public class BootScreen : MonoBehaviour
 
         foreach (var vuIndicator in vuIndicators)
         {
+            vuIndicator.Clear();
             vuIndicator.enabled = false;
         }
 
@@ -89,11 +96,12 @@ public class BootScreen : MonoBehaviour
             terminal.AppendLine("> Connecting...", () =>
             {
                 terminal.Append(" OK");
-                this.Wait(1, () => signalIcon.SetActive(true));
-                this.Wait(1, () => terminal.AppendLine("> Testing battery status..."));
-                this.Wait(3, () => terminal.Append(" OK", () => batteryIcon.SetActive(true)));
-                this.Wait(5, () => terminal.AppendLine("> Receiving audio..."));
-                this.Wait(7, () => terminal.Append(" OK", () =>
+
+                EnqueueAction(1, () => signalIcon.SetActive(true));
+                EnqueueAction(1, () => terminal.AppendLine("> Testing battery status..."));
+                EnqueueAction(3, () => terminal.Append(" OK", () => batteryIcon.SetActive(true)));
+                EnqueueAction(5, () => terminal.AppendLine("> Receiving audio..."));
+                EnqueueAction(7, () => terminal.Append(" OK", () =>
                 {
                     foreach (var vuIndicator in vuIndicators)
                     {
@@ -102,8 +110,29 @@ public class BootScreen : MonoBehaviour
 
                     EnableAllAudio();
                 }));
-                this.Wait(9, () => terminal.AppendLine("> Switching to environmental imaging mode...", () => this.Wait(3, EndBootSequence)));
+                EnqueueAction(9, () => terminal.AppendLine("> Switching to environmental imaging mode...", () => EnqueueAction(3, EndBootSequence)));
             });
+        }
+    }
+
+    private void EnqueueAction(int delay, Action action)
+    {
+        bootScreenTimes.Enqueue(Time.time + delay);
+        bootScreenActions.Enqueue(action);
+    }
+
+    private void Update()
+    {
+        if (bootScreenTimes.Count > 0)
+        {
+            var nextBootScreenTime = bootScreenTimes.Peek();
+
+            if (Time.time >= nextBootScreenTime)
+            {
+                bootScreenTimes.Dequeue();
+                var action = bootScreenActions.Dequeue();
+                action();
+            }
         }
     }
 
@@ -148,6 +177,6 @@ public class BootScreen : MonoBehaviour
         
         terminal.Append(" <ERROR>");
         terminal.AppendLine();
-        terminal.AppendLine("> Waiting for connection...", () => isReadyForConnection = true);
+        terminal.AppendLine("> Press CONNECT button when ready...", () => isReadyForConnection = true);
     }
 }
