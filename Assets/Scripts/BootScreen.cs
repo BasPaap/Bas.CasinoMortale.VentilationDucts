@@ -166,17 +166,25 @@ public class BootScreen : MonoBehaviour
     public void StartBootSequence()
     {
         Debug.Log("Starting boot sequence.");
-        
+
+        //EndBootSequence();
+        //return;
+
         gameObject.SetActive(true);
         terminal.Append("> Welcome to ROVER.");
         terminal.AppendLine("> Please place the remote operated ROVER unit in the nearest accessible air vent and press the CONNECT button.");
-        terminal.AppendLine("> <WARNING> To prevent signal interference, accidental exposure to lethal doses of radiation, dismemberment or partial loss of fingers by accidental or unexpected activation, do not press the CONNECT button until the remote operated ROVER unit is in the air vent.");
-        terminal.AppendLine();
-        terminal.AppendLine("> Q branch is committed to providing a safe working environment for our field agents.");
-        terminal.AppendLine("> Most recent Health and Safety Executive guidelines compliance certfification date: ");
-        
-        terminal.Append(" <ERROR>");
-        terminal.AppendLine();
-        terminal.AppendLine("> Press CONNECT button when ready...", () => isReadyForConnection = true);
+        terminal.AppendLine("> <WARNING> To prevent signal interference, accidental exposure to lethal doses of radiation, dismemberment or partial loss of fingers by accidental or unexpected activation, do not press the CONNECT button until the remote operated ROVER unit is in the air vent.", () =>
+        {
+            EnqueueAction(5, () =>
+            {
+                terminal.Clear();
+                terminal.AppendLine("> Q branch is committed to providing a safe working environment for our field agents.");
+                terminal.AppendLine("> Most recent Health and Safety Executive guidelines compliance certfification date: ");
+
+                terminal.Append(" <ERROR>");
+                terminal.AppendLine();
+                terminal.AppendLine("> Press CONNECT button when ready...", () => isReadyForConnection = true);
+            });            
+        });
     }
 }
