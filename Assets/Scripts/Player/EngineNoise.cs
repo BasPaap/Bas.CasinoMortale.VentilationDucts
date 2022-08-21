@@ -17,8 +17,16 @@ public class EngineNoise : MonoBehaviour
     [SerializeField] float maxPitch;
 
     private void Update()
-    {   
-        engineAudioSource.volume = Mathf.Clamp(playerMovementController.Speed, 0, maxVolume);
-        engineAudioSource.pitch = Mathf.Clamp(playerMovementController.Speed, minPitch, maxPitch);        
+    {
+        if (playerMovementController.enabled)
+        {
+            engineAudioSource.volume = Mathf.Clamp(playerMovementController.Speed, 0, maxVolume);
+            engineAudioSource.pitch = Mathf.Clamp(playerMovementController.Speed, minPitch, maxPitch);
+        }
+        else
+        {
+            engineAudioSource.volume = 0;
+            engineAudioSource.pitch = minPitch;
+        }
     }
 }

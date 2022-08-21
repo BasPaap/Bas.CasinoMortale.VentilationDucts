@@ -14,6 +14,13 @@ public class Scanner : MonoBehaviour
     private float timeSinceLastScan;
     private readonly List<Material> materialInstances = new List<Material>();
 
+    private void Awake()
+    {
+        enabled = Settings.Instance.IsScannerPulseVisible;
+        speed = Settings.Instance.ScannerSpeed;
+        interval = Settings.Instance.ScannerInterval;
+    }
+
     private void Start()
     {        
         // Make sure we get the instanced versions of all scannable materials and apply our changes to them instead of the originals.

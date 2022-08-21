@@ -4,7 +4,7 @@ A minigame in which players control a robot that crawls through ventilation duct
 ![main](https://user-images.githubusercontent.com/18243979/139534386-71396837-a6b1-4b70-8e2f-34eae307c7e8.png)
 
 ## How to use
-Control the robot with the arrow keys.
+Control the robot with the arrow keys or a controller.
 
 ### Editing the map
 Press E to open the map editor. Types of tiles can be selected on the toolbar at the top. Click on any cell in the grid to place the currently selected tile or to clear the cell if the clear tool is selected. Use the mouse wheel to rotate the tile in 90 degree increments before placing it.

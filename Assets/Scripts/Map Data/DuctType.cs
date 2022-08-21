@@ -5,5 +5,6 @@
     Corner,
     ThreeWayCrossing,
     FourWayCrossing,
-    Grill
+    Grill,
+    Ramp
 }

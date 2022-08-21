@@ -18,6 +18,8 @@ public class Map : MonoBehaviour
 
     public Vector3 CellSize => Vector3.one;
 
+    public event EventHandler Loaded;
+
     private void Start()
     {
         Load();
@@ -28,6 +30,11 @@ public class Map : MonoBehaviour
         LoadMapData();
         PopulateMap();
         PlacePlayerAtStartPosition();
+
+        if (Loaded != null)
+        {
+            Loaded(this, EventArgs.Empty);
+        }
     }
 
     #region Map Editing
@@ -55,10 +62,10 @@ public class Map : MonoBehaviour
         Save();
     }
 
-    internal void ClearCell(int column, int row)
+    internal void ClearCell(int column, int row, int level)
     {
-        Debug.Log($"Removing all tiles from cell {column}, {row}.");
-        mapData.RemoveTiles(t => t.Column == column && t.Row == row);
+        Debug.Log($"Removing all tiles from cell {column}, {row} at level {level}.");
+        mapData.RemoveTiles(t => t.Column == column && t.Row == row && t.Level == level);
         Save();
     }
 
@@ -110,8 +117,8 @@ public class Map : MonoBehaviour
 
             if (prefab != null)
             {
-                Debug.Log($"Instantiating {prefab.name} at {tile.Column}, {tile.Row} at {tile.Rotation} degrees rotation.");
-                var instantiatedTile = Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
+                Debug.Log($"Instantiating {prefab.name} at {tile.Column}, {tile.Row} at level {tile.Level} at {tile.Rotation} degrees rotation.");
+                var instantiatedTile = Instantiate(prefab, prefab.transform.position + GetPosition(tile.Column, tile.Row, tile.Level), Quaternion.AngleAxis(tile.Rotation, Vector3.up) * prefab.transform.localRotation, transform);
 
                 var fogOfWar = instantiatedTile.GetComponent<FogOfWar>();
                 if (fogOfWar != null)
@@ -146,11 +153,11 @@ public class Map : MonoBehaviour
 
         if (startPositionTileData == null)
         {
-            playerTransform.position = GetPosition(0, 0);
+            playerTransform.position = GetPosition(0, 0, 0);
         }
         else
         {
-            playerTransform.position = GetPosition(startPositionTileData.Column, startPositionTileData.Row);
+            playerTransform.position = GetPosition(startPositionTileData.Column, startPositionTileData.Row, startPositionTileData.Level);
         }
     }
 
@@ -244,36 +251,37 @@ public class Map : MonoBehaviour
             Width = 10
         };
 
-        defaultMapData.Tiles.Add(new DuctTileData(0, 3, -270, DuctType.Corner));
-        defaultMapData.Tiles.Add(new DuctTileData(0, 4, 0, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(0, 5, 180, DuctType.Grill));
-        defaultMapData.Tiles.Add(new SoundTileData(0, 5, 0, "casino.mp3"));
-        defaultMapData.Tiles.Add(new DuctTileData(1, 3, -90, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(2, 3, -90, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(3, 1, 0, DuctType.Grill));
-        defaultMapData.Tiles.Add(new SoundTileData(3, 1, 0, "do-you-expect-me-to-talk.mp3"));
-        defaultMapData.Tiles.Add(new DuctTileData(3, 2, -270, DuctType.ThreeWayCrossing));
-        defaultMapData.Tiles.Add(new DuctTileData(3, 3, -90, DuctType.ThreeWayCrossing));
-        defaultMapData.Tiles.Add(new DuctTileData(3, 4, 0, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(0, 4, -270, DuctType.Corner));
+        defaultMapData.Tiles.Add(new DuctTileData(0, 5, 0, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(0, 6, 180, DuctType.Grill));
+        defaultMapData.Tiles.Add(new SoundTileData(0, 6, 0, "casino.mp3"));
+        defaultMapData.Tiles.Add(new DuctTileData(1, 4, -90, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(2, 4, -90, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(3, 2, 0, DuctType.Grill));
+        defaultMapData.Tiles.Add(new SoundTileData(3, 2, 0, "do-you-expect-me-to-talk.mp3"));
+        defaultMapData.Tiles.Add(new DuctTileData(3, 3, -270, DuctType.ThreeWayCrossing));
+        defaultMapData.Tiles.Add(new DuctTileData(3, 4, -90, DuctType.ThreeWayCrossing));
         defaultMapData.Tiles.Add(new DuctTileData(3, 5, 0, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(3, 6, 180, DuctType.Corner));
-        defaultMapData.Tiles.Add(new DuctTileData(4, 2, -90, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(4, 6, -90, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(4, 8, -270, DuctType.Grill));
-        defaultMapData.Tiles.Add(new SoundTileData(4, 8, 0, "gunnar-gunnarson.mp3"));
-        defaultMapData.Tiles.Add(new DuctTileData(5, 0, 0, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(3, 6, 0, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(3, 7, 180, DuctType.Corner));
+        defaultMapData.Tiles.Add(new DuctTileData(4, 3, -90, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(4, 7, -90, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(4, 9, -270, DuctType.Grill));
+        defaultMapData.Tiles.Add(new SoundTileData(4, 9, 0, "gunnar-gunnarson.mp3"));
+        defaultMapData.Tiles.Add(new DuctTileData(5, 0, 0, DuctType.Grill));
         defaultMapData.Tiles.Add(new DuctTileData(5, 1, 0, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(5, 2, -90, DuctType.Corner));
-        defaultMapData.Tiles.Add(new DuctTileData(5, 6, 90, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(5, 8, -90, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(6, 6, 0, DuctType.Corner));
-        defaultMapData.Tiles.Add(new DuctTileData(6, 7, 0, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(6, 8, 180, DuctType.ThreeWayCrossing));
-        defaultMapData.Tiles.Add(new DuctTileData(7, 8, -90, DuctType.Straight));
-        defaultMapData.Tiles.Add(new DuctTileData(8, 8, 90, DuctType.Straight));
-        defaultMapData.Tiles.Add(new SoundTileData(9, 8, 0, "trololololo.mp3"));
-        defaultMapData.Tiles.Add(new DuctTileData(9, 8, -90, DuctType.Grill));
-        defaultMapData.Tiles.Add(new StartPositionTileData(5, 0, 0));
+        defaultMapData.Tiles.Add(new DuctTileData(5, 2, 0, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(5, 3, -90, DuctType.Corner));
+        defaultMapData.Tiles.Add(new DuctTileData(5, 7, 90, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(5, 9, -90, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(6, 7, 0, DuctType.Corner));
+        defaultMapData.Tiles.Add(new DuctTileData(6, 8, 0, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(6, 9, 180, DuctType.ThreeWayCrossing));
+        defaultMapData.Tiles.Add(new DuctTileData(7, 9, -90, DuctType.Straight));
+        defaultMapData.Tiles.Add(new DuctTileData(8, 9, 90, DuctType.Straight));
+        defaultMapData.Tiles.Add(new SoundTileData(9, 9, 0, "trololololo.mp3"));
+        defaultMapData.Tiles.Add(new DuctTileData(9, 9, -90, DuctType.Grill));
+        defaultMapData.Tiles.Add(new StartPositionTileData(5, 1, 0));
 
         return defaultMapData;
     }
@@ -284,12 +292,13 @@ public class Map : MonoBehaviour
     /// <param name="column">The X-coordinate of the cell.</param>
     /// <param name="row">The Y-coordinate of the cell.</param>
     /// <returns>The cell's position in world space.</returns>
-    internal Vector3 GetPosition(int column, int row)
+    internal Vector3 GetPosition(int column, int row, int level)
     {
         var xPos = CellSize.x * column;
+        var yPos = CellSize.y * level;
         var zPos = CellSize.z * row;
 
-        return new Vector3(xPos, 0, zPos);
+        return new Vector3(xPos, yPos, zPos);
     } 
     #endregion
 }

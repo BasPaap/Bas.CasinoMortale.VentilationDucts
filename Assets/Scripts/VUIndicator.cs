@@ -23,9 +23,20 @@ public class VUIndicator : MonoBehaviour
     private void Awake()
     {
         perlinYAxis = (float)transform.GetSiblingIndex();
-        image = GetComponent<Image>();    
+        image = GetComponent<Image>();
+        image.color = Color.clear;
     }
-        
+
+    public void Clear()
+    {
+        Level = 0;
+
+        if (image != null)
+        {
+            image.color = Color.clear;
+        }    
+    }
+
     private void Update()
     {
         var noise = Mathf.RoundToInt((2 - (Mathf.PerlinNoise(Time.time * fluctuationSpeed, perlinYAxis) * 4)));

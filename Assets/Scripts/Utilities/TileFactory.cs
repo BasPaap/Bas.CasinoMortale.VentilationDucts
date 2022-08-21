@@ -9,6 +9,7 @@ public class TileFactory : MonoBehaviour
     [SerializeField] private GameObject cornerDuctPrefab;
     [SerializeField] private GameObject threeWayDuctPrefab;
     [SerializeField] private GameObject fourWayDuctPrefab;
+    [SerializeField] private GameObject rampDuctPrefab;
     [SerializeField] private GameObject grillDuctPrefab;
     [SerializeField] private GameObject soundPrefab;
     [SerializeField] private GameObject startPositionPrefab;
@@ -44,7 +45,10 @@ public class TileFactory : MonoBehaviour
                     return fourWayDuctPrefab;
                 case DuctType.Grill:
                     return grillDuctPrefab;
+                case DuctType.Ramp:
+                    return rampDuctPrefab;
                 case DuctType.None:
+                default:
                     return null;
             };
         }
