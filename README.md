@@ -4,7 +4,8 @@ A minigame in which players control a robot that crawls through ventilation duct
 ![main](https://user-images.githubusercontent.com/18243979/139534386-71396837-a6b1-4b70-8e2f-34eae307c7e8.png)
 
 ## How to use
-Control the robot with the arrow keys or a controller.
+Wait until the boot screen asks you to press the CONNECT button (The C key or the right shoulder key on an Xbox controller). Control the robot with the arrow keys or a controller. 
+If you set the IsPowerButtonRequired button setting to True, the game will stay black on startup untill you press and hold the power button (The V key or the left shoulder button on an Xbox 360 controller.) To make this less awkward, it is recommended to solder a toggle switch to the controller button when using this mode.
 
 ### Editing the map
 Press E to open the map editor. Types of tiles can be selected on the toolbar at the top. Click on any cell in the grid to place the currently selected tile or to clear the cell if the clear tool is selected. Use the mouse wheel to rotate the tile in 90 degree increments before placing it.
