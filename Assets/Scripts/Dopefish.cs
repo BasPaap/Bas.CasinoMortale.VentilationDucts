@@ -20,7 +20,7 @@ public class Dopefish : MonoBehaviour
         TestKey(KeyCode.A);
         TestKey(KeyCode.C);
 
-        if (IsKonamiCodeEntered())
+        if (IsKonamiCodeEntered() && !bootScreen.isActiveAndEnabled)
         {
             bootScreen.ShowDopefish();
         }

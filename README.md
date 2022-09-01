@@ -20,6 +20,9 @@ Press E again to close the editor.
 ### Resetting the map
 Press X to reset the map to the default version.
 
+### Skipping the boot sequence
+Press B during the boot sequence to skip straight to the game.
+
 ## Attribution
 - "Do you expect me to talk?" audio from _Goldfinger_ (1964), United Artists.
 - "Trololololo" audio from _I Am Very Glad, as I'm Finally Returning Back Home_, Eduard Khil
