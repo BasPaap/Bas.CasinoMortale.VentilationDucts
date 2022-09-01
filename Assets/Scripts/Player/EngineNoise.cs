@@ -20,8 +20,9 @@ public class EngineNoise : MonoBehaviour
     {
         if (playerMovementController.enabled)
         {
-            engineAudioSource.volume = Mathf.Clamp(playerMovementController.Speed, 0, maxVolume);
-            engineAudioSource.pitch = Mathf.Clamp(playerMovementController.Speed, minPitch, maxPitch);
+            // Use the lateral speed (ignore the y axis) to set the engine noise to prevent constant engine sounds while unity adjusts the grounding of the player in small increments.
+            engineAudioSource.volume = Mathf.Clamp(playerMovementController.LateralSpeed, 0, maxVolume);
+            engineAudioSource.pitch = Mathf.Clamp(playerMovementController.LateralSpeed, minPitch, maxPitch);
         }
         else
         {
