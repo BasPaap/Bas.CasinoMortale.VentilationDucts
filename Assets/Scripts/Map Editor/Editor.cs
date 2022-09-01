@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -61,7 +62,13 @@ public class Editor : MonoBehaviour
         else if (Input.GetKeyUp(Hotkeys.ResetMapKey))
         {
             map.ResetMap();
-            CreateGrid();
+            MoveCameraToCenter();
+        }
+        else if (Input.GetKeyUp(Hotkeys.DoomKey))
+        {
+            // Load Doom E1M1 map as an easter egg.
+            const string doomMapFileName = "e1m1.xml";
+            map.Load(Path.Combine(Application.streamingAssetsPath, doomMapFileName));
             MoveCameraToCenter();
         }
     }

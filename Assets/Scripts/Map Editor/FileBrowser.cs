@@ -14,6 +14,7 @@ public class FileBrowser : MonoBehaviour
     public bool IsOpen { get; private set; }
         
     private readonly List<FileOption> fileOptions = new List<FileOption>();
+    private readonly List<string> hiddenFileNames = new List<string>() { "at-dooms-gate.mp3", "dsdoropn.mp3", "dsitemup.mp3" };
     private bool shouldCloseOnNextFrame;
     private float closeTime;
 
@@ -41,9 +42,12 @@ public class FileBrowser : MonoBehaviour
 
         foreach (var fileName in fileNames)
         {
-            var fileOption = Instantiate(fileOptionPrefab, contentTransform).GetComponent<FileOption>();
-            fileOption.FileName = fileName;
-            fileOptions.Add(fileOption);
+            if (!hiddenFileNames.Contains(fileName))
+            {
+                var fileOption = Instantiate(fileOptionPrefab, contentTransform).GetComponent<FileOption>();
+                fileOption.FileName = fileName;
+                fileOptions.Add(fileOption);
+            }
         }
     }
 

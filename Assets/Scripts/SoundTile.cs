@@ -61,6 +61,7 @@ public class SoundTile : MonoBehaviour
         var maxLoudness = averages.Max();
         
         audioSource.clip = audioClip;
+        audioSource.enabled = true; // For some reason, audio sources get disabled before playback, so we need to ensure they are enabled again after setting the clip.
         audioSource.Play();
 
         CurrentMaxLoudness = maxLoudness;

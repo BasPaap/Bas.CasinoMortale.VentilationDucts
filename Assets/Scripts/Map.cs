@@ -10,10 +10,10 @@ public class Map : MonoBehaviour
 {
     [SerializeField] private Transform playerTransform;
 
-    private const string fileName = "map.xml";
+    private const string defaultFileName = "map.xml";
     private MapData mapData;
 
-    private string FullPath => Path.Combine(Application.persistentDataPath, fileName);
+    private string FullPath => Path.Combine(Application.persistentDataPath, defaultFileName);
     public Vector2 Size => mapData != null ? new Vector2(mapData.Width, mapData.Height) : Vector2.zero;
 
     public Vector3 CellSize => Vector3.one;
@@ -25,9 +25,9 @@ public class Map : MonoBehaviour
         Load();
     }
 
-    internal void Load()
+    internal void Load(string mapFilePath = null)
     {
-        LoadMapData();
+        LoadMapData(mapFilePath);
         PopulateMap();
         PlacePlayerAtStartPosition();
 
@@ -167,17 +167,28 @@ public class Map : MonoBehaviour
     /// <summary>
     /// Loads map data from a file.
     /// </summary>
-    private void LoadMapData()
+    private void LoadMapData(string mapFilePath = null)
     {
-        if (!File.Exists(FullPath))
+        string fullMapPath = FullPath;
+
+        if (!string.IsNullOrWhiteSpace(mapFilePath))
+        {
+            fullMapPath = mapFilePath;
+        }
+
+        if (!File.Exists(fullMapPath))
         {
             mapData = CreateDefaultMap();
-            Save();
+
+            if (string.IsNullOrWhiteSpace(mapFilePath))
+            {
+                Save();
+            }            
         }
 
         Debug.Log("Loading map data.");
         var serializer = new XmlSerializer(typeof(MapData));
-        using var streamReader = new StreamReader(FullPath);
+        using var streamReader = new StreamReader(fullMapPath);
         mapData = serializer.Deserialize(streamReader) as MapData;
     }
 
@@ -209,7 +220,7 @@ public class Map : MonoBehaviour
         Debug.Log("Creating backup of map file.");
         if (File.Exists(FullPath))
         {
-            File.Copy(FullPath, Path.Combine(Application.persistentDataPath, $"{DateTime.Now:yyyyMMddhhmmss} {fileName}"));
+            File.Copy(FullPath, Path.Combine(Application.persistentDataPath, $"{DateTime.Now:yyyyMMddhhmmss} {defaultFileName}"));
         }
 
         // Remove old backups.
@@ -218,7 +229,7 @@ public class Map : MonoBehaviour
 
     private static void RemoveOldBackups()
     {
-        string searchPattern = $"* {fileName}";
+        string searchPattern = $"* {defaultFileName}";
         var backupFilePaths = Directory.GetFiles(Application.persistentDataPath, searchPattern).OrderByDescending(f => File.GetLastWriteTime(f));
         var filePathsToExclude = backupFilePaths.Take(10).ToList();
         var filePathFromPreviousDate = backupFilePaths.Where(f => File.GetLastWriteTime(f) < DateTime.Today).FirstOrDefault();

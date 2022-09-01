@@ -123,6 +123,21 @@ public class BootScreen : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyUp(Hotkeys.SkipBootSequenceKey))
+        {
+            bootScreenActions.Clear();
+            bootScreenTimes.Clear();
+            batteryIcon.SetActive(true);
+            signalIcon.SetActive(true);
+            foreach (var vuIndicator in vuIndicators)
+            {
+                vuIndicator.enabled = true;
+            }
+
+            EnableAllAudio();
+            EndBootSequence();
+        }
+
         if (bootScreenTimes.Count > 0)
         {
             var nextBootScreenTime = bootScreenTimes.Peek();

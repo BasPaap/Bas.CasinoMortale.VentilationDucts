@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MapData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Width>15</Width>
+  <Height>16</Height>
+  <Tiles>
+    <TileData xsi:type="DuctTileData">
+      <Column>5</Column>
+      <Row>8</Row>
+      <Rotation>180</Rotation>
+      <Level>0</Level>
+      <Type>ThreeWayCrossing</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>5</Column>
+      <Row>7</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>5</Column>
+      <Row>6</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Grill</Type>
+    </TileData>
+    <TileData xsi:type="StartPositionTileData">
+      <Column>5</Column>
+      <Row>7</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>3</Column>
+      <Row>8</Row>
+      <Rotation>90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>2</Column>
+      <Row>8</Row>
+      <Rotation>-270</Rotation>
+      <Level>0</Level>
+      <Type>Grill</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>4</Column>
+      <Row>8</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>ThreeWayCrossing</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>4</Column>
+      <Row>9</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>ThreeWayCrossing</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>3</Column>
+      <Row>9</Row>
+      <Rotation>-270</Rotation>
+      <Level>0</Level>
+      <Type>Ramp</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>4</Column>
+      <Row>10</Row>
+      <Rotation>180</Rotation>
+      <Level>0</Level>
+      <Type>ThreeWayCrossing</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>3</Column>
+      <Row>10</Row>
+      <Rotation>90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>2</Column>
+      <Row>10</Row>
+      <Rotation>-270</Rotation>
+      <Level>0</Level>
+      <Type>Grill</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>9</Column>
+      <Row>13</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>14</Column>
+      <Row>10</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>14</Column>
+      <Row>9</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>9</Row>
+      <Rotation>-180</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>8</Row>
+      <Rotation>-270</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>14</Column>
+      <Row>8</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>14</Column>
+      <Row>7</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>7</Row>
+      <Rotation>-180</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>6</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>ThreeWayCrossing</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>5</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>4</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>3</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>FourWayCrossing</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>2</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>12</Column>
+      <Row>3</Row>
+      <Rotation>90</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>14</Column>
+      <Row>3</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>12</Column>
+      <Row>5</Row>
+      <Rotation>-180</Rotation>
+      <Level>0</Level>
+      <Type>Grill</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>14</Column>
+      <Row>5</Row>
+      <Rotation>-180</Rotation>
+      <Level>0</Level>
+      <Type>Grill</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>12</Column>
+      <Row>4</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>14</Column>
+      <Row>4</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>11</Column>
+      <Row>6</Row>
+      <Rotation>-90</Rotation>
+      <Level>-1</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>10</Column>
+      <Row>6</Row>
+      <Rotation>-180</Rotation>
+      <Level>-1</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>10</Column>
+      <Row>5</Row>
+      <Rotation>0</Rotation>
+      <Level>-1</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>9</Column>
+      <Row>5</Row>
+      <Rotation>-270</Rotation>
+      <Level>-1</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>9</Column>
+      <Row>6</Row>
+      <Rotation>0</Rotation>
+      <Level>-1</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>9</Column>
+      <Row>7</Row>
+      <Rotation>180</Rotation>
+      <Level>-1</Level>
+      <Type>Ramp</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>9</Column>
+      <Row>8</Row>
+      <Rotation>180</Rotation>
+      <Level>0</Level>
+      <Type>ThreeWayCrossing</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>11</Column>
+      <Row>8</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>7</Column>
+      <Row>8</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>ThreeWayCrossing</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>7</Column>
+      <Row>9</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>8</Column>
+      <Row>10</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>9</Column>
+      <Row>10</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>10</Column>
+      <Row>10</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>11</Column>
+      <Row>10</Row>
+      <Rotation>270</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>11</Column>
+      <Row>9</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>10</Column>
+      <Row>8</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>8</Column>
+      <Row>8</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>6</Column>
+      <Row>8</Row>
+      <Rotation>90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>12</Column>
+      <Row>6</Row>
+      <Rotation>-90</Rotation>
+      <Level>-1</Level>
+      <Type>Ramp</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>14</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>9</Column>
+      <Row>14</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>10</Column>
+      <Row>14</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>11</Column>
+      <Row>14</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>12</Column>
+      <Row>14</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>8</Column>
+      <Row>13</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>FourWayCrossing</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>10</Column>
+      <Row>13</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Ramp</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>13</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>8</Column>
+      <Row>12</Row>
+      <Rotation>90</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>9</Column>
+      <Row>12</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>10</Column>
+      <Row>12</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>11</Column>
+      <Row>12</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>12</Column>
+      <Row>12</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>12</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>ThreeWayCrossing</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>14</Column>
+      <Row>12</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>14</Column>
+      <Row>11</Row>
+      <Rotation>-180</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>11</Column>
+      <Row>13</Row>
+      <Rotation>-270</Rotation>
+      <Level>1</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>5</Column>
+      <Row>13</Row>
+      <Rotation>-180</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>5</Column>
+      <Row>12</Row>
+      <Rotation>-180</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>5</Column>
+      <Row>11</Row>
+      <Rotation>-180</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>6</Column>
+      <Row>13</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>5</Column>
+      <Row>10</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="SoundTileData">
+      <Column>5</Column>
+      <Row>6</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <FileNames>
+        <string>at-dooms-gate.mp3</string>
+      </FileNames>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>2</Column>
+      <Row>9</Row>
+      <Rotation>-90</Rotation>
+      <Level>1</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>8</Column>
+      <Row>14</Row>
+      <Rotation>180</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>7</Column>
+      <Row>10</Row>
+      <Rotation>180</Rotation>
+      <Level>0</Level>
+      <Type>Corner</Type>
+    </TileData>
+    <TileData xsi:type="SoundTileData">
+      <Column>0</Column>
+      <Row>9</Row>
+      <Rotation>0</Rotation>
+      <Level>1</Level>
+      <FileNames>
+        <string>dsitemup.mp3</string>
+      </FileNames>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>1</Column>
+      <Row>9</Row>
+      <Rotation>-90</Rotation>
+      <Level>1</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>0</Column>
+      <Row>9</Row>
+      <Rotation>-270</Rotation>
+      <Level>1</Level>
+      <Type>Grill</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>12</Column>
+      <Row>13</Row>
+      <Rotation>-90</Rotation>
+      <Level>1</Level>
+      <Type>Grill</Type>
+    </TileData>
+    <TileData xsi:type="SoundTileData">
+      <Column>13</Column>
+      <Row>6</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <FileNames>
+        <string>dsdoropn.mp3</string>
+      </FileNames>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>7</Column>
+      <Row>13</Row>
+      <Rotation>-90</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>1</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Straight</Type>
+    </TileData>
+    <TileData xsi:type="DuctTileData">
+      <Column>13</Column>
+      <Row>0</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <Type>Grill</Type>
+    </TileData>
+    <TileData xsi:type="SoundTileData">
+      <Column>7</Column>
+      <Row>13</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <FileNames>
+        <string>dsdoropn.mp3</string>
+      </FileNames>
+    </TileData>
+    <TileData xsi:type="SoundTileData">
+      <Column>13</Column>
+      <Row>0</Row>
+      <Rotation>0</Rotation>
+      <Level>0</Level>
+      <FileNames>
+        <string>dsdoropn.mp3</string>
+      </FileNames>
+    </TileData>
+  </Tiles>
+</MapData>
