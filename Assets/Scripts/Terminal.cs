@@ -90,6 +90,42 @@ public class Terminal : MonoBehaviour
         text.text = enteredText;
     }
 
+    public void ShowDopefish()
+    {
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW..;;;;;.WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW.;;;;;;;WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW;;;;;;;;;WWWWWWWWWWWWWWWWWWWWWW..WWWWWWWWWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW.;;;;;;;;.WWWWWWWWWWWWWWWWWWWWWWW..;;.WWWWWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWW...;;;.......;;..WWWWWWWWWWWWWWWWWWWWWWWW.;;..WWWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWW...;;;;;;;;;;;;;;;;;;;;;;..WWWWWWWWWWWWWWWWWWWW.;;;.WWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWW.;;;;;;;;;;;;;;;;;;;;;;;;;;;;;..WWWWWWWWWWWWWWWWW.;;;;..WWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;.WWWWWWWWWWWWWW.;;;;;..WWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWW.;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;.WWWWWWWWWWWW.;;;;;;..WWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWW....;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;.WWWWWWWWWW.;;;;;;;;..WWW" + Environment.NewLine;
+        enteredText += "WWWWWWWW.WWW..WWWWV..;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;+..WWWWWWW.;;;;;;;;;..WWW" + Environment.NewLine;
+        enteredText += "WWWWWW.WWWWWWWWWWWWWWWW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;..WWWW.;;;;;;;;;;;..WWW" + Environment.NewLine;
+        enteredText += "WWWWW.VW......WWWWWWWWW.;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;....;;;;;;;;;;;..WWWW" + Environment.NewLine;
+        enteredText += "WWWWW.WW......WWWWWWWWWW.;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;..WWWWW" + Environment.NewLine;
+        enteredText += "WWWWW..WWW.....WWWWWWWWV.;;;;;;...;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;..WWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWW.;.W.WWWWWWWWWWWWW.;;;;;;;;..;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;.WWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWW...;.VW..WWWWWWWW.;..;;;;;;..;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;..WWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWW......;;;......;;;;;;..;;;..;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;..WWWWW" + Environment.NewLine;
+        enteredText += "WWWWWW.WW.VV...............;;;;;..;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;..WWWW" + Environment.NewLine;
+        enteredText += "WWWWWW.WW.WWWWV.;;;;;;.;....;;;...;;;;;;;;;;;;;;;;;;;;;;;;....;;;;;;;;;;;..WWWW" + Environment.NewLine;
+        enteredText += "WWWWWW.WW.WWWWV....;;;;;;;..;;;..;;;;;;;;;;;;;;;;;;;;;;;..WWWW..;;;;;;;;;..WWWW" + Environment.NewLine;
+        enteredText += "WWWWWW.WW.WWWWV.;;;;;;.;;;;.;;;;;;;;;;;;;;;;;;;;;..;;....WWWWWW..;;;;;;;;..WWWW" + Environment.NewLine;
+        enteredText += "WWWWWW.WW.WWWWV.....;;;;;;;;;;;;;;;;;;;;;;;;;.;;;;....WWWWWWWWWWW.;;;;;;..WWWWW" + Environment.NewLine;
+        enteredText += "WWWWWW.WW.WWWWV.;;;;;;;;;;;;;;;;;;;;;;;;;;;;;.;;.....WWWWWWWWWWWW.;;;;;;..WWWWW" + Environment.NewLine;
+        enteredText += "WWWWWW....WWWWV..;;;;;;;.;;;;;;;;;;;;;;;;;;;;......WWWWWWWWWWWWWW.;;;;;..WWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWW...WV.WW......+;;;;;;;;;;;;;;;;;;;;;...WWWWWWWWWWWWWWW.;;;;;;.WWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWW..;;;;;;;;;;;;;;;;;...WWWWWWWWWWWWWWWWWW.;;;..WWWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWWWWW..;;;;;;;;;...WWWWWWWWWWWWWWWWWWWWWW.;;.WWWWWWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWWWWWW -= DOPEFISH LIVES! =- WWWWWWWWWWWWWWWWWWWWWWWWWWWW" + Environment.NewLine;
+        enteredText += "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" + Environment.NewLine;
+    }
+
     private void HandleCallbacks()
     {
         if (textBuffer.Length == 0)

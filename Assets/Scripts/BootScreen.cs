@@ -9,6 +9,13 @@ public class BootScreen : MonoBehaviour
 {
     [SerializeField] private GameObject signalIcon;
     [SerializeField] private GameObject batteryIcon;
+
+    internal void ShowDopefish()
+    {
+        gameObject.SetActive(true);
+        terminal.ShowDopefish();
+    }
+
     [SerializeField] private GameObject player;
     [SerializeField] private Terminal terminal;
     [SerializeField] private Map map;
@@ -181,9 +188,6 @@ public class BootScreen : MonoBehaviour
     public void StartBootSequence()
     {
         Debug.Log("Starting boot sequence.");
-
-        //EndBootSequence();
-        //return;
 
         gameObject.SetActive(true);
         terminal.Append("> Welcome to ROVER.");
